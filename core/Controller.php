@@ -16,6 +16,6 @@ class Controller {
         self::view($contentView, $data);
 
         // Load footer
-        self::view('layouts/header', $data);
+        self::view('layouts/footer', $data);
     }
 }

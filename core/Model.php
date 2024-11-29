@@ -72,6 +72,15 @@ class Model {
     }
 
     /**
+     * Run a custom query.
+     */
+    protected function query(string $sql, array $params = []): array {
+        $stmt = self::$pdo->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
      * Delete the current record.
      */
     public function delete(): bool {

@@ -14,7 +14,7 @@ class HomeController extends Controller {
         $data['examples'] = $userModel->all();
         $data['title'] = "Home Page";
 
-        self::render('home', $data);
+        self::view('home', $data);
     }
 
     public function pdf() {
@@ -23,7 +23,7 @@ class HomeController extends Controller {
     }
 
     public function login() {
-        self::render('login');
+        self::view('login');
     }
 
     public function authenticate() {
@@ -48,5 +48,10 @@ class HomeController extends Controller {
         } else {
             self::redirectBack(['errors' => $validation->errors()]);
         }
+    }
+
+    public function logout() {
+        self::destroySession();
+        self::redirect('login');
     }
 }

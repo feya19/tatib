@@ -5,4 +5,4 @@
     <?php endforeach; ?>
 </ul>
 
-<a href="/pdf">Generate PDF</a>
+<a href="/login">Login</a>

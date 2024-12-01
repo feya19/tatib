@@ -5,6 +5,12 @@ namespace App\Models;
 use Core\Model;
 
 class User extends Model {
-    protected string $table = 'Users';      // Define the table name
-    protected string $primaryKey = 'id';    // Define the primary key (if different from default)
+    protected string $table = 'Users'; 
+    protected string $primaryKey = 'id';
+
+    public function findByUsername(string $username) {
+        $sql = "SELECT TOP 1 * FROM {$this->table} WHERE username = :username";
+        $data = $this->query($sql, ['username' => $username]);
+        return !empty($data) ? $data[0] : $data;
+    }
 }

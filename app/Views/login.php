@@ -5,106 +5,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - SiTatib POLINEMA</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #f8fafc;
-            font-family: 'Arial', sans-serif;
-        }
-
-        .login-container {
-            margin-top: 80px;
-        }
-
-        .login-card {
-            padding: 2rem;
-            border-radius: 12px;
-            background-color: white;
-            box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1);
-        }
-
-        .form-control:focus {
-            box-shadow: none;
-            border-color: #0d6efd;
-        }
-
-        .login-title {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .info-box {
-            background-color: #e8f8f2;
-            color: #055160;
-            padding: 1rem;
-            border-radius: 10px;
-            margin-bottom: 1.5rem;
-            font-size: 0.9rem;
-        }
-
-        .info-box ul {
-            padding-left: 1.5rem;
-            margin: 0;
-        }
-
-        .info-box ul li {
-            list-style-type: disc;
-        }
-
-        .logo {
-            position: absolute;
-            top: 30px;
-            left: 25px;
-        }
-
-        .logo img {
-            max-width: 220px;
-        }
-
-        .btn-primary {
-            background-color: darkblue;
-            border: none;
-        }
-
-        .btn-primary:hover {
-            background-color: #094dbd;
-        }
-    </style>
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<body>
-    <div class="logo">
-    <img src="/assets/img/logo-tatib.png" alt="SiTatib POLINEMA" class="img-fluid">
+<body class="bg-light">
+
+    <!-- Logo -->
+    <div class="position-absolute top-0 start-0 m-3">
+        <img src="/assets/img/logo-tatib.png" alt="SiTatib POLINEMA" class="img-fluid" style="max-width: 220px;">
     </div>
-    <!-- Container untuk Form Login -->
-    <div class="container login-container">
-        <div class="row justify-content-center">
-            <div class="col-md-6 col-lg-4">
-                <div class="card login-card">
+
+    <!-- Login Container -->
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="col-md-6 col-lg-4">
+            <div class="card shadow border-0">
+                <div class="card-body">
                     <div class="text-center mb-4">
-                        <h1 class="login-title">Login</h1>
+                        <h1 class="h4 fw-bold">Login</h1>
                     </div>
 
-                    <!-- Box Informasi -->
-                    <div class="info-box">
+                    <!-- Info Box -->
+                    <div class="alert alert-info" role="alert">
                         <strong>Informasi:</strong>
-                        <ul>
+                        <ul class="mb-0">
                             <li>Bagi Mahasiswa: Gunakan akun Siakad</li>
                             <li>Bagi DPA/Admin: Gunakan akun Portal Polinema</li>
                         </ul>
                     </div>
 
-                    <!-- Form Login -->
-                    <form>
+                    <!-- Error Messages -->
+                    <?php if ($errors = \Core\Controller::getFlash('errors')): ?>
+                        <div class="alert alert-danger" role="alert">
+                            <ul class="mb-0">
+                                <?php 
+                                if (is_array($errors)) {
+                                    foreach ($errors as $error):
+                                        echo '<li>'. htmlspecialchars($error) .'</li>';
+                                    endforeach;
+                                } else {
+                                    echo '<li>'. htmlspecialchars($errors) .'</li>';
+                                }
+                                ?>
+                            </ul>
+                        </div>
+                    <?php endif; ?>
+
+                    <!-- Login Form -->
+                    <form method="post" action="">
                         <div class="mb-3">
                             <label for="idAnggota" class="form-label">ID Anggota</label>
-                            <input type="text" class="form-control" id="idAnggota"
-                                placeholder="Isikan NIM/akun Portal Polinema">
+                            <input 
+                                type="text" 
+                                class="form-control <?= isset($errors['username']) ? 'is-invalid' : '' ?>" 
+                                id="idAnggota" 
+                                name="username"
+                                placeholder="Isikan NIM/akun Portal Polinema" 
+                                value="<?= htmlspecialchars($old['username'] ?? '') ?>"
+                            >
+                            <?php if (isset($errors['username'])): ?>
+                                <div class="invalid-feedback"><?= htmlspecialchars($errors['username']) ?></div>
+                            <?php endif; ?>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" placeholder="Isikan Password">
+                            <input 
+                                type="password" 
+                                class="form-control <?= isset($errors['password']) ? 'is-invalid' : '' ?>" 
+                                id="password" 
+                                name="password"
+                                placeholder="Isikan Password"
+                            >
+                            <?php if (isset($errors['password'])): ?>
+                                <div class="invalid-feedback"><?= htmlspecialchars($errors['password']) ?></div>
+                            <?php endif; ?>
                         </div>
                         <div class="form-check mb-3">
                             <input class="form-check-input" type="checkbox" id="showPassword">
@@ -119,20 +92,16 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/jquery-3.7.1.min.js"></script>
     <script>
-        // lihat password
+        // Toggle password visibility
         $('#showPassword').on('click', function () {
             const passwordField = $('#password');
             const passwordFieldType = passwordField.attr('type');
-            if (passwordFieldType === 'password') {
-                passwordField.attr('type', 'text');
-            } else {
-                passwordField.attr('type', 'password');
-            }
+            passwordField.attr('type', passwordFieldType === 'password' ? 'text' : 'password');
         });
     </script>
-
 </body>
 
 </html>

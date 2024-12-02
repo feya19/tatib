@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/assets/css/custom.css" rel="stylesheet">
+    <link href="/assets/css/home.css" rel="stylesheet">
     <link href="/assets/css/bootstrap-icons.min.css" rel="stylesheet">
 </head>
 
@@ -33,13 +33,17 @@
                         <a class="nav-link" href="#">FAQ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Login</a>
+                        <button type="button" class="btn btn-primary" onclick="location.href='login'">Login</button>
                     </li>
 
                 </ul>
             </div>
         </div>
     </nav>
+    <div class="background-container">
+        <div class="background-overlay"></div>
+        Ini adalah tulisan di atas background
+    </div>
 </body>
 
 </html>

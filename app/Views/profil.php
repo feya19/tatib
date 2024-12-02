@@ -53,7 +53,6 @@ $user = [
         .profile-header p {
             padding: 10px;
             margin: 0;
-            color: #0A58CA;
         }
         .profile-info {
             margin-top: 20px;

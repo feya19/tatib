@@ -27,7 +27,7 @@
                             <span>Anya Callista</span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                            <li><a class="dropdown-item" href="/profil">Profile</a></li>
                             <li><a class="dropdown-item" href="/logout">Logout</a></li>
                         </ul>
                     </li>

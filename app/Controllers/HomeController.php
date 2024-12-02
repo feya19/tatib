@@ -54,4 +54,8 @@ class HomeController extends Controller {
         self::destroySession();
         self::redirect('login');
     }
+    
+    public function profil() {
+        self::render('profil');
+    }
 }

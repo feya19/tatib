@@ -10,18 +10,13 @@
     background-position: center;
     /* Posisi gambar di tengah */
 
-    text-align: center;
-    /* Teks rata tengah */
-    display: flex;
-    /* Flexbox untuk teks di tengah */
-    justify-content: center;
-    /* Rata tengah horizontal */
     align-items: center;
     /* Rata tengah vertikal */
     font-size: 2rem;
     /* Ukuran font */
     font-family: Arial, sans-serif;
     /* Font tulisan */
+
 }
 
 .background-overlay {
@@ -31,5 +26,38 @@
     width: 100%;
     height: 100%;
     background-color: #262261B3;
+
     /* Warna overlay dengan 70% opacity */
+    z-index: 1;
+}
+
+.text-content {
+    position: relative;
+    /* Untuk memastikan elemen teks di atas overlay */
+    z-index: 2;
+    /* Memberikan prioritas lebih tinggi daripada overlay */
+    color: #ffffff;
+    /* Warna putih */
+    text-align: left;
+    height: 312px;
+    top: 104px;
+    left: 129px;
+}
+
+.SiTatib h5 {
+    text-align: center;
+}
+
+.SiTatib p {
+    display: flex;
+    justify-content: center;
+    /* Rata tengah secara horizontal */
+    align-items: center;
+    /* Rata tengah secara vertikal */
+    height: 330px;
+    /* Tinggi penuh viewport */
+    margin: 0;
+    /* Hapus margin default */
+    font-family: Arial, sans-serif;
+    /* Font untuk konten */
 }

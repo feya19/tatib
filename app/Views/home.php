@@ -42,7 +42,23 @@
     </nav>
     <div class="background-container">
         <div class="background-overlay"></div>
-        Ini adalah tulisan di atas background
+        <div class="text-content">
+            <h1><b>Selamat Datang di SiTatib Polinema!</b></h1>
+            <br>
+            <h2>Menjaga Sikap, Integritas, dan Tanggung Jawab di Kampus</h2>
+            <br>
+            <h5>Temukan panduan untuk memahami aturan kampus dan berperan dalam membangun kampus yang tertib dan beretika.</h5>
+            <br>
+            <button type="button" class="btn btn-primary" onclick="location.href='login'">Login</button>
+        </div>
+    </div>
+    </div>
+    <div class="SiTatib">
+        <h5>SiTatib Polinema</h5>
+        <p>SiTatib Polinema adalah Sistem Informasi Tata Tertib yang dirancang untuk mendukung penerapan peraturan dan menjaga disiplin di lingkungan Politeknik Negeri Malang. Sistem ini bertujuan menciptakan suasana yang aman, tertib, dan kondusif bagi seluruh civitas akademika, termasuk mahasiswa, dosen, dan staf kampus. Melalui SiTatib Polinema, pengguna dapat dengan mudah memahami, mengelola, dan memantau tata tertib kampus secara efisien.
+            <br>
+            Sistem ini menyediakan akses mudah ke informasi tata tertib kampus, memungkinkan pemantauan riwayat pelanggaran mahasiswa secara transparan, serta memfasilitasi dosen dalam melaporkan dan memantau pelanggaran secara efisien. Dengan fitur-fitur ini, Politeknik Negeri Malang berkomitmen untuk menciptakan lingkungan akademik yang mendukung pembelajaran dan pengembangan karakter disiplin.
+        </p>
     </div>
 </body>
 

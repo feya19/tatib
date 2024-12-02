@@ -110,3 +110,53 @@ body {
     padding: 5px 10px;
     border-radius: 10px;
 }
+
+#dashboard .welcome-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+}
+
+#dashboard .welcome-container h1 {
+    color: #C45A01;
+    z-index: 1;
+    font-size: 5vw; 
+    font-weight: bold;
+    position: absolute;
+    text-align: center;
+}
+
+#dashboard .welcome-container img {
+    width: 100%;
+    height: auto;
+}
+
+#dashboard .card {
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+    border: none;
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#dashboard .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+#dashboard .card .card-title {
+    color: #7A7A7A !important;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+#dashboard .card .display-4 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+#dashboard .card-text {
+    font-size: 0.9rem;
+}

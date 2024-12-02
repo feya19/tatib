@@ -52,7 +52,7 @@
         <!-- Sidebar -->
         <ul class="nav flex-column p-3" style="min-width: 240px;">
             <li class="nav-item">
-                <a href="/dashboard" class="nav-link active">
+                <a href="/dashboard" class="nav-link">
                     <i class="bi bi-grid me-2"></i> Dashboard
                 </a>
             </li>

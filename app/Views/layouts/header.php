@@ -21,7 +21,18 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav me-3">
+                    <!-- Notification -->
+                    <li class="nav-item me-2">
+                        <button class="btn btn-light position-relative">
+                            <img src="/assets/img/bell.png" alt="Notification Bell" height="25" width="25">
+                            <span class="position-absolute top-0 start-90 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem; padding: 0.2em 0.4em;">
+                                99+
+                                <span class="visually-hidden">unread notifications</span>
+                            </span>
+                        </button>
+                    </li>
+                    <!-- Profile -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
                             <span>Anya Callista</span>
@@ -37,11 +48,11 @@
     </nav>
 
     <!-- Sidebar and Content -->
-    <div class="d-flex bg-white" style="min-height: 100vh;">
+    <div class="d-flex bg-white" style="min-height: 100vh;" id="sidebar">
         <!-- Sidebar -->
         <ul class="nav flex-column p-3" style="min-width: 240px;">
             <li class="nav-item">
-                <a href="/dashboard" class="nav-link">
+                <a href="/dashboard" class="nav-link active">
                     <i class="bi bi-grid me-2"></i> Dashboard
                 </a>
             </li>

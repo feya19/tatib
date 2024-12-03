@@ -31,26 +31,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><span class="badge-level">V</span></td>
-                                <td>Pelanggaran ringan.</td>
-                            </tr>
-                            <tr>
-                                <td><span class="badge-level">IV</span></td>
-                                <td>Pelanggaran sedang.</td>
-                            </tr>
-                            <tr>
-                                <td><span class="badge-level">III</span></td>
-                                <td>Pelanggaran cukup berat.</td>
-                            </tr>
-                            <tr>
-                                <td><span class="badge-level">II</span></td>
-                                <td>Pelanggaran berat.</td>
-                            </tr>
-                            <tr>
-                                <td><span class="badge-level">I</span></td>
-                                <td>Pelanggaran sangat berat.</td>
-                            </tr>
+                            <?php if (!empty($levels)): ?>
+                                <?php foreach ($levels as $level): ?>
+                                    <tr>
+                                        <td><span class="badge-level"><?= htmlspecialchars($level['level_name']); ?></span></td>
+                                        <td><?= htmlspecialchars($level['description']); ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <tr>
+                                    <td colspan="2" class="text-center">Tidak ada data tingkat pelanggaran.</td>
+                                </tr>
+                            <?php endif; ?>
                         </tbody>
                     </table>
                 </div>
@@ -128,6 +120,7 @@
     </div>
 </div>
        <!-- Kontainer 3: Sanksi Pelanggaran -->
+        <!-- Kontainer 3: Sanksi Pelanggaran -->
         <div class="container-custom">
             <div class="row">
                 <div class="col-md-12">
@@ -135,47 +128,23 @@
                     <table class="table table-bordered table-custom">
                         <thead>
                             <tr>
-                                <th>Tingkat</th>
+                                <th style="width: 8%;">Tingkat</th>
                                 <th>Sanksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><span class="badge-level">V</span></td>
-                                <td>Teguran lisan disertai dengan surat pernyataan tidak mengulangi perbuatan tersebut,
-                                    dibubuhi materai, ditandatangani mahasiswa yang bersangkutan dan DPA.</td>
-                            </tr>
-                            <tr>
-                                <td><span class="badge-level">IV</span></td>
-                                <td>Teguran tertulis disertai dengan pemanggilan orang tua/wali dan membuat surat
-                                    pernyataan tidak mengulangi perbuatan tersebut, dibubuhi materai, ditandatangani
-                                    mahasiswa, orang tua/wali, dan DPA.</td>
-                            </tr>
-                            <tr>
-                                <td><span class="badge-level">III</span></td>
-                                <td>
-                                    <li>a. Membuat surat pernyataan tidak mengulangi perbuatan tersebut, dibubuhi
-                                        materai ditandatangani mahasiswa, orang tua/wali, dan DPA;</li>
-                                    <li>b. Melakukan tugas khusus, misalnya bertanggungjawab untuk memperbaiki atau
-                                        membersihkan kembali, dan tugas-tugas lainnya.</li>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><span class="badge-level">II</span></td>
-                                <td>
-                                    <li>a. Dikenakan penggantian kerugian atau penggantian benda/ barang semacamnya
-                                        dan/atau.</li>
-                                    <li>b. Melakukan tugas layanan sosial dalam jangka waktu tertentu dan/atau.</li>
-                                    <li>c. Diberikan nilai D pada mata kuliah terkait saat melakukan pelanggaran.</li>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><span class="badge-level">I</span></td>
-                                <td>
-                                    <li>a. Dinonaktifkan (Cuti Akademik/ Terminal) selama dua semester dan/atau;</li>
-                                    <li>b. Diberhentikan sebagai mahasiswa.</li>
-                                </td>
-                            </tr>
+                            <?php if (!empty($sanctions)): ?>
+                                <?php foreach ($sanctions as $sanction): ?>
+                                    <tr>
+                                        <td><span class="badge-level"><?= htmlspecialchars($sanction['level_name']); ?></span></td>
+                                        <td><?= htmlspecialchars($sanction['sanction_description']); ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <tr>
+                                    <td colspan="2" class="text-center">Tidak ada data sanksi pelanggaran.</td>
+                                </tr>
+                            <?php endif; ?>
                         </tbody>
                     </table>
                 </div>
@@ -208,4 +177,4 @@
         });
     </script>
 </body>
-</html>
+</html> 

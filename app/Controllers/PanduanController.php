@@ -9,6 +9,7 @@ class PanduanController extends Controller {
     // Metode utama untuk menampilkan panduan
     public function index() {
         // Ambil parameter dari URL
+        $title = 'Panduan Tata Tertib';        
         $level = $_GET['level'] ?? ''; 
         $search = $_GET['search'] ?? '';
 
@@ -25,7 +26,8 @@ class PanduanController extends Controller {
         self::render('panduan', [
             'violations' => $violations, 
             'levels' => $levels, 
-            'sanctions' => $sanctions
+            'sanctions' => $sanctions,
+            'title' => $title
         ]);
     }
 }

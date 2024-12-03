@@ -19,6 +19,13 @@ class Controller {
         self::view('layouts/footer', $data);
     }
 
+    public static function json(array $data, int $statusCode = 200) {
+        http_response_code($statusCode);
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+        exit;
+    }
+
     public static function get(string $key = null, $default = null) {
         if (is_null($key)) {
             return filter_input_array(INPUT_GET, FILTER_SANITIZE_SPECIAL_CHARS) ?? [];
@@ -118,5 +125,9 @@ class Controller {
     public static function clearFlash() {
         self::startSession();
         unset($_SESSION['flash']);
+    }
+
+    public function isAjax() {
+        return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
     }
 }

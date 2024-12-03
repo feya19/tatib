@@ -1,26 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panduan Tata Tertib</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/assets/css/custom.css" rel="stylesheet">
-    <link href="/assets/css/bootstrap-icons.min.css" rel="stylesheet">
-    <script src="/assets/js/bootstrap.bundle.min.js"></script>
-    <script src="/assets/js/bootstrap.min.js"></script>
-    <script src="/assets/js/jquery-3.6.0.min.js"></script>
-
-</head>
-
-<body id="panduan">
-    <div class="container mt-4">
+<h2 class="mb-4 fw-semibold"><?= $title ?></h2>
+<p class="text-muted"><?= $title ?></p>
+<div id="panduan">
+    <div class="mt-4">
         <!-- Kontainer 1: Tingkat Pelanggaran dan Akumulasi Sanksi -->
-        <div class="container-custom">
-            <div class="row mb-4">
+        <div class="container-custom mt-4">
+            <div class="row">
                 <div class="col-md-5">
                     <h4>Tingkat Pelanggaran</h4>
                     <table class="table table-bordered table-custom">
@@ -47,7 +31,7 @@
                     </table>
                 </div>
                 <div class="col-md-7">
-                    <div class="alert alert-custom" role="alert">
+                    <div class="alert alert-custom mb-0" role="alert">
                         <h4 class="alert-heading">Akumulasi Sanksi Pelanggaran</h4>
                         <p class="mb-0">Perbuatan / tindakan pelanggaran Tata Tertib Kehidupan Kampus akan
                             diakumulasikan untuk setiap kategori pelanggaran dan berlaku sepanjang mahasiswa masih
@@ -71,8 +55,8 @@
         </div>
 
 <!-- Kontainer 2: Klasifikasi Pelanggaran -->
-<div class="container-custom">
-    <div class="row mb-4">
+<div class="container-custom mt-4">
+    <div class="row">
         <div class="col-md-12">
             <h4>Klasifikasi Pelanggaran</h4>
             <div class="row filter-inputs mb-3">
@@ -120,8 +104,7 @@
     </div>
 </div>
        <!-- Kontainer 3: Sanksi Pelanggaran -->
-        <!-- Kontainer 3: Sanksi Pelanggaran -->
-        <div class="container-custom">
+        <div class="container-custom mt-4">
             <div class="row">
                 <div class="col-md-12">
                     <h4>Sanksi Pelanggaran</h4>
@@ -151,30 +134,28 @@
             </div>
         </div>
     </div>
+</div>
+<script>
+    $(document).ready(function () {
+        function loadPelanggaran() {
+            var level = $('#filterLevel').val();
+            var search = $('#searchPelanggaran').val();
 
-    <script>
-        $(document).ready(function () {
-            function loadPelanggaran() {
-                var level = $('#filterLevel').val();
-                var search = $('#searchPelanggaran').val();
-
-                $.get('/panduan', { level: level, search: search }, function (response) {
-                    $('#pelanggaranTable').html($(response).find('#pelanggaranTable').html());
-                });
-            }
-
-            $('#searchPelanggaran').on('keypress', function (e) {
-                if (e.which === 13) {
-                    loadPelanggaran();
-                }
+            $.get('/panduan', { level: level, search: search }, function (response) {
+                $('#pelanggaranTable').html($(response).find('#pelanggaranTable').html());
             });
+        }
 
-            $('#filterLevel').on('change', loadPelanggaran);
-
-            var params = new URLSearchParams(window.location.search);
-            $('#filterLevel').val(params.get('level'));
-            $('#searchPelanggaran').val(params.get('search'));
+        $('#searchPelanggaran').on('keypress', function (e) {
+            if (e.which === 13) {
+                loadPelanggaran();
+            }
         });
-    </script>
-</body>
-</html> 
+
+        $('#filterLevel').on('change', loadPelanggaran);
+
+        var params = new URLSearchParams(window.location.search);
+        $('#filterLevel').val(params.get('level'));
+        $('#searchPelanggaran').val(params.get('search'));
+    });
+</script>

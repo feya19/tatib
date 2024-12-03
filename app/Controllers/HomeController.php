@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Kelas;
 use Core\Controller;
 use App\Models\User;
 use Helpers\Pdf;
@@ -40,6 +41,10 @@ class HomeController extends Controller {
             $userModel = new User();
             $user = $userModel->findByUsername($data['username']);
             if ($user && password_verify($data['password'], $user['password'])) {
+                if ($user['lecturer_id']) {
+                    $classModel = new Kelas();
+                    $user['classes'] = $classModel->where('dpa_id', '=', $user['lecturer_id'])->get();
+                }
                 self::setSession('userdata', $user);
                 self::redirect('/dashboard', ['success' => 'Login successful!']);
             } else {

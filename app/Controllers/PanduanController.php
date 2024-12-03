@@ -17,7 +17,15 @@ class PanduanController extends Controller {
 
         // Mendapatkan data panduan berdasarkan filter
         $violations = $model->getPanduan($level, $search);
+        $levels = $model->getLevels(); // Mendapatkan data tingkat pelanggaran
+        $sanctions = $model->getSanctions(); // Mendapatkan data sanksi pelanggaran
 
-        self::render('panduan', ['violations' => $violations]);
+
+        // Kirim data ke view
+        self::render('panduan', [
+            'violations' => $violations, 
+            'levels' => $levels, 
+            'sanctions' => $sanctions
+        ]);
     }
 }

@@ -31,4 +31,18 @@ class PanduanModel extends Model {
         // Eksekusi query dan kembalikan hasilnya
         return $this->query($sql, $params);
     }
+
+    // Fungsi untuk mendapatkan data tingkat pelanggaran dari tabel Levels
+    public function getLevels(): array {
+        $sql = "SELECT level_id, level_name, description FROM Levels";
+        return $this->query($sql);
+    }
+
+    // Fungsi untuk mendapatkan data sanksi pelanggaran dari tabel Sanctions dan Levels
+    public function getSanctions(): array {
+        $sql = "SELECT s.sanction_id, l.level_name, s.sanction_description 
+                FROM Sanctions s
+                JOIN Levels l ON s.level_id = l.level_id";
+        return $this->query($sql);
+    }
 }

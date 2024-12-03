@@ -45,6 +45,7 @@ body {
     text-align: left;
     height: 312px;
     top: 104px;
+
     max-width: calc(100% - 40px);
     /* Hindari overflow */
     margin: 0 auto;

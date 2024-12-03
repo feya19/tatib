@@ -53,6 +53,7 @@
         </div>
     </div>
     </div>
+    <!-- SiTatib -->
     <div class="container-fluid">
         <div class="card" style="margin: 20px 109px 20px 109px; padding: 50px;">
             <div class="card-body">
@@ -69,7 +70,47 @@
             </div>
         </div>
     </div>
+    <!-- TATA TERTIB -->
+    <div class="container mb-5">
+        <div class="row">
+            <div class="col-6">
+                <div class="card" style="height: 285px; width: 285px;">
+                    <img src="/assets/img/logo-TataTertib.png" alt="Gambar Tidak Ditemukan" style="width: 90px; hight: 90px; left: 380px;">
+                    <h3 class="mb-1 pad">Tata Tertib</h3>
+                    <hr style="width: 50%; border: 3px solid #F6921E ; border-radius: 10px; background-color: #F6921E;">
+                    <p>Pelajari aturan yang harus dipatuhi di kampus untuk menciptakan lingkungan yang tertib dan harmonis.</p>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card" style="height: 285px; width: 285px;">
+                    <img src="/assets/img/logo-Pelanggaran.png" style=" width:65px; height: 72.22px; top: 3px; left: 920px; gap: 0px; opacity: 0px;">
+                    <h3 class="mb-1 pad">Tata Tertib</h3>
+                    <hr style="width: 50%; border: 3px solid #F6921E ; border-radius: 10px; background-color: #F6921E;">
+                    <p>Lihat riwayat pelanggaran dan pantau status kedisiplinan. Pastikan untuk selalu mematuhi tata tertib kampus.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- FAQ -->
+    <div class="card" style="margin: 20px 109px 20px 109px; padding: 50px;">
+        <div class="row">
+            <img src="/assets/img/info-circle.png" alt="" style="width: 32px; height: 32px; top: 68px; left: 215px;">
+            <h3>FAQ</h3>
+        </div>
+        <div class="row">
+            <button>Bagaimana cara mengatahui peraturan kampus yang berlaku?</button>
+        </div>
+        <div class="row">
+            <button>Bagaimana cara mengatahui peraturan kampus yang berlaku?</button>
+        </div>
+        <div class="row">
+            <button>Bagaimana cara mengatahui peraturan kampus yang berlaku?</button>
+        </div>
+        <div class="row">
+            <button>Bagaimana cara mengatahui peraturan kampus yang berlaku?</button>
+        </div>
 
+    </div>
 </body>
 
 </html>

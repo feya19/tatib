@@ -1,3 +1,9 @@
+body {
+    background-color: #F1F4F9;
+    width: 100%;
+    height: 100%;
+}
+
 .background-container {
     position: relative;
     /* Untuk posisi teks */
@@ -16,6 +22,7 @@
     /* Ukuran font */
     font-family: Arial, sans-serif;
     /* Font tulisan */
+    width: 100%;
 
 }
 
@@ -33,15 +40,16 @@
 
 .text-content {
     position: relative;
-    /* Untuk memastikan elemen teks di atas overlay */
     z-index: 2;
-    /* Memberikan prioritas lebih tinggi daripada overlay */
     color: #ffffff;
-    /* Warna putih */
     text-align: left;
     height: 312px;
     top: 104px;
-    left: 129px;
+    max-width: calc(100% - 40px);
+    /* Hindari overflow */
+    margin: 0 auto;
+    /* Pastikan elemen terpusat */
+
 }
 
 .SiTatib h5 {

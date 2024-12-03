@@ -53,13 +53,23 @@
         </div>
     </div>
     </div>
-    <div class="SiTatib">
-        <h5>SiTatib Polinema</h5>
-        <p>SiTatib Polinema adalah Sistem Informasi Tata Tertib yang dirancang untuk mendukung penerapan peraturan dan menjaga disiplin di lingkungan Politeknik Negeri Malang. Sistem ini bertujuan menciptakan suasana yang aman, tertib, dan kondusif bagi seluruh civitas akademika, termasuk mahasiswa, dosen, dan staf kampus. Melalui SiTatib Polinema, pengguna dapat dengan mudah memahami, mengelola, dan memantau tata tertib kampus secara efisien.
-            <br>
-            Sistem ini menyediakan akses mudah ke informasi tata tertib kampus, memungkinkan pemantauan riwayat pelanggaran mahasiswa secara transparan, serta memfasilitasi dosen dalam melaporkan dan memantau pelanggaran secara efisien. Dengan fitur-fitur ini, Politeknik Negeri Malang berkomitmen untuk menciptakan lingkungan akademik yang mendukung pembelajaran dan pengembangan karakter disiplin.
-        </p>
+    <div class="container-fluid">
+        <div class="card" style="margin: 20px 109px 20px 109px; padding: 50px;">
+            <div class="card-body">
+                <div class="row">
+                    <h5 class="mb-4 d-flex justify-content-center">SiTatib Polinema</h5>
+                </div>
+                <div class="row" style="text-align: justify;">
+                    <p class="fs-6">SiTatib Polinema adalah Sistem Informasi Tata Tertib yang dirancang untuk mendukung penerapan peraturan dan menjaga disiplin di lingkungan Politeknik Negeri Malang. Sistem ini bertujuan menciptakan suasana yang aman, tertib, dan kondusif bagi seluruh civitas akademika, termasuk mahasiswa, dosen, dan staf kampus. Melalui SiTatib Polinema, pengguna dapat dengan mudah memahami, mengelola, dan memantau tata tertib kampus secara efisien.
+                        <br>
+                        <br>
+                        Sistem ini menyediakan akses mudah ke informasi tata tertib kampus, memungkinkan pemantauan riwayat pelanggaran mahasiswa secara transparan, serta memfasilitasi dosen dalam melaporkan dan memantau pelanggaran secara efisien. Dengan fitur-fitur ini, Politeknik Negeri Malang berkomitmen untuk menciptakan lingkungan akademik yang mendukung pembelajaran dan pengembangan karakter disiplin.
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
+
 </body>
 
 </html>

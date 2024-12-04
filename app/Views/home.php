@@ -42,7 +42,7 @@
     </nav>
     <div class="background-container">
         <div class="background-overlay"></div>
-        <div class="text-content">
+        <div class="text-content" style="padding-left: 129px;">
             <h1><b>Selamat Datang di SiTatib Polinema!</b></h1>
             <br>
             <h2>Menjaga Sikap, Integritas, dan Tanggung Jawab di Kampus</h2>
@@ -73,20 +73,22 @@
     <!-- TATA TERTIB -->
     <div class="container mb-5">
         <div class="row">
-            <div class="col-6">
+            <div class="col-6" style="padding-left: 351px;">
                 <div class="card" style="height: 285px; width: 285px;">
-                    <img src="/assets/img/logo-TataTertib.png" alt="Gambar Tidak Ditemukan" style="width: 90px; hight: 90px; left: 380px;">
-                    <h3 class="mb-1 pad">Tata Tertib</h3>
-                    <hr style="width: 50%; border: 3px solid #F6921E ; border-radius: 10px; background-color: #F6921E;">
-                    <p>Pelajari aturan yang harus dipatuhi di kampus untuk menciptakan lingkungan yang tertib dan harmonis.</p>
+                    <img src="/assets/img/logo-TataTertib.png" alt="Gambar Tidak Ditemukan" style="width: 90px; hight: 90px; left: 380px; margin-left: 35px; margin-top:23px">
+                    <h3 style="margin-left: 23px;">Tata Tertib</h3>
+                    <hr style="width: 50%; border: 3px solid #F6921E ; border-radius: 10px; background-color: #F6921E; margin: 0 0 0 23px;">
+                    <p style="margin-left: 23px; text-align:justify; padding-right: 35px;">Pelajari aturan yang harus dipatuhi di kampus untuk menciptakan lingkungan yang tertib dan harmonis.</p>
                 </div>
             </div>
             <div class="col-6">
                 <div class="card" style="height: 285px; width: 285px;">
-                    <img src="/assets/img/logo-Pelanggaran.png" style=" width:65px; height: 72.22px; top: 3px; left: 920px; gap: 0px; opacity: 0px;">
-                    <h3 class="mb-1 pad">Tata Tertib</h3>
-                    <hr style="width: 50%; border: 3px solid #F6921E ; border-radius: 10px; background-color: #F6921E;">
-                    <p>Lihat riwayat pelanggaran dan pantau status kedisiplinan. Pastikan untuk selalu mematuhi tata tertib kampus.</p>
+                    <div style="margin-left: 35px;">
+                        <img src="/assets/img/logo-Pelanggaran.png" style=" width:65px; height: 72.22px; top: 3px; left: 920px; gap: 0px; opacity: 0px; margin: 23px 0 0 0; ">
+                        <h3>Pelanggaran</h3>
+                        <hr style="width: 75%; border: 3px solid #F6921E ; border-radius: 10px; background-color: #F6921E;">
+                        <p style="text-align:justify; padding-right: 35px;">Lihat riwayat pelanggaran dan pantau status kedisiplinan. Pastikan untuk selalu mematuhi tata tertib kampus.</p>
+                    </div>
                 </div>
             </div>
         </div>

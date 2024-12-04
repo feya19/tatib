@@ -2,19 +2,21 @@
 <div class="container-fluid p-4 bg-white rounded">
     <div class="table-toolbar">
         <div class="row align-items-center">
-            <label for="prodi" class="col-sm-1 col-form-label fw-semibold">Prodi</label>
-            <div class="col-sm-7 ps-4">
-                <select class="form-select" name="prodi" id="prodi">
-                    <option value="">D-IV Teknik Informatika</option>
-                    <option value="">D-IV Sistem Informasi Bisnis</option>
-                    <option value="">D-II Rekayasa Peranti Web</option>
+             <!-- Status Filter -->
+             <div class="col-md-5 d-flex align-items-center">
+                <label for="status" class="form-label fw-semibold me-3 mb-0">Status:</label>
+                <select class="form-select" name="status" id="status">
+                    <option value="semua">Semua</option>
+                    <option value="baru">Baru</option>
+                    <option value="proses">Proses</option>
+                    <option value="ditolak">Ditolak</option>
+                    <option value="selesai">Selesai</option>
                 </select>
             </div>
-            <label for="kelas" class="col-sm-1 col-form-label fw-semibold">Kelas</label>
-            <div class="col-sm-3 ps-4">
-                <select class="form-select" name="kelas" id="kelas">
-                    <option value="">TI-2A</option>
-                </select>
+            <!-- Tanggal Filter -->
+            <div class="col-md-4 d-flex align-items-center">
+                <label for="tanggal" class="form-label fw-semibold me-4 mb-0">Tanggal:</label>
+                <input type="date" class="form-control" name="tanggal" id="tanggal">
             </div>
         </div>
     </div>
@@ -23,30 +25,37 @@
 <script>
     $('#table').bootstrapTable({
         pagination: true,
-        search: true,
+        search: true ,
+        // searchSelector: '#search',
         toolbar: '.table-toolbar',
         columns: [
             {
                 field: 'report_date',
-                title: 'Tanggal'
-            }, {
-                field: 'nim',
-                title: 'NIM'
-            }, {
-                field: 'class_name',
-                title: 'Kelas'
+                title: 'Tanggal',
+                width: '90px'
+            },  {
+                field: 'name',
+                title: 'Pelapor',
+                width: '120px'
             }, {
                 field: 'type_name',
-                title: 'Pelanggaran'
+                title: 'Pelanggaran',
+                width: '300px'
             }, {
                 field: 'level_name',
-                title: 'Level'
+                title: 'Level',
+                width: '60px'
             }, {
                 field: 'status',
-                title: 'Status'
-            }, {
+                title: 'Status',
+                width: '70px'
+            },{
                 field: 'violation_id',
-                title: 'Aksi'
+                title: 'Aksi',
+                width: '100px',
+                formatter: function(value, row, index) {
+                    return '<a href="Detail/'+ value +'" class="btn btn-sm btn-primary">Detail</a> <a href="Cetak/'+ value +'" class="btn btn-sm btn-primaryr">Cetak</a>';
+                }
             }
         ],
         data: []

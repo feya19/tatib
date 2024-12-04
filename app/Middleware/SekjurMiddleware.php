@@ -4,13 +4,13 @@ namespace App\Middleware;
 use Core\Session;
 use Core\Redirect;
 
-class MahasiswaMiddleware extends AuthMiddleware
+class SekjurMiddleware extends DosenMiddleware
 {
     public static function handle()
     {
         parent::handle();
 
-        if (!Session::get('userdata')['student_id']) {
+        if (!Session::get('userdata')['is_sekjur']) {
             Redirect::to('/dashboard', ['warning' => 'Anda Tidak Memiliki Akses']);
         }
     }

@@ -11,7 +11,7 @@ class AdminMiddleware extends AuthMiddleware
         parent::handle();
 
         if (!Session::get('userdata')['is_admin']) {
-            Redirect::to('dashboard');
+            Redirect::to('/dashboard', ['warning' => 'Anda Tidak Memiliki Akses']);
         }
     }
 }

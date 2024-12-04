@@ -63,7 +63,7 @@ class HomeController extends Controller {
 
     public function logout() {
         Session::destroy();
-        Redirect::to('login');
+        Redirect::to('/login');
     }
     
     public function profil() {

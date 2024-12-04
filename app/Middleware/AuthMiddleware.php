@@ -10,7 +10,7 @@ class AuthMiddleware
     public static function handle()
     {
         if (!Session::has('userdata')) {
-            Redirect::to('login');
+            Redirect::to('/login');
         }
     }
 }

@@ -11,7 +11,7 @@ class DosenMiddleware extends AuthMiddleware
         parent::handle();
 
         if (!Session::get('userdata')['lecturer_id']) {
-            Redirect::to('dashboard');
+            Redirect::to('/dashboard', ['warning' => 'Anda Tidak Memiliki Akses']);
         }
     }
 }

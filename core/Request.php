@@ -1,5 +1,4 @@
 <?php
-
 namespace Core;
 
 class Request {
@@ -20,5 +19,19 @@ class Request {
 
     public function isAjax() {
         return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
+    }
+
+    public static function is(string $path) {
+        $currentPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $normalizedPath = rtrim($currentPath, '/');
+        $normalizedInputPath = rtrim($path, '/');
+
+        // Handle wildcard matching
+        if (str_contains($normalizedInputPath, '*')) {
+            $pattern = str_replace('*', '', $normalizedInputPath);
+            return stripos($normalizedPath, $pattern) === 0;
+        }
+
+        return $normalizedPath === $normalizedInputPath;
     }
 }

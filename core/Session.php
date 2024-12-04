@@ -46,11 +46,13 @@ class Session {
         return $_SESSION['old_values'][$key] ?? $default;
     }
 
-    public static function getFlash(string $key) {
+    public static function getFlash(string $key = '') {
         self::start();
-        $flash = $_SESSION['flash'][$key] ?? null;
+        $flash = $_SESSION['flash'][$key] ?? $_SESSION['flash'];
         if (isset($_SESSION['flash'][$key])) {
             unset($_SESSION['flash'][$key]); // Clear the flash message after retrieval
+        } else {
+            unset($_SESSION['flash']);
         }
         return $flash;
     }

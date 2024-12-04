@@ -2,34 +2,53 @@
         </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        // Ambil semua link di sidebar
-        const sidebarLinks = document.querySelectorAll("#sidebar .nav-link");
+        $(document).ready(function () {
+            const $verifikasiSubmenu = $('#verifikasiSubmenu');
+            const $chevronIcon = $('.rotate-icon[data-parent="verifikasiSubmenu"]');
+            // Initial angle
+            let angle = 0;
 
-        // Dapatkan URL path saat ini
-        let currentPath = window.location.pathname;
+            $verifikasiSubmenu.on('show.bs.collapse', function () {
+                angle += 180;
+                $chevronIcon.animate({ deg: angle }, {
+                    step: function (now) {
+                        $(this).css({ transform: `rotate(${now}deg)` });
+                    },
+                    duration: 300
+                });
+            });
 
-        // Fungsi untuk mencoba mencocokkan path
-        function findActiveLink(path) {
-            for (const link of sidebarLinks) {
-                if (link.getAttribute("href") === path) {
-                    link.classList.add("active");
-                    return true; // Link ditemukan
-                }
+            $verifikasiSubmenu.on('hide.bs.collapse', function () {
+                angle -= 180;
+                $chevronIcon.animate({ deg: angle }, {
+                    step: function (now) {
+                        $(this).css({ transform: `rotate(${now}deg)` });
+                    },
+                    duration: 300
+                });
+            });
+        });
+
+        const flashdata = <?= json_encode(Core\Session::getFlash() ?: []); ?>;
+        
+        Object.entries(flashdata).forEach(([key, val]) => {
+            switch (key) {
+                case 'success':
+                    toastr.success(val);
+                    break;
+                case 'error':
+                    toastr.error(val);
+                    break;
+                case 'warning':
+                    toastr.warning(val);
+                    break;
+                default:
+                    toastr.info(val);
+                    break;
             }
-            return false; // Link tidak ditemukan
-        }
-
-        // Mulai dari path lengkap, dan coba dengan mengurangi segment jika tidak ditemukan
-        while (currentPath !== "") {
-            if (findActiveLink(currentPath)) {
-                break; // Jika path ditemukan, hentikan loop
-            }
-            // Hapus segmen terakhir dari path
-            currentPath = currentPath.substring(0, currentPath.lastIndexOf("/"));
-        }
-    });
+        });
     </script>
 </body>
 </html>

@@ -12,5 +12,6 @@ Route::get('logout', 'HomeController@logout');
 Route::get('profil', 'HomeController@profil', AuthMiddleware::class);
 Route::get('dashboard', 'DashboardController@index', AuthMiddleware::class);
 Route::get('panduan', 'PanduanController@index', AuthMiddleware::class); //Panduan Tata Tertib
+Route::get('pelanggaran', 'PelanggaranController@index', AuthMiddleware::class); //Panduan Tata Tertib
 // Dispatch the route
 Route::dispatch();

@@ -8,8 +8,12 @@ use PDOException;
 class Model {
     protected string $table; // Table name
     protected string $primaryKey = 'id'; // Primary key column
-    private static ?PDO $pdo = null;    // Database connection
-    protected array $attributes = [];   // Stores the model's data
+    private static ?PDO $pdo = null; // Database connection
+    protected array $attributes = []; // Stores the model's data
+    protected array $whereConditions = []; // Where conditions for queries
+    protected string $orderClause = ''; // Order clause
+    protected ?int $limitClause = null; // Limit clause
+    protected ?int $offsetClause = null; // Offset clause
 
     public function __construct() {
         if (self::$pdo === null) {
@@ -25,8 +29,8 @@ class Model {
      * Get all records.
      */
     public function all(): array {
-        $stmt = self::$pdo->query("SELECT * FROM {$this->table}");
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $sql = "SELECT * FROM {$this->table}";
+        return $this->query($sql);
     }
 
     /**
@@ -72,15 +76,6 @@ class Model {
     }
 
     /**
-     * Run a custom query.
-     */
-    protected function query(string $sql, array $params = []): array {
-        $stmt = self::$pdo->prepare($sql);
-        $stmt->execute($params);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    /**
      * Delete the current record.
      */
     public function delete(): bool {
@@ -88,6 +83,101 @@ class Model {
         $stmt = self::$pdo->prepare($sql);
 
         return $stmt->execute(['id' => $this->attributes[$this->primaryKey]]);
+    }
+
+    /**
+     * Add a where condition.
+     */
+    public function where(string $column, string $operator, $value): self {
+        $this->whereConditions[] = [$column, $operator, $value];
+        return $this;
+    }
+
+    /**
+     * Add a whereIn condition.
+     */
+    public function whereIn(string $column, array $values): self {
+        $placeholders = implode(', ', array_fill(0, count($values), '?'));
+        $this->whereConditions[] = ["{$column} IN ({$placeholders})", $values];
+        return $this;
+    }
+
+    /**
+     * Add order by clause.
+     */
+    public function orderBy(string $column, string $direction = 'ASC'): self {
+        $this->orderClause = "ORDER BY {$column} {$direction}";
+        return $this;
+    }
+
+    /**
+     * Add limit clause.
+     */
+    public function limit(int $limit): self {
+        $this->limitClause = $limit;
+        return $this;
+    }
+
+    /**
+     * Add offset clause.
+     */
+    public function offset(int $offset): self {
+        $this->offsetClause = $offset;
+        return $this;
+    }
+
+    /**
+     * Get the first record.
+     */
+    public function first(): ?self {
+        $this->limit(1);
+        $results = $this->get();
+        return $results[0] ?? null;
+    }
+
+    /**
+     * Execute the built query and fetch records.
+     */
+    public function get(): array {
+        $sql = "SELECT * FROM {$this->table}";
+
+        $params = [];
+        if (!empty($this->whereConditions)) {
+            $whereSql = [];
+            foreach ($this->whereConditions as $condition) {
+                if (is_array($condition[2])) { // whereIn case
+                    $whereSql[] = $condition[0];
+                    $params = array_merge($params, $condition[1]);
+                } else {
+                    $whereSql[] = "{$condition[0]} {$condition[1]} ?";
+                    $params[] = $condition[2];
+                }
+            }
+            $sql .= " WHERE " . implode(' AND ', $whereSql);
+        }
+
+        if (!empty($this->orderClause)) {
+            $sql .= " {$this->orderClause}";
+        }
+
+        if (!is_null($this->limitClause)) {
+            $sql .= " LIMIT {$this->limitClause}";
+        }
+
+        if (!is_null($this->offsetClause)) {
+            $sql .= " OFFSET {$this->offsetClause}";
+        }
+
+        return $this->query($sql, $params);
+    }
+
+    /**
+     * Run a custom query.
+     */
+    protected function query(string $sql, array $params = []): array {
+        $stmt = self::$pdo->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     /**

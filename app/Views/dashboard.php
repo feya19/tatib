@@ -10,13 +10,13 @@
     <div class="row mt-4">
         <!-- Card 1 -->
         <div class="col-lg-4 col-md-6 mb-4">
-            <a href="#" class="text-decoration-none">
+            <a href="/pelanggaran" class="text-decoration-none">
                 <div class="card shadow-sm h-100">
                     <div class="card-body p-4 d-flex align-items-center">
                         <div class="flex-grow-1">
                             <h5 class="card-title fw-bold mb-3">Seluruh Pelanggaran</h5>
                             <h2 class="text-primary fw-bold mb-3">3</h2>
-                            <p class="text-muted">Total pelanggaran keseluruhan mahasiswa</p>
+                            <p class="text-muted">Total pelanggaran keseluruhan </p>
                         </div>
                         <img src="/assets/img/icon-1.png" alt="Icon representing total violations" class="ms-4 pb-4" width="80">
                     </div>

@@ -75,7 +75,7 @@
         <div class="row">
             <div class="col-6">
                 <div class="card" style="height: 285px; width: 285px;">
-                    <img src="/assets/img/logo-TataTertib.png" alt="Gambar Tidak Ditemukan" style="width: 90px; hight: 90px; left: 380px;">
+                    <img src="/assets/img/logo-TataTertib.png" alt="Gambar Tidak Ditemukan" style="width: 90px; height: 90px; left: 380px;">
                     <h3 class="mb-1 pad">Tata Tertib</h3>
                     <hr style="width: 50%; border: 3px solid #F6921E ; border-radius: 10px; background-color: #F6921E;">
                     <p>Pelajari aturan yang harus dipatuhi di kampus untuk menciptakan lingkungan yang tertib dan harmonis.</p>

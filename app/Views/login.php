@@ -11,9 +11,9 @@
 <body class="bg-light">
 
     <!-- Logo -->
-    <div class="position-absolute top-0 start-0 m-3">
+    <a class="position-absolute top-0 start-0 m-3" href="/">
         <img src="/assets/img/logo-tatib.png" alt="SiTatib POLINEMA" class="img-fluid" style="max-width: 220px;">
-    </div>
+    </a>
 
     <!-- Login Container -->
     <div class="container d-flex justify-content-center align-items-center vh-100">

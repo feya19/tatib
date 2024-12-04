@@ -34,7 +34,7 @@
                     </div>
 
                     <!-- Error Messages -->
-                    <?php if ($errors = \Core\Controller::getFlash('errors')): ?>
+                    <?php if ($errors = \Core\Session::getFlash('errors')): ?>
                         <div class="alert alert-danger" role="alert">
                             <ul class="mb-0">
                                 <?php 

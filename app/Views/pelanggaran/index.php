@@ -1,6 +1,4 @@
-<h2 class="mb-4 fw-semibold">Daftar Pelanggaran</h2>
-<p class="text-muted">Pelanggaran</p>
-
+<h2 class="mb-4 fw-semibold"><?= $title ?></h2>
 <div class="container-fluid p-4 bg-white rounded">
     <div class="table-toolbar">
         <div class="row align-items-center">
@@ -27,24 +25,30 @@
         pagination: true,
         search: true,
         toolbar: '.table-toolbar',
-        columns: [{
-            field: 'id',
-            title: 'Item ID'
-        }, {
-            field: 'name',
-            title: 'Item Name'
-        }, {
-            field: 'price',
-            title: 'Item Price'
-        }],
-        data: [{
-            id: 1,
-            name: 'Item 1',
-            price: '$1'
-        }, {
-            id: 2,
-            name: 'Item 2',
-            price: '$2'
-        }]
+        columns: [
+            {
+                field: 'report_date',
+                title: 'Tanggal'
+            }, {
+                field: 'nim',
+                title: 'NIM'
+            }, {
+                field: 'class_name',
+                title: 'Kelas'
+            }, {
+                field: 'type_name',
+                title: 'Pelanggaran'
+            }, {
+                field: 'level_name',
+                title: 'Level'
+            }, {
+                field: 'status',
+                title: 'Status'
+            }, {
+                field: 'violation_id',
+                title: 'Aksi'
+            }
+        ],
+        data: []
     })
 </script>

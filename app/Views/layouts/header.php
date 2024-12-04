@@ -7,10 +7,11 @@
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/css/bootstrap-table.css" rel="stylesheet">
     <link href="/assets/css/custom.css" rel="stylesheet">
-    <link href="/assets/css/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="/assets/css/fontawesome.min.css" rel="stylesheet">
     <script src="/assets/js/jquery.min.js"></script>
     <script src="/assets/js/bootstrap.bundle.min.js"></script>
     <script src="/assets/js/bootstrap-table.js"></script>
+    <script src="/assets/js/fontawesome.min.js"></script>
 </head>
 <body>
     <!-- Navbar -->
@@ -39,7 +40,7 @@
                     <!-- Profile -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
-                            <span><?= \Core\Controller::getSession('userdata')['name'] ?></span>
+                            <span><?= \Core\Session::get('userdata')['name'] ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="/profil">Profile</a></li>
@@ -58,25 +59,25 @@
         <ul class="nav flex-column p-3" style="min-width: 240px;">
             <li class="nav-item">
                 <a href="/dashboard" class="nav-link">
-                    <i class="bi bi-grid me-2"></i> Dashboard
+                    <i class="fa-duotone fa-solid fa-grid-2"></i></i> Dashboard
                 </a>
             </li>
-            <?php if(\Core\Controller::getSession('userdata')['lecturer_id']): ?>
+            <?php if(\Core\Session::get('userdata')['lecturer_id']): ?>
             <li class="nav-item">
                 <a href="/pelaporan" class="nav-link">
-                    <i class="bi bi-clipboard me-2"></i> Pelaporan
+                    <i class="fa-duotone fa-solid fa-file-lines"></i></i> Pelaporan
                 </a>
             </li>
             <?php else: ?>
             <li class="nav-item">
                 <a href="/pelanggaran" class="nav-link">
-                    <i class="bi bi-clipboard me-2"></i> Pelanggaran
+                    <i class="fa-duotone fa-solid fa-file-lines"></i> Pelanggaran
                 </a>
             </li>
             <?php endif; ?>
             <li class="nav-item">
                 <a href="/panduan" class="nav-link">
-                    <i class="bi bi-file-earmark-text me-2"></i> Tata Tertib
+                    <i class="fa-duotone fa-solid fa-book"></i></i> Tata Tertib
                 </a>
             </li>
         </ul>

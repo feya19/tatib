@@ -11,7 +11,7 @@ set_exception_handler(function ($exception) {
     // Log the exception
     error_log($exception);
 
-    if (getenv('APP_DEBUG') === 'true') {
+    if (Core\Env::get('APP_DEBUG') === 'true') {
         // Display detailed error in debug mode
         echo "<h1>Exception Caught</h1>";
         echo "<p><strong>Message:</strong> " . $exception->getMessage() . "</p>";

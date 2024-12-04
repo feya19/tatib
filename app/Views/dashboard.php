@@ -2,7 +2,7 @@
     <!-- Welcome -->
     <div class="welcome-container">
         <h1 class="position-absolute" style="color: #C45A01; z-index: 1; font-size: 40px; font-weight: bold;">
-            Selamat Datang <?= \Core\Controller::getSession('userdata')['name'] ?>
+            Selamat Datang <?= \Core\Session::get('userdata')['name'] ?>
         </h1>
         <img src="/assets/img/background-dashboard.png" alt="Background" class="img-fluid" style="height: 100%; width: 100%;">
     </div>

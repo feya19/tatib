@@ -5,6 +5,7 @@ use App\Middleware\AuthMiddleware;
 use App\Middleware\DosenMiddleware;
 use App\Middleware\DpaMiddleware;
 use App\Middleware\SekjurMiddleware;
+use App\Middleware\AdminMiddleware;
 
 // Define your application routes
 Route::get('', 'HomeController@index'); // Home page
@@ -20,5 +21,6 @@ Route::get('pelaporan', 'PelaporanController@index', DosenMiddleware::class); //
 Route::get('pelaporan/tambah', 'PelaporanController@tambah', DosenMiddleware::class); //Panduan Tata Tertib
 Route::get('verifikasi/kelas', 'VerifikasiController@kelas', DpaMiddleware::class); //Panduan Tata Tertib
 Route::get('verifikasi/jurusan', 'VerifikasiController@jurusan', SekjurMiddleware::class); //Panduan Tata Tertib
+Route::get('laporan', 'LaporanController@index', AdminMiddleware::class); 
 // Dispatch the route
 Route::dispatch();

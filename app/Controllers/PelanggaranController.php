@@ -11,7 +11,7 @@ class PelanggaranController extends Controller {
         $title = 'Daftar Pelanggaran';
         $model = new Pelanggaran();
         if ($student_id = Session::get('userdata')['student_id']) {
-            $model->where('student_id', '=', $student_id);
+            $model->where('nim', '=', $student_id);
         }
         $data = $model->get();
         self::render('pelanggaran/index', ['title' => $title, 'data' => $data]);

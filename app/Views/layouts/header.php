@@ -75,7 +75,7 @@ $userdata = \Core\Session::get('userdata');
                     <i class="fa-duotone fa-solid fa-file-lines"></i></i> Pelaporan
                 </a>
             </li>
-            <?php elseif (\Core\Session::get('userdata')['student_id']): ?>
+            <?php elseif ($userdata['student_id']): ?>
             <li class="nav-item">
                 <a href="/pelanggaran" class="nav-link <?= Request::is('/pelanggaran') ? 'active' : '' ?>">
                     <i class="fa-duotone fa-solid fa-file-lines"></i> Pelanggaran

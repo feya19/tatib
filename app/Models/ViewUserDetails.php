@@ -6,6 +6,7 @@ use Core\Model;
 
 class ViewUserDetails extends Model {
     protected string $table = 'UserDetails'; 
+    protected string $primaryKey = 'user_id';
 
     public function findByUsername(string $username) {
         $sql = "SELECT TOP 1 * FROM {$this->table} WHERE username = :username";

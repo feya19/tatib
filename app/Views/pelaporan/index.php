@@ -10,15 +10,13 @@
             <label for="prodi" class="col-sm-1 col-form-label fw-semibold">Prodi</label>
             <div class="col-sm-7 ps-4">
                 <select class="form-select" name="prodi" id="prodi">
-                    <option value="">D-IV Teknik Informatika</option>
-                    <option value="">D-IV Sistem Informasi Bisnis</option>
-                    <option value="">D-II Rekayasa Peranti Web</option>
+                    <option value="">Pilih</option>
                 </select>
             </div>
             <label for="kelas" class="col-sm-1 col-form-label fw-semibold">Kelas</label>
             <div class="col-sm-3 ps-4">
                 <select class="form-select" name="kelas" id="kelas">
-                    <option value="">TI-2A</option>
+                    <option value="">Pilih</option>
                 </select>
             </div>
         </div>
@@ -29,6 +27,7 @@
     $('#table').bootstrapTable({
         pagination: true,
         search: true,
+        url: '/pelaporan',
         toolbar: '.table-toolbar',
         columns: [
             {
@@ -53,7 +52,6 @@
                 field: 'violation_id',
                 title: 'Aksi'
             }
-        ],
-        data: []
+        ]
     })
 </script>

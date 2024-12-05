@@ -5,7 +5,7 @@ namespace Core;
 use PDO;
 use PDOException;
 
-class Model {
+abstract class Model {
     protected string $table; // Table name
     protected string $primaryKey = 'id'; // Primary key column
     private static ?PDO $pdo = null; // Database connection
@@ -140,7 +140,39 @@ class Model {
      */
     public function get(): array {
         $sql = "SELECT * FROM {$this->table}";
+        $params = [];
+    
+        if (!empty($this->whereConditions)) {
+            $whereSql = [];
+            foreach ($this->whereConditions as $condition) {
+                if (is_array($condition[2])) { // whereIn case
+                    $whereSql[] = $condition[0];
+                    $params = array_merge($params, $condition[1]);
+                } else {
+                    $whereSql[] = "{$condition[0]} {$condition[1]} ?";
+                    $params[] = $condition[2];
+                }
+            }
+            $sql .= " WHERE " . implode(' AND ', $whereSql);
+        }
+    
+        // Ensure there's an ORDER BY clause
+        $sql .= !empty($this->orderClause) ? " {$this->orderClause}" : " ORDER BY {$this->primaryKey} ASC";
+    
+        // Add LIMIT and OFFSET
+        if (!is_null($this->limitClause) && !is_null($this->offsetClause)) {
+            $sql .= " OFFSET {$this->offsetClause} ROWS FETCH NEXT {$this->limitClause} ROWS ONLY";
+        }
+    
+        return $this->query($sql, $params);
+    }
 
+    /**
+     * Count the total number of rows, considering applied conditions.
+     */
+    public function count(): int {
+        $sql = "SELECT COUNT(*) AS count FROM {$this->table}";
+    
         $params = [];
         if (!empty($this->whereConditions)) {
             $whereSql = [];
@@ -155,22 +187,11 @@ class Model {
             }
             $sql .= " WHERE " . implode(' AND ', $whereSql);
         }
-
-        if (!empty($this->orderClause)) {
-            $sql .= " {$this->orderClause}";
-        }
-
-        if (!is_null($this->limitClause)) {
-            $sql .= " LIMIT {$this->limitClause}";
-        }
-
-        if (!is_null($this->offsetClause)) {
-            $sql .= " OFFSET {$this->offsetClause}";
-        }
-
-        return $this->query($sql, $params);
+    
+        $stmt = self::$pdo->prepare($sql);
+        $stmt->execute($params);
+        return (int) $stmt->fetchColumn();
     }
-
     /**
      * Run a custom query.
      */

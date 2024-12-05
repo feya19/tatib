@@ -1,9 +1,8 @@
 <?php
 
 namespace Core;
-use Core\Session;
 
-class Controller {
+abstract class Controller {
     public static function view(string $view, array $data = []) {
         extract($data);
         include __DIR__ . '/../app/Views/' . $view . '.php';

@@ -6,5 +6,5 @@ use Core\Model;
 
 class User extends Model {
     protected string $table = 'Users'; 
-    protected string $primaryKey = 'id';
+    protected string $primaryKey = 'user_id';
 }

@@ -6,7 +6,7 @@ use Core\Model;
 class PanduanModel extends Model {
 
     protected string $table = 'ViolationTypes'; // Nama tabel dalam database
-
+    protected string $primaryKey = 'type_id';
     // Mendapatkan data berdasarkan filter
     public function getPanduan($level = '', $search = ''): array {
         // Mulai query dasar dengan join ke tabel Levels

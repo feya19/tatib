@@ -83,10 +83,11 @@
                     </tr>
                 </thead>
                 <tbody id="pelanggaranTable">
+                    <?php $no = 1; ?>
                     <?php if (!empty($violations)): ?>
                         <?php foreach ($violations as $violation): ?>
                             <tr>
-                                <td><?= htmlspecialchars($violation['type_id']); ?></td>
+                                <td><?= $no; $no++;?></td>
                                 <td><?= htmlspecialchars($violation['type_name']); ?></td>
                                 <td><span class="badge-level"><?= htmlspecialchars($violation['level_name']); ?></span></td>
                             </tr>

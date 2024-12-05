@@ -63,7 +63,7 @@ $userdata = \Core\Session::get('userdata');
 
     <!-- Sidebar and Content -->
     <div class="d-flex bg-white" id="sidebar">
-        <ul class="nav flex-column p-2" style="min-width: 240px;">
+        <ul class="nav flex-column p-2" style="min-width: 240px; max-width: 240px">
             <li class="nav-item">
                 <a href="/dashboard" class="nav-link <?= Request::is('/dashboard') ? 'active' : '' ?>">
                     <i class="fa-duatone fa-solid fa-grid-2" aria-hidden="true"></i> Dashboard
@@ -83,7 +83,7 @@ $userdata = \Core\Session::get('userdata');
             </li>
             <?php else: ?>
              <li class="nav-item">
-                <a href="/laporan" class="nav-link">
+                <a href="/laporan" class="nav-link <?= Request::is('/laporan') ? 'active' : '' ?>">
                     <i class="fa-duotone fa-solid fa-file-lines"></i> Pelanggaran
                 </a>
             </li>
@@ -113,11 +113,45 @@ $userdata = \Core\Session::get('userdata');
                 </ul>
             </li>
             <?php endif; ?>
+            <?php if($userdata['is_admin']): ?>
+                <p class="text-muted text-center my-2">Data Master</p>
             <li class="nav-item">
-                <a href="/panduan" class="nav-link <?= Request::is('/panduan') ? 'active' : '' ?>">
-                    <i class="fa-duotone fa-solid fa-book"></i></i> Tata Tertib
+                <a href="#verifikasiSubmenu" data-bs-toggle="collapse" class="nav-link <?= Request::is('/data_user/*') ? 'active' : '' ?>">
+                    <div class="d-flex justify-content-between ">
+                        <span><i class="fa-duotone fa-solid fa-users"></i> User</span> <i class="fa-duotone fa-solid fa-chevron-<?= Request::is('/data_user/*') ? 'down' : 'up' ?> my-auto rotate-icon" data-parent="verifikasiSubmenu"></i>
+                    </div>
                 </a>
+                <ul id="verifikasiSubmenu" class="collapse nav ms-4 <?= Request::is('/data_user/*') ? 'show' : '' ?>">
+                    <?php if ($userdata['is_admin']): ?>
+                    <li class="nav-item flex w-100">
+                        <a class="nav-link <?= Request::is('/data_user/mahasiswa') ? 'active' : '' ?>" href="/data_user/mahasiswa">
+                            <i class="fa-duotone fa-solid fa-graduation-cap"></i> Mahasiswa
+                        </a>
+                    </li>
+                    <?php endif; ?>
+                    <?php if ($userdata['is_admin']): ?>
+                    <li class="nav-item flex w-100">
+                        <a class="nav-link <?= Request::is('/data_user/dosen') ? 'active' : '' ?>" href="/data_user/dosen">
+                            <i class="fa-duotone fa-solid fa-chalkboard-teacher"></i> Dosen
+                        </a>
+                    </li>
+                    <?php endif; ?>
+                </ul>
             </li>
+            <?php endif; ?>
+            <?php if($userdata['is_admin']): ?>
+                <li class="nav-item">
+                    <a href="/data_tatib" class="nav-link <?= Request::is('/data_tatib') ? 'active' : '' ?>">
+                        <i class="fa-duotone fa-solid fa-book"></i></i> Tata Tertib
+                    </a>
+                </li>
+            <?php else: ?>
+                <li class="nav-item">
+                    <a href="/panduan" class="nav-link <?= Request::is('/panduan') ? 'active' : '' ?>">
+                        <i class="fa-duotone fa-solid fa-book"></i></i> Tata Tertib
+                    </a>
+                </li>
+            <?php endif; ?>
         </ul>
 
         <!-- Main Content -->

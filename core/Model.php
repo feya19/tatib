@@ -86,14 +86,6 @@ abstract class Model {
     }
 
     /**
-     * Add a where condition.
-     */
-    public function where(string $column, string $operator, $value): self {
-        $this->whereConditions[] = [$column, $operator, $value];
-        return $this;
-    }
-
-    /**
      * Add a whereIn condition.
      */
     public function whereIn(string $column, array $values): self {
@@ -136,6 +128,37 @@ abstract class Model {
     }
 
     /**
+     * Add a where condition.
+     */
+    public function where($column, $operator = null, $value = null): self {
+        // Check if closure is provided for nesting
+        if (is_callable($column)) {
+            $nestedQuery = new static();
+            $column($nestedQuery);
+            $this->whereConditions[] = ['AND', $nestedQuery->whereConditions];
+        } else {
+            $this->whereConditions[] = ['AND', $column, $operator, $value];
+        }
+        return $this;
+    }
+    
+    
+    /**
+     * Add an OR where condition.
+     */
+    public function orWhere($column, $operator = null, $value = null): self {
+        // Check if closure is provided for nesting
+        if (is_callable($column)) {
+            $nestedQuery = new static();
+            $column($nestedQuery);
+            $this->whereConditions[] = ['OR', $nestedQuery->whereConditions];
+        } else {
+            $this->whereConditions[] = ['OR', $column, $operator, $value];
+        }
+        return $this;
+    }
+    
+    /**
      * Execute the built query and fetch records.
      */
     public function get(): array {
@@ -143,23 +166,12 @@ abstract class Model {
         $params = [];
     
         if (!empty($this->whereConditions)) {
-            $whereSql = [];
-            foreach ($this->whereConditions as $condition) {
-                if (is_array($condition[2])) { // whereIn case
-                    $whereSql[] = $condition[0];
-                    $params = array_merge($params, $condition[1]);
-                } else {
-                    $whereSql[] = "{$condition[0]} {$condition[1]} ?";
-                    $params[] = $condition[2];
-                }
-            }
-            $sql .= " WHERE " . implode(' AND ', $whereSql);
+            $whereSql = $this->buildWhere($this->whereConditions, $params);
+            $sql .= " WHERE {$whereSql}";
         }
     
-        // Ensure there's an ORDER BY clause
         $sql .= !empty($this->orderClause) ? " {$this->orderClause}" : " ORDER BY {$this->primaryKey} ASC";
     
-        // Add LIMIT and OFFSET
         if (!is_null($this->limitClause) && !is_null($this->offsetClause)) {
             $sql .= " OFFSET {$this->offsetClause} ROWS FETCH NEXT {$this->limitClause} ROWS ONLY";
         }
@@ -172,24 +184,16 @@ abstract class Model {
      */
     public function count(): int {
         $sql = "SELECT COUNT(*) AS count FROM {$this->table}";
-    
         $params = [];
+    
         if (!empty($this->whereConditions)) {
-            $whereSql = [];
-            foreach ($this->whereConditions as $condition) {
-                if (is_array($condition[2])) { // whereIn case
-                    $whereSql[] = $condition[0];
-                    $params = array_merge($params, $condition[1]);
-                } else {
-                    $whereSql[] = "{$condition[0]} {$condition[1]} ?";
-                    $params[] = $condition[2];
-                }
-            }
-            $sql .= " WHERE " . implode(' AND ', $whereSql);
+            $whereSql = $this->buildWhere($this->whereConditions, $params);
+            $sql .= " WHERE {$whereSql}";
         }
     
         $stmt = self::$pdo->prepare($sql);
         $stmt->execute($params);
+    
         return (int) $stmt->fetchColumn();
     }
     /**
@@ -199,6 +203,35 @@ abstract class Model {
         $stmt = self::$pdo->prepare($sql);
         $stmt->execute($params);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Recursively build the WHERE clause.
+     */
+    private function buildWhere(array $conditions, array &$params): string {
+        $sqlParts = [];
+        $booleanOperator = ''; // Start with an empty string for the boolean operator.
+    
+        foreach ($conditions as $index => $condition) {
+            // Determine the operator for this condition
+            if ($index === 0) {
+                $booleanOperator = $condition[0]; // For the first condition, use the operator (AND/OR)
+            } else {
+                $booleanOperator = $condition[0]; // Subsequent conditions will use the operator in the array (AND/OR)
+            }
+    
+            if (is_array($condition[1])) { // Nested group
+                $nestedSql = $this->buildWhere($condition[1], $params);
+                $sqlParts[] = "({$nestedSql})";
+            } else {
+                // Build individual condition
+                $sqlParts[] = "{$condition[1]} {$condition[2]} ?";
+                $params[] = $condition[3];
+            }
+        }
+    
+        // Join the conditions with their respective boolean operators (AND/OR)
+        return implode(" {$booleanOperator} ", $sqlParts);
     }
 
     /**

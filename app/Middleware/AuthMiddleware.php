@@ -2,15 +2,15 @@
 
 namespace App\Middleware;
 
+use Core\Redirect;
+use Core\Session;
+
 class AuthMiddleware
 {
     public static function handle()
     {
-        session_start();
-
-        if (!isset($_SESSION['userdata'])) {
-            header('Location: /login');
-            exit();
+        if (!Session::has('userdata')) {
+            Redirect::to('/login');
         }
     }
 }

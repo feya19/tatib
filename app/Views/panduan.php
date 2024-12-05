@@ -1,5 +1,4 @@
 <h2 class="mb-4 fw-semibold"><?= $title ?></h2>
-<p class="text-muted"><?= $title ?></p>
 <div id="panduan">
     <div class="mt-4">
         <!-- Kontainer 1: Tingkat Pelanggaran dan Akumulasi Sanksi -->

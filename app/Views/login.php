@@ -11,9 +11,9 @@
 <body class="bg-light">
 
     <!-- Logo -->
-    <div class="position-absolute top-0 start-0 m-3">
+    <a class="position-absolute top-0 start-0 m-3" href="/">
         <img src="/assets/img/logo-tatib.png" alt="SiTatib POLINEMA" class="img-fluid" style="max-width: 220px;">
-    </div>
+    </a>
 
     <!-- Login Container -->
     <div class="container d-flex justify-content-center align-items-center vh-100">
@@ -34,7 +34,7 @@
                     </div>
 
                     <!-- Error Messages -->
-                    <?php if ($errors = \Core\Controller::getFlash('errors')): ?>
+                    <?php if ($errors = \Core\Session::getFlash('errors')): ?>
                         <div class="alert alert-danger" role="alert">
                             <ul class="mb-0">
                                 <?php 
@@ -93,7 +93,7 @@
     </div>
 
     <script src="/assets/js/bootstrap.min.js"></script>
-    <script src="/assets/js/jquery-3.7.1.min.js"></script>
+    <script src="/assets/js/jquery.min.js"></script>
     <script>
         // Toggle password visibility
         $('#showPassword').on('click', function () {

@@ -1,3 +1,7 @@
+<?php 
+use Core\Request;
+$userdata = \Core\Session::get('userdata');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,10 +11,15 @@
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/css/bootstrap-table.css" rel="stylesheet">
     <link href="/assets/css/custom.css" rel="stylesheet">
-    <link href="/assets/css/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="/assets/css/fontawesome.min.css" rel="stylesheet">
+    <link href="/assets/css/toastr.min.css" rel="stylesheet">
+    <link href="/assets/css/gijgo.min.css" rel="stylesheet">
     <script src="/assets/js/jquery.min.js"></script>
     <script src="/assets/js/bootstrap.bundle.min.js"></script>
     <script src="/assets/js/bootstrap-table.js"></script>
+    <script src="/assets/js/fontawesome.min.js"></script>
+    <script src="/assets/js/toastr.min.js"></script>
+    <script src="/assets/js/gijgo.min.js"></script>
 </head>
 <body>
     <!-- Navbar -->
@@ -39,7 +48,7 @@
                     <!-- Profile -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
-                            <span><?= \Core\Controller::getSession('userdata')['name'] ?></span>
+                            <span><?= $userdata['name'] ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="/profil">Profile</a></li>
@@ -54,33 +63,62 @@
 
     <!-- Sidebar and Content -->
     <div class="d-flex bg-white" id="sidebar">
-        <!-- Sidebar -->
-        <ul class="nav flex-column p-3" style="min-width: 240px;">
+        <ul class="nav flex-column p-2" style="min-width: 240px;">
             <li class="nav-item">
-                <a href="/dashboard" class="nav-link">
-                    <i class="bi bi-grid me-2"></i> Dashboard
+                <a href="/dashboard" class="nav-link <?= Request::is('/dashboard') ? 'active' : '' ?>">
+                    <i class="fa-duatone fa-solid fa-grid-2" aria-hidden="true"></i> Dashboard
                 </a>
             </li>
-            <?php if(\Core\Controller::getSession('userdata')['lecturer_id']): ?>
+            <?php if($userdata['lecturer_id']): ?>
             <li class="nav-item">
-                <a href="/pelaporan" class="nav-link">
-                    <i class="bi bi-clipboard me-2"></i> Pelaporan
+                <a href="/pelaporan" class="nav-link <?= Request::is('/pelaporan') ? 'active' : '' ?>">
+                    <i class="fa-duotone fa-solid fa-file-lines"></i></i> Pelaporan
+                </a>
+            </li>
+            <?php elseif (\Core\Session::get('userdata')['student_id']): ?>
+            <li class="nav-item">
+                <a href="/pelanggaran" class="nav-link <?= Request::is('/pelanggaran') ? 'active' : '' ?>">
+                    <i class="fa-duotone fa-solid fa-file-lines"></i> Pelanggaran
                 </a>
             </li>
             <?php else: ?>
-            <li class="nav-item">
-                <a href="/pelanggaran" class="nav-link">
-                    <i class="bi bi-clipboard me-2"></i> Pelanggaran
+             <li class="nav-item">
+                <a href="/laporan" class="nav-link">
+                    <i class="fa-duotone fa-solid fa-file-lines"></i> Pelanggaran
                 </a>
             </li>
             <?php endif; ?>
+            <?php if($userdata['is_sekjur'] || !empty($userdata['classes'])): ?>
             <li class="nav-item">
-                <a href="/panduan" class="nav-link">
-                    <i class="bi bi-file-earmark-text me-2"></i> Tata Tertib
+                <a href="#verifikasiSubmenu" data-bs-toggle="collapse" class="nav-link <?= Request::is('/verifikasi/*') ? 'active' : '' ?>">
+                    <div class="d-flex justify-content-between ">
+                        <span><i class="fa-duotone fa-solid fa-file-check"></i> Verifikasi</span> <i class="fa-duotone fa-solid fa-chevron-<?= Request::is('/verifikasi/*') ? 'down' : 'up' ?> my-auto rotate-icon" data-parent="verifikasiSubmenu"></i>
+                    </div>
+                </a>
+                <ul id="verifikasiSubmenu" class="collapse nav ms-4 <?= Request::is('/verifikasi/*') ? 'show' : '' ?>">
+                    <?php if (!empty($userdata['classes'])): ?>
+                    <li class="nav-item flex w-100">
+                        <a class="nav-link <?= Request::is('/verifikasi/kelas') ? 'active' : '' ?>" href="/verifikasi/kelas">
+                            <i class="fa-duotone fa-solid fa-building"></i> Kelas
+                        </a>
+                    </li>
+                    <?php endif; ?>
+                    <?php if ($userdata['is_sekjur']): ?>
+                    <li class="nav-item flex w-100">
+                        <a class="nav-link <?= Request::is('/verifikasi/jurusan') ? 'active' : '' ?>" href="/verifikasi/jurusan">
+                            <i class="fa-duotone fa-solid fa-buildings"></i> Jurusan
+                        </a>
+                    </li>
+                    <?php endif; ?>
+                </ul>
+            </li>
+            <?php endif; ?>
+            <li class="nav-item">
+                <a href="/panduan" class="nav-link <?= Request::is('/panduan') ? 'active' : '' ?>">
+                    <i class="fa-duotone fa-solid fa-book"></i></i> Tata Tertib
                 </a>
             </li>
         </ul>
-
 
         <!-- Main Content -->
         <div id="content" class="flex-grow-1 p-4">

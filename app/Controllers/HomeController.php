@@ -10,6 +10,7 @@ use Core\Request;
 use Core\Session;
 use Helpers\Pdf;
 use Core\Validation;
+use Core\Models\Profil;
 
 class HomeController extends Controller {
 
@@ -67,6 +68,17 @@ class HomeController extends Controller {
     }
     
     public function profil() {
-        self::render('profil');
+        // Check if user data exists in the session
+        if (!Session::has('userdata')) {
+            Redirect::to('/login'); // Redirect to login page if no user data is found in session
+        }
+
+        // Retrieve user data from the session
+        $userData = Session::get('userdata');
+        
+        // Pass the user data to the view
+        $data['user'] = $userData;
+        $data['title'] = "Profil";
+        self::render('profil', $data);
     }
 }

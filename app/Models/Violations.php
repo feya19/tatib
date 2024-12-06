@@ -17,4 +17,8 @@ class Violations extends Model {
             'done' => 'Selesai'
         ];
     }
+
+    function getTotalPelanggaran(): int {
+        return $this->count();
+    }
 }

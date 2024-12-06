@@ -9,7 +9,6 @@ use Core\Session;
 
 class PelanggaranController extends Controller
 {
-
     public function index()
     {
         if (Request::isAjax()) {
@@ -20,9 +19,26 @@ class PelanggaranController extends Controller
             $order = Request::get('order') ?: 'DESC';
             $search = Request::get('search') ? strtolower(Request::get('search')) : null;
 
+            // Get status and date filter from request
+            $status = Request::get('status') ?: null;
+            $tanggal = Request::get('tanggal') ?: null;
+
+            // Filter by student_id if present
             if ($student_id = Session::get('userdata')['student_id']) {
                 $model->where('nim', '=', $student_id);
             }
+
+            // Apply status filter if selected and not 'semua'
+            if ($status && $status !== 'semua') {
+                $model->where('status', '=', $status);
+            }
+
+            // Apply date filter if selected
+            if ($tanggal) {
+                $model->where('report_date', '=', $tanggal);
+            }
+
+            // Apply search filter
             if ($search) {
                 $model->where(function ($query) use ($search) {
                     $query->where('CAST(report_date AS varchar)', 'LIKE', "%$search%")
@@ -33,18 +49,24 @@ class PelanggaranController extends Controller
                         ->orWhere('LOWER(status)', 'LIKE', "%$search%");
                 });
             }
+
+            // Apply sorting
             if ($sort) {
                 $model->orderBy($sort, strtoupper($order));
             }
 
+            // Get data and total count
             $data = $model->limit($limit)->offset($offset)->get();
             $total = $model->count();
 
+            // Return the data in JSON format
             self::json([
                 'total' => $total,
                 'rows' => $data,
             ]);
         }
+
+        // Render the view for non-AJAX requests
         $title = 'Riwayat Pelanggaran';
         self::render('pelanggaran/index', [
             'title' => $title,

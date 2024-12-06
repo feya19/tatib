@@ -8,11 +8,13 @@
                 <label for="status" class="form-label fw-semibold me-3 mb-0">Status:</label>
                 <select class="form-select" name="status" id="status">
                     <option value="semua">Semua</option>
-                    <option value="baru">Baru</option>
-                    <option value="proses">Proses</option>
-                    <option value="ditolak">Ditolak</option>
-                    <option value="selesai">Selesai</option>
+                    <option value="new">Baru</option>
+                    <option value="rejected">Ditolak</option>
+                    <option value="process">Diproses</option>
+                    <option value="action_rejected">Pelaksanaan Sanksi Ditolak</option>
+                    <option value="done">Selesai</option>
                 </select>
+
             </div>
             <!-- Tanggal Filter -->
             <div class="col-md-6 d-flex align-items-center">
@@ -40,19 +42,19 @@ const $table = $('#table');
 const $status = JSON.parse('<?=json_encode($status)?>');
 const $status_class = JSON.parse('<?=json_encode($status_class)?>');
 $(function() {
-    // Attach change event listeners to dropdowns
-    $('#prodi, #kelas').change(function() {
+    // Attach change event listeners to status and tanggal filters
+    $('#status, #tanggal').change(function() {
         reloadTable();
     });
-})
-// Function to update table data based on filters
+});
+
 function reloadTable() {
-    const prodi = $('#prodi').val();
-    const kelas = $('#kelas').val();
+    const status = $('#status').val();
+    const tanggal = $('#tanggal').val();
 
     // Reload the table with new URL params
     $table.bootstrapTable('refresh', {
-        url: `/pelaporan?prodi=${prodi}&kelas=${kelas}`
+        url: `/pelanggaran?status=${status}&tanggal=${tanggal}`
     });
 }
 

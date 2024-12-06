@@ -1,5 +1,5 @@
 <h2 class="mb-4 fw-semibold"><?= $title ?></h2>
-
+<?php \Core\Controller::view('layouts/message'); ?>
 <div class="container-fluid p-4 bg-white rounded">
     <form action="/pelaporan/tambah" method="post" enctype="multipart/form-data">
         <div class="mb-3">

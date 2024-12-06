@@ -53,9 +53,9 @@ class HomeController extends Controller {
                     $user['classes'] = $classModel->where('dpa_id', '=', $user['lecturer_id'])->get();
                 }
                 Session::set('userdata', $user);
-                Redirect::to('/dashboard', ['success' => 'Login successful!']);
+                Redirect::to('/dashboard', ['success' => 'Login berhasil!']);
             } else {
-                Redirect::back(['errors' => 'Invalid username or password.']);
+                Redirect::back(['errors' => 'Username atau password salah.']);
             }
         } else {
             Redirect::back(['errors' => $validation->errors()]);

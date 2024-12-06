@@ -97,7 +97,7 @@ class PelaporanController extends Controller
             'nim' => 'required',
             'violation_type_id' => 'required',
             'report_date' => 'required',
-            'photo_evidence' => 'required_file|mimes:image/jpeg,image/png|max_size:2048',
+            'photo_evidence' => 'required_file|mimes:image/jpeg,image/jpg,image/png|max_size:2048',
         ];
         
         $validation = new Validation(array_merge($post, $files), $rules);
@@ -118,12 +118,12 @@ class PelaporanController extends Controller
             if (move_uploaded_file($photo['tmp_name'], __DIR__ . '/../../public'.$destination . $filename)) {
                 $post['photo_evidence'] = $destination . $filename;
             } else {
-                Redirect::back(['errors' => ['photo_evidence' => 'Failed to upload the photo evidence.']]);
+                Redirect::back(['errors' => 'Gagal mengunggah bukti pelanggaran.']);
             }
 
             $model = new Violations();
             $model->create($post);
-            Redirect::to('/pelaporan', ['success' => 'Berhasil Menambahkan Laporan!']);
+            Redirect::to('/pelaporan', ['success' => 'Berhasil menambahkan laporan!']);
         } else {
             Redirect::back(['errors' => $validation->errors()]);
         }

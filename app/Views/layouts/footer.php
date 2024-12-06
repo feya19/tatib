@@ -60,8 +60,10 @@
                 case 'warning':
                     toastr.warning(val);
                     break;
-                default:
+                case 'info':
                     toastr.info(val);
+                    break;
+                default:
                     break;
             }
         });

@@ -1,170 +1,166 @@
 body {
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
 #content {
-    background-color: #F5F6FA;
-    flex-grow: 1;
-    overflow-y: auto;
+  background-color: #f5f6fa;
+  flex-grow: 1;
+  overflow-y: auto;
 }
 
 /* Sidebar styles */
 #sidebar {
-    background-color: #ffffff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    height: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
-    /* Optional for visual separation */
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* Optional for visual separation */
 }
 
 #sidebar .nav-link {
-    color: #333;
-    /* Default text color */
-    font-weight: 500;
-    margin: 0.25rem;
-    border-radius: 4px;
-    transition: all 0.3s ease;
+  color: #333;
+  /* Default text color */
+  font-weight: 500;
+  margin: 0.25rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
 }
 
 #sidebar .nav-link:hover {
-    background-color: #e9ecef;
-    /* Hover background */
-    color: var(--bs-primary);
-    /* Hover text color */
+  background-color: #e9ecef;
+  /* Hover background */
+  color: var(--bs-primary);
+  /* Hover text color */
 }
 
 #sidebar .nav-link.active {
-    background-color: var(--bs-primary);
-    /* Active background */
-    color: #ffffff;
-    /* Active text color */
-    font-weight: 500;
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-    /* Optional active shadow */
+  background-color: var(--bs-primary);
+  /* Active background */
+  color: #ffffff;
+  /* Active text color */
+  font-weight: 500;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  /* Optional active shadow */
 }
 
 /* panduan style */
 #panduan body {
-    background-color: #f0f2f5;
+  background-color: #f0f2f5;
 }
 
 #panduan h4 {
-    color: #343a40;
-    font-weight: bold;
-    margin-bottom: 20px;
+  color: #343a40;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
 #panduan .container-custom {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 #panduan .alert-custom {
-    background-color: #e2f0ff;
-    border-color: #b8daff;
-    color: var(--bs-primary);
+  background-color: #e2f0ff;
+  border-color: #b8daff;
+  color: var(--bs-info);
 }
 
 #panduan .alert-heading {
-    color: var(--bs-primary);
-    margin-bottom: 5px;
+  color: var(--bs-info);
+  margin-bottom: 5px;
 }
 
 #panduan .table-custom {
-
-
-
-
-    border: 1px solid #dee2e6;
+  border: 1px solid #dee2e6;
 }
 
 #panduan .table-custom thead th {
-    background-color: var(--bs-primary);
-    color: white;
+  background-color: var(--bs-primary);
+  color: white;
 }
 
 #panduan .table-custom tbody tr {
-    transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease;
 }
 
 #panduan .table-custom tbody tr:hover {
-    background-color: #f1f1f1;
+  background-color: #f1f1f1;
 }
 
 #panduan .filter-inputs {
-    background-color: #f8f9fa;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  background-color: #f8f9fa;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 #panduan .table-custom td,
 #panduan .table-custom th {
-    vertical-align: middle;
+  vertical-align: middle;
 }
 
 #panduan .badge-level {
-    font-size: 1rem;
-    font-weight: bold;
-    padding: 5px 10px;
-    border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 10px;
 }
 
 #dashboard .welcome-container {
-    position: relative;
-    display: flex;
-    width: 100%;
-    height: auto;
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: auto;
 }
 
 #dashboard .welcome-container h1 {
-    color: #C45A01;
-    z-index: 1;
-    font-size: 5vw; 
-    font-weight: bold;
-    position: absolute;
-    padding: 1.5rem;
+  color: #c45a01;
+  z-index: 1;
+  font-size: 5vw;
+  font-weight: bold;
+  position: absolute;
+  padding: 1.5rem;
 }
 
 #dashboard .welcome-container img {
-    width: 100%;
-    height: auto;
+  width: 100%;
+  height: auto;
 }
 
 #dashboard .card {
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
-    border: none;
-    border-radius: 12px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+  border: none;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 #dashboard .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 #dashboard .card .card-title {
-    color: #7A7A7A !important;
-    font-size: 1.2rem;
-    margin-bottom: 10px;
+  color: #7a7a7a !important;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
 }
 
 #dashboard .card .display-4 {
-    font-size: 2.5rem;
-    margin-bottom: 15px;
+  font-size: 2.5rem;
+  margin-bottom: 15px;
 }
 
 #dashboard .card-text {
-    font-size: 0.9rem;
+  font-size: 0.9rem;
 }
 
 .max-w-20 {
-    max-width: 18rem;
+  max-width: 18rem;
 }

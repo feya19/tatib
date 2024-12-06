@@ -1,15 +1,16 @@
 <?php
 namespace App\Controllers;
 
-use App\Models\Kelas;
-use App\Models\ProgramStudi;
-use Core\Controller;
 use App\Models\ViewViolationsDetails;
 use App\Models\Violations;
+use Core\Controller;
 use Core\Request;
 use Core\Session;
-class PelaporanController extends Controller {
-    public function index() {
+
+class PelaporanController extends Controller
+{
+    public function index()
+    {
         if (Request::isAjax()) {
             $model = new ViewViolationsDetails();
             $limit = Request::get('limit') ?: 10;
@@ -22,7 +23,7 @@ class PelaporanController extends Controller {
                 $model->where('reporter_id', '=', $lecturer_id);
             }
             if ($search) {
-                $model->where(function($query) use ($search) {
+                $model->where(function ($query) use ($search) {
                     $query->where('CAST(report_date AS varchar)', 'LIKE', "%$search%")
                         ->orWhere('LOWER(violation_number)', 'LIKE', "%$search%")
                         ->orWhere('nim', 'LIKE', "%$search%")
@@ -49,11 +50,12 @@ class PelaporanController extends Controller {
         self::render('pelaporan/index', [
             'title' => $title,
             'status' => Violations::enumStatus(),
-            'status_class' => ViewViolationsDetails::enumStatusClass()
+            'status_class' => ViewViolationsDetails::enumStatusClass(),
         ]);
     }
 
-    public function tambah() {
+    public function tambah()
+    {
         $title = 'Buat Laporan';
         self::render('pelaporan/add', ['title' => $title]);
     }

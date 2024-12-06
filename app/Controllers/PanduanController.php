@@ -6,23 +6,17 @@ use App\Models\PanduanModel;
 
 class PanduanController extends Controller {
 
-    // Metode utama untuk menampilkan panduan
     public function index() {
-        // Ambil parameter dari URL
         $title = 'Panduan Tata Tertib';        
         $level = $_GET['level'] ?? ''; 
         $search = $_GET['search'] ?? '';
 
-        // Inisialisasi model Panduan
         $model = new PanduanModel();
 
-        // Mendapatkan data panduan berdasarkan filter
         $violations = $model->getPanduan($level, $search);
-        $levels = $model->getLevels(); // Mendapatkan data tingkat pelanggaran
-        $sanctions = $model->getSanctions(); // Mendapatkan data sanksi pelanggaran
+        $levels = $model->getLevels();
+        $sanctions = $model->getSanctions();
 
-
-        // Kirim data ke view
         self::render('panduan', [
             'violations' => $violations, 
             'levels' => $levels, 

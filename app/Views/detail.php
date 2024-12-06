@@ -122,14 +122,6 @@
                                 style="width: 250px;">Setujui</button>
                         </div>
                     </div>
-
-                    <!-- <div class="col-md-12 text-center mt-4">
-                        <div class="d-flex justify-content-center" style="gap: 300px;">
-                            <button type="button" class="btn btn-outline-danger" style="width: 250px;">Tolak</button>
-                            <button type="button" class="btn btn-outline-success" style="width: 250px;">Setujui</button>
-                        </div>
-                    </div> -->
-
                 </div>
             </div>
         </div>
@@ -264,14 +256,6 @@
                                 style="width: 250px;">Setujui</button>
                         </div>
                     </div>
-
-                    <!-- <div class="col-md-12 text-center mt-4">
-                        <div class="d-flex justify-content-center" style="gap: 300px;">
-                            <button type="button" class="btn btn-outline-danger" style="width: 250px;">Tolak</button>
-                            <button type="button" class="btn btn-outline-success" style="width: 250px;">Setujui</button>
-                        </div>
-                    </div> -->
-
                 </div>
             </div>
         </div>
@@ -377,7 +361,7 @@
             $("#downloadSanksi").click(function (e) {
                 e.preventDefault();
                 $.ajax({
-                    url: "/path/to/download/sanksi", // replace with your download link
+                    url: "/path/to/download/sanksi", 
                     method: "GET",
                     success: function () {
                         alert("Dokumen sanksi sedang diunduh...");
@@ -391,7 +375,7 @@
             $("#downloadSurat").click(function (e) {
                 e.preventDefault();
                 $.ajax({
-                    url: "/path/to/download/surat", // replace with your download link
+                    url: "/path/to/download/surat", 
                     method: "GET",
                     success: function () {
                         alert("Surat pembebasan pelanggaran sedang diunduh...");

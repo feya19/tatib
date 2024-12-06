@@ -1,5 +1,5 @@
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     display: flex;
     flex-direction: column;
@@ -34,12 +34,12 @@ body {
 #sidebar .nav-link:hover {
     background-color: #e9ecef;
     /* Hover background */
-    color: #0d6efd;
+    color: var(--bs-primary);
     /* Hover text color */
 }
 
 #sidebar .nav-link.active {
-    background-color: #0d6efd;
+    background-color: var(--bs-primary);
     /* Active background */
     color: #ffffff;
     /* Active text color */
@@ -69,11 +69,11 @@ body {
 #panduan .alert-custom {
     background-color: #e2f0ff;
     border-color: #b8daff;
-    color: #004085;
+    color: var(--bs-primary);
 }
 
 #panduan .alert-heading {
-    color: #004085;
+    color: var(--bs-primary);
     margin-bottom: 5px;
 }
 
@@ -86,7 +86,7 @@ body {
 }
 
 #panduan .table-custom thead th {
-    background-color: #007bff;
+    background-color: var(--bs-primary);
     color: white;
 }
 
@@ -163,4 +163,8 @@ body {
 
 #dashboard .card-text {
     font-size: 0.9rem;
+}
+
+.max-w-20 {
+    max-width: 18rem;
 }

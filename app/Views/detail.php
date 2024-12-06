@@ -1,7 +1,7 @@
-<h2 class="mb-4 fw-semibold"><?= $title ?></h2>
+<h2 class="mb-4 fw-semibold"><?=$title?></h2>
 
 <div id="detail">
-<div class="container mt-5">
+    <div class="container mt-5">
         <!--Detail Pelanggaran (view) -->
         <div class="p-4 card mb-4 shadow-sm">
             <div class="text-dark d-flex align-items-center ">
@@ -346,45 +346,45 @@
 </div>
 
 <script>
-        function previewPDF(pdfUrl) {
-            // Atur sumber (src) iframe dengan URL PDF yang diklik
-            document.getElementById('pdfViewer').src = pdfUrl;
+function previewPDF(pdfUrl) {
+    // Atur sumber (src) iframe dengan URL PDF yang diklik
+    document.getElementById('pdfViewer').src = pdfUrl;
 
-            // Tampilkan modal dengan iframe PDF
-            var pdfModal = new bootstrap.Modal(document.getElementById('pdfModal'), {
-                keyboard: false
-            });
-            pdfModal.show();
-        }
-        $(document).ready(function () {
-            // AJAX call for downloading report documents
-            $("#downloadSanksi").click(function (e) {
-                e.preventDefault();
-                $.ajax({
-                    url: "/path/to/download/sanksi", 
-                    method: "GET",
-                    success: function () {
-                        alert("Dokumen sanksi sedang diunduh...");
-                    },
-                    error: function () {
-                        alert("Gagal mengunduh dokumen.");
-                    }
-                });
-            });
-
-            $("#downloadSurat").click(function (e) {
-                e.preventDefault();
-                $.ajax({
-                    url: "/path/to/download/surat", 
-                    method: "GET",
-                    success: function () {
-                        alert("Surat pembebasan pelanggaran sedang diunduh...");
-                    },
-                    error: function () {
-                        alert("Gagal mengunduh surat pembebasan.");
-                    }
-                });
-            });
+    // Tampilkan modal dengan iframe PDF
+    var pdfModal = new bootstrap.Modal(document.getElementById('pdfModal'), {
+        keyboard: false
+    });
+    pdfModal.show();
+}
+$(document).ready(function() {
+    // AJAX call for downloading report documents
+    $("#downloadSanksi").click(function(e) {
+        e.preventDefault();
+        $.ajax({
+            url: "/path/to/download/sanksi",
+            method: "GET",
+            success: function() {
+                alert("Dokumen sanksi sedang diunduh...");
+            },
+            error: function() {
+                alert("Gagal mengunduh dokumen.");
+            }
         });
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    });
+
+    $("#downloadSurat").click(function(e) {
+        e.preventDefault();
+        $.ajax({
+            url: "/path/to/download/surat",
+            method: "GET",
+            success: function() {
+                alert("Surat pembebasan pelanggaran sedang diunduh...");
+            },
+            error: function() {
+                alert("Gagal mengunduh surat pembebasan.");
+            }
+        });
+    });
+});
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

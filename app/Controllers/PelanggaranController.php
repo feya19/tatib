@@ -1,19 +1,57 @@
 <?php
 namespace App\Controllers;
 
+use App\Models\ViewViolationsDetails;
+use App\Models\Violations;
 use Core\Controller;
-use App\Models\Pelanggaran;
+use Core\Request;
 use Core\Session;
 
-class PelanggaranController extends Controller {
+class PelanggaranController extends Controller
+{
 
-    public function index() {
-        $title = 'Daftar Pelanggaran';
-        $model = new Pelanggaran();
-        if ($student_id = Session::get('userdata')['student_id']) {
-            $model->where('nim', '=', $student_id);
+    public function index()
+    {
+        if (Request::isAjax()) {
+            $model = new ViewViolationsDetails();
+            $limit = Request::get('limit') ?: 10;
+            $offset = Request::get('offset') ?: 0;
+            $sort = Request::get('sort') ?: 'violation_number';
+            $order = Request::get('order') ?: 'DESC';
+            $search = Request::get('search') ? strtolower(Request::get('search')) : null;
+
+            if ($lecturer_id = Session::get('userdata')['nim']) {
+                $model->where('reporter_id', '=', $lecturer_id);
+            }
+            if ($search) {
+                $model->where(function ($query) use ($search) {
+                    $query->where('CAST(report_date AS varchar)', 'LIKE', "%$search%")
+                        ->orWhere('LOWER(violation_number)', 'LIKE', "%$search%")
+                        ->orWhere('nim', 'LIKE', "%$search%")
+                        ->orWhere('LOWER(student_class)', 'LIKE', "%$search%")
+                        ->orWhere('LOWER(student_name)', 'LIKE', "%$search%")
+                        ->orWhere('LOWER(violation_type_name)', 'LIKE', "%$search%")
+                        ->orWhere('LOWER(sanction_level)', 'LIKE', "%$search%")
+                        ->orWhere('LOWER(status)', 'LIKE', "%$search%");
+                });
+            }
+            if ($sort) {
+                $model->orderBy($sort, strtoupper($order));
+            }
+
+            $data = $model->limit($limit)->offset($offset)->get();
+            $total = $model->count();
+
+            self::json([
+                'total' => $total,
+                'rows' => $data,
+            ]);
         }
-        $data = $model->get();
-        self::render('pelanggaran/index', ['title' => $title, 'data' => $data]);
+        $title = 'Riwayat Pelanggaran';
+        self::render('pelanggaran/index', [
+            'title' => $title,
+            'status' => Violations::enumStatus(),
+            'status_class' => ViewViolationsDetails::enumStatusClass(),
+        ]);
     }
 }

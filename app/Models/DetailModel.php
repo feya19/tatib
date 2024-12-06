@@ -3,11 +3,11 @@ namespace App\Models;
 
 use Core\Model;
 
-class PanduanModel extends Model {
+class DetailModel extends Model {
 
     protected string $table = 'ViolationTypes'; 
     protected string $primaryKey = 'type_id';
-    public function getPanduan($level = '', $search = ''): array {
+    public function getDetail($level = '', $search = ''): array {
         $sql = "SELECT vt.type_id, vt.type_name, l.level_name 
                 FROM {$this->table} vt
                 JOIN Levels l ON vt.level_id = l.level_id

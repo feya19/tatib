@@ -24,6 +24,8 @@ Route::get('verifikasi/jurusan', 'VerifikasiController@jurusan', SekjurMiddlewar
 Route::get('laporan', 'LaporanController@index', AdminMiddleware::class); 
 Route::get('data_user/mahasiswa', 'UserController@mahasiswa', AdminMiddleware::class); 
 Route::get('data_user/dosen', 'UserController@dosen', AdminMiddleware::class); 
-Route::get('data_tatib', 'TataTertibController@index', AdminMiddleware::class); 
+Route::get('data_tatib', 'TataTertibController@index', AdminMiddleware::class);
+Route::get('detail', 'DetailController@index', AuthMiddleware   ::class); 
+
 // Dispatch the route
 Route::dispatch();

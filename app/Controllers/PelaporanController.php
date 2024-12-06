@@ -5,23 +5,33 @@ use App\Models\Kelas;
 use App\Models\ProgramStudi;
 use Core\Controller;
 use App\Models\ViewViolationsDetails;
+use App\Models\Violations;
 use Core\Request;
 use Core\Session;
 class PelaporanController extends Controller {
     public function index() {
         if (Request::isAjax()) {
             $model = new ViewViolationsDetails();
-            $limit = $_GET['limit'] ?? 10;
-            $offset = $_GET['offset'] ?? 0;
-            $sort = $_GET['sort'] ?? null;
-            $order = $_GET['order'] ?? 'asc';
-            $search = $_GET['search'] ?? null;
+            $limit = Request::get('limit') ?: 10;
+            $offset = Request::get('offset') ?: 0;
+            $sort = Request::get('sort') ?: 'violation_number';
+            $order = Request::get('order') ?: 'DESC';
+            $search = Request::get('search') ? strtolower(Request::get('search')) : null;
 
             if ($lecturer_id = Session::get('userdata')['lecturer_id']) {
                 $model->where('reporter_id', '=', $lecturer_id);
             }
             if ($search) {
-                $model->where('column_name', 'LIKE', "%$search%"); // Replace `column_name` with the searchable column
+                $model->where(function($query) use ($search) {
+                    $query->where('CAST(report_date AS varchar)', 'LIKE', "%$search%")
+                        ->orWhere('LOWER(violation_number)', 'LIKE', "%$search%")
+                        ->orWhere('nim', 'LIKE', "%$search%")
+                        ->orWhere('LOWER(student_class)', 'LIKE', "%$search%")
+                        ->orWhere('LOWER(student_name)', 'LIKE', "%$search%")
+                        ->orWhere('LOWER(violation_type_name)', 'LIKE', "%$search%")
+                        ->orWhere('LOWER(sanction_level)', 'LIKE', "%$search%")
+                        ->orWhere('LOWER(status)', 'LIKE', "%$search%");
+                });
             }
             if ($sort) {
                 $model->orderBy($sort, strtoupper($order));
@@ -36,12 +46,10 @@ class PelaporanController extends Controller {
             ]);
         }
         $title = 'Riwayat Pelaporan';
-        $kelasModel = new Kelas();
-        $prodiModel = new ProgramStudi();
         self::render('pelaporan/index', [
             'title' => $title,
-            'kelas' => $kelasModel->all(),
-            'prodi' => $prodiModel->all()
+            'status' => Violations::enumStatus(),
+            'status_class' => ViewViolationsDetails::enumStatusClass()
         ]);
     }
 

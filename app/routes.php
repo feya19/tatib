@@ -20,6 +20,7 @@ Route::get('panduan', 'PanduanController@index', AuthMiddleware::class); //Pandu
 Route::get('pelanggaran', 'PelanggaranController@index', MahasiswaMiddleware::class);
 Route::get('pelaporan', 'PelaporanController@index', DosenMiddleware::class);
 Route::get('pelaporan/tambah', 'PelaporanController@tambah', DosenMiddleware::class);
+Route::post('pelaporan/tambah', 'PelaporanController@store', DosenMiddleware::class);
 Route::get('verifikasi/kelas', 'VerifikasiController@kelas', DpaMiddleware::class);
 Route::get('verifikasi/jurusan', 'VerifikasiController@jurusan', SekjurMiddleware::class);
 Route::get('laporan', 'LaporanController@index', AdminMiddleware::class);

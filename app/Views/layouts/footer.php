@@ -2,8 +2,24 @@
         </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/assets/js/extended.js"></script>
     <script>
+        function logout() {
+            swalBootstrap.fire({
+                title: "Apakah anda yakin ingin logout?",
+                icon: 'warning',
+                showCancelButton: true,
+                reverseButtons: true,
+                confirmButtonText: "Ya, logout dari aplikasi",
+                cancelButtonText: "Tidak, batal",
+                
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '/logout';
+                }
+            });
+        }
+
         $(document).ready(function () {
             const $verifikasiSubmenu = $('#verifikasiSubmenu');
             const $chevronIcon = $('.rotate-icon[data-parent="verifikasiSubmenu"]');

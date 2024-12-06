@@ -34,4 +34,12 @@ class Request {
 
         return $normalizedPath === $normalizedInputPath;
     }
+
+    public static function file(string $key = null)
+    {
+        if (is_null($key)) {
+            return $_FILES ?? [];
+        }
+        return isset($_FILES[$key]) ? $_FILES[$key] : null;
+    }
 }

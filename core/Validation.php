@@ -8,17 +8,11 @@ class Validation {
     private array $errors = [];
     private array $callbacks = [];
 
-    /**
-     * Constructor to initialize data and rules.
-     */
     public function __construct(array $data, array $rules) {
         $this->data = $data;
         $this->rules = $rules;
     }
 
-    /**
-     * Run the validation process.
-     */
     public function validate(): bool {
         foreach ($this->rules as $field => $fieldRules) {
             $rules = explode('|', $fieldRules);
@@ -31,43 +25,57 @@ class Validation {
         return empty($this->errors);
     }
 
-    /**
-     * Add a custom callback for validation.
-     */
     public function addCallback(string $name, callable $callback): self {
         $this->callbacks[$name] = $callback;
         return $this;
     }
 
-    /**
-     * Get validation errors.
-     */
     public function errors(): array {
         return $this->errors;
     }
 
-    /**
-     * Apply a validation rule to a specific field.
-     */
     private function applyRule(string $field, string $rule): void {
         [$ruleName, $parameter] = explode(':', $rule . ':') + [null, null]; // Split rule and parameter
 
         $value = $this->data[$field] ?? null;
 
-        // Check if it's a built-in rule or callback
         if (isset($this->callbacks[$ruleName])) {
             $callback = $this->callbacks[$ruleName];
             $result = $callback($value, $parameter, $this->data);
 
             if ($result !== true) {
-                $this->addError($field, $result); // Use the returned error message
+                $this->addError($field, $result);
             }
         } else {
-            // Built-in rules
             switch ($ruleName) {
                 case 'required':
                     if (empty($value)) {
                         $this->addError($field, "{$field} is required.");
+                    }
+                    break;
+
+                case 'required_file':
+                    if (!isset($_FILES[$field]) || $_FILES[$field]['error'] !== UPLOAD_ERR_OK) {
+                        $this->addError($field, "The file {$field} is required.");
+                    }
+                    break;
+
+                case 'mimes':
+                    if (isset($_FILES[$field]) && $_FILES[$field]['error'] === UPLOAD_ERR_OK) {
+                        $allowedTypes = explode(',', $parameter);
+                        $fileType = mime_content_type($_FILES[$field]['tmp_name']);
+                        if (!in_array($fileType, $allowedTypes)) {
+                            $this->addError($field, "{$field} must be one of the following types: {$parameter}.");
+                        }
+                    }
+                    break;
+
+                case 'max_size':
+                    if (isset($_FILES[$field]) && $_FILES[$field]['error'] === UPLOAD_ERR_OK) {
+                        $maxSize = (int)$parameter * 1024; // Convert KB to bytes
+                        if ($_FILES[$field]['size'] > $maxSize) {
+                            $this->addError($field, "{$field} must not exceed {$parameter} KB.");
+                        }
                     }
                     break;
 
@@ -102,15 +110,11 @@ class Validation {
                     break;
 
                 default:
-                    // Unknown rule
                     break;
             }
         }
     }
 
-    /**
-     * Add an error message for a specific field.
-     */
     private function addError(string $field, string $message): void {
         $this->errors[$field] = $message;
     }

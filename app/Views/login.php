@@ -36,17 +36,13 @@
                     <!-- Error Messages -->
                     <?php if ($errors = \Core\Session::getFlash('errors')): ?>
                         <div class="alert alert-danger" role="alert">
-                            <ul class="mb-0">
-                                <?php 
-                                if (is_array($errors)) {
-                                    foreach ($errors as $error):
-                                        echo '<li>'. htmlspecialchars($error) .'</li>';
-                                    endforeach;
-                                } else {
-                                    echo '<li>'. htmlspecialchars($errors) .'</li>';
-                                }
-                                ?>
-                            </ul>
+                            <?php 
+                            if (is_array($errors)) {
+                                echo '<span>Login Gagal!</span>';
+                            } else {
+                                echo '<span>'. htmlspecialchars($errors) .'</span>';
+                            }
+                            ?>
                         </div>
                     <?php endif; ?>
 

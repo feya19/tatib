@@ -26,7 +26,7 @@
             <tr>
                 <th data-field="report_date" class="text-nowrap">Tanggal</th>
                 <th data-field="violation_number" class="text-nowrap">Nomor Pelaporan</th>
-                <th data-field="name" class="text-nowrap">Pelapor</th>
+                <th data-field="reporter_name" class="text-nowrap">Pelapor</th>
                 <th data-field="violation_type_name" class="text-truncate max-w-20">Pelanggaran</th>
                 <th data-field="sanction_level" class="text-nowrap">Level</th>
                 <th data-field="status" class="text-nowrap">Status</th>
@@ -85,7 +85,7 @@ $table.bootstrapTable({
         width: '1',
         sortable: true
     }, {
-        field: 'name',
+        field: 'reporter_name',
         title: 'Pelapor',
         width: '1',
         sortable: true

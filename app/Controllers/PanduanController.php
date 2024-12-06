@@ -1,14 +1,16 @@
 <?php
 namespace App\Controllers;
 
-use Core\Controller;
 use App\Models\PanduanModel;
+use Core\Controller;
 
-class PanduanController extends Controller {
+class PanduanController extends Controller
+{
 
-    public function index() {
-        $title = 'Panduan Tata Tertib';        
-        $level = $_GET['level'] ?? ''; 
+    public function index()
+    {
+        $title = 'Panduan Tata Tertib';
+        $level = $_GET['level'] ?? '';
         $search = $_GET['search'] ?? '';
 
         $model = new PanduanModel();
@@ -18,10 +20,10 @@ class PanduanController extends Controller {
         $sanctions = $model->getSanctions();
 
         self::render('panduan', [
-            'violations' => $violations, 
-            'levels' => $levels, 
+            'violations' => $violations,
+            'levels' => $levels,
             'sanctions' => $sanctions,
-            'title' => $title
+            'title' => $title,
         ]);
     }
 }

@@ -15,10 +15,10 @@
                 </select>
             </div>
             <!-- Tanggal Filter -->
-            <!-- <div class="col-md-5 d-flex align-items-center">
+            <div class="col-md-6 d-flex align-items-center">
                 <label for="tanggal" class="form-label fw-semibold me-4 mb-0">Tanggal:</label>
                 <input type="date" class="form-control" name="tanggal" id="tanggal">
-            </div> -->
+            </div>
         </div>
     </div>
     <table id="table">

@@ -20,16 +20,14 @@ class PelanggaranController extends Controller
             $order = Request::get('order') ?: 'DESC';
             $search = Request::get('search') ? strtolower(Request::get('search')) : null;
 
-            if ($lecturer_id = Session::get('userdata')['nim']) {
-                $model->where('reporter_id', '=', $lecturer_id);
+            if ($student_id = Session::get('userdata')['student_id']) {
+                $model->where('reporter_id', '=', $student_id);
             }
             if ($search) {
                 $model->where(function ($query) use ($search) {
                     $query->where('CAST(report_date AS varchar)', 'LIKE', "%$search%")
                         ->orWhere('LOWER(violation_number)', 'LIKE', "%$search%")
-                        ->orWhere('nim', 'LIKE', "%$search%")
-                        ->orWhere('LOWER(student_class)', 'LIKE', "%$search%")
-                        ->orWhere('LOWER(student_name)', 'LIKE', "%$search%")
+                        ->orWhere('name', 'LIKE', "%$search%")
                         ->orWhere('LOWER(violation_type_name)', 'LIKE', "%$search%")
                         ->orWhere('LOWER(sanction_level)', 'LIKE', "%$search%")
                         ->orWhere('LOWER(status)', 'LIKE', "%$search%");

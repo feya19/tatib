@@ -67,8 +67,8 @@ body {
 }
 
 #panduan .alert-custom {
-  background-color: #e2f0ff;
-  border-color: #b8daff;
+  background-color: #d0ebff;
+  border-color: #80bfff;
   color: var(--bs-info);
 }
 

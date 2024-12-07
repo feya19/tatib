@@ -117,7 +117,7 @@ $userdata = \Core\Session::get('userdata');
                             <div class="card-body p-4 d-flex align-items-center">
                                 <div class="flex-grow-1">
                                     <h5 class="card-title fw-bold mb-3">Seluruh Laporan</h5>
-                                    <h2 class="text-primary fw-bold mb-3"><?php echo $modelDetailPelanggaran->getTotalPelanggaranKelasDPA($userdata['lecturer_id']); ?></h2>
+                                    <h2 class="text-primary fw-bold mb-3"><?php echo $modelDetailPelanggaranDPA->getTotalPelanggaranKelasDPA($userdata['lecturer_id']); ?></h2>
                                     <p class="text-muted">Total pelanggaran yang telah dilaporkan</p>
                                 </div>
                                 <img src="/assets/img/icon-4.png" alt="Icon representing total violations" class="ms-4 pb-4" width="80">
@@ -132,7 +132,7 @@ $userdata = \Core\Session::get('userdata');
                             <div class="card-body p-4 d-flex align-items-center">
                                 <div class="flex-grow-1">
                                     <h5 class="card-title fw-bold mb-3">Laporan Perlu Konfirmasi</h5>
-                                    <h2 class="text-primary fw-bold mb-3"><?php echo $modelDetailPelanggaran->getLaporanPerluKonfirmasiDPA($userdata['lecturer_id']); ?></h2>
+                                    <h2 class="text-primary fw-bold mb-3"><?php echo $modelDetailPelanggaranDPA->getLaporanPerluKonfirmasiDPA($userdata['lecturer_id']); ?></h2>
                                     <p class="text-muted">Total laporan yang perlu dikonfirmasi</p>
                                 </div>
                                 <img src="/assets/img/icon-5.png" alt="Icon representing total violations" class="ms-4 pb-4" width="80">
@@ -147,7 +147,7 @@ $userdata = \Core\Session::get('userdata');
                             <div class="card-body p-4 d-flex align-items-center">
                                 <div class="flex-grow-1">
                                     <h5 class="card-title fw-bold mb-3">Laporan Terkonfirmasi</h5>
-                                    <h2 class="text-primary fw-bold mb-3"><?php echo $modelDetailPelanggaran->getLaporanTerkonfirmasiDPA($userdata['lecturer_id']); ?></h2>
+                                    <h2 class="text-primary fw-bold mb-3"><?php echo $modelDetailPelanggaranDPA->getLaporanTerkonfirmasiDPA($userdata['lecturer_id']); ?></h2>
                                     <p class="text-muted">Total laporan yang sudah dikonfirmasi</p>
                                 </div>
                                 <img src="/assets/img/icon-6.png" alt="Icon representing total violations" class="ms-4 pb-4" width="80">

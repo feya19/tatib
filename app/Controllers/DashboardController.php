@@ -14,11 +14,13 @@ class DashboardController extends Controller {
         $modelMahasiswa = new MahasiswaModel();
         $modelPelanggaran = new Violations();
         $modelDetailPelanggaran = new ViewViolationsDetails();
+        $modelDetailPelanggaranDPA = new ViewViolationsDetails();
         self::render('dashboard', [
             'modelDosen' => $modelDosen,
             'modelMahasiswa' => $modelMahasiswa,
             'modelPelanggaran' => $modelPelanggaran,
-            'modelDetailPelanggaran' => $modelDetailPelanggaran
+            'modelDetailPelanggaran' => $modelDetailPelanggaran,
+            'modelDetailPelanggaranDPA' => $modelDetailPelanggaranDPA
         ]);
     }
 }

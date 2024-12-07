@@ -15,10 +15,6 @@ $notifications = [
         'process' => 'Laporan yang anda ajukan <br>disetujui.',
         'done' => 'Laporan yang anda ajukan <br>telah diselesaikan',
     ],
-    'admin' => [
-        'new' => 'Laporan baru telah diajukan',
-        'done' => 'Laporan telah terselesaikan',
-    ],
 ];
 
 $seeAllLink = '#';
@@ -29,9 +25,6 @@ if (!empty($userdata['student_id'])) {
 } elseif (!empty($userdata['lecturer_id'])) {
     $seeAllLink = '/pelaporan';
     $notif_count = count($notifications['dosen']);
-} elseif (!empty($userdata['is_admin'])) {
-    $seeAllLink = '/laporan';
-    $notif_count = count($notifications['admin']);
 }
 ?>
 
@@ -77,6 +70,7 @@ if (!empty($userdata['student_id'])) {
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav me-3">
                     <!-- Notification -->
+                    <?php if (empty($userdata['is_admin'])): ?>
                     <li class="nav-item me-2 dropdown">
                         <button class="btn btn-light position-relative" id="notificationButton"
                             data-bs-toggle="dropdown">
@@ -128,24 +122,10 @@ if (!empty($userdata['student_id'])) {
                                 </a>
                             </li>
                             <?php endforeach;?>
-                            <?php elseif (!empty($userdata['is_admin'])): ?>
-                            <?php foreach ($notifications['admin'] as $status => $message): ?>
-                            <li>
-                                <a href="/laporan" class="dropdown-item d-flex align-items-center mb-2 p-1">
-                                    <div class="icon">
-                                        <?php if ($status == 'new'): ?>
-                                        <img src="/assets/img/icon-notif-pelanggaran.png" alt="New Notification">
-                                        <?php elseif ($status == 'done'): ?>
-                                        <img src="/assets/img/icon-notif-diterima.png" alt="Done">
-                                        <?php endif;?>
-                                    </div>
-                                    <span class="notification-text"><?php echo $message; ?></span>
-                                </a>
-                            </li>
-                            <?php endforeach;?>
                             <?php endif;?>
                         </ul>
                     </li>
+                    <?php endif;?>
 
 
 

@@ -1,35 +1,23 @@
-<div class="container mt-5">
+<div class="mt-4">
     <!-- Verifikasi Pelaksanaan Sanksi  (View)-->
-    <div class="p-4 card mb-4 shadow-sm">
-        <div class="text-dark d-flex align-items-center">
-            <h3 class="p-2 mb-1">Verifikasi Pelaksanaan Sanksi</h3>
+    <div class="p-4 card shadow-sm">
+        <div class="d-flex mb-3">
+            <h3 class="fw-semibold mb-1">Verifikasi Pelaksanaan Sanksi</h3>
         </div>
 
-        <div class="card-body">
+        <div class="card-body p-0">
             <div class="row">
-                <div class="col-md-3">
-                    <div>
-                        <h6>Tanggal Unggah Laporan</h6>
-                        <h5>11 November 2024</h5><br>
-                    </div>
+                <div class="col-md-4">
+                    <h6 class="fw-semibold">Tanggal Unggah Laporan</h6>
+                    <h6><?= datetime($model->action_date) ?></h6>
                 </div>
-                <div class="col-md-3">
-                    <div>
-                        <h6>Tanggal Konfirmasi</h6>
-                        <h5>11 November 2024</h5><br>
-                    </div>
+                <div class="col-md-4">
+                    <h6 class="fw-semibold">Tanggal Konfirmasi</h6>
+                    <h6><?= datetime($model->action_verified_at) ?></h6>
                 </div>
-                <div class="col-md-6">
-                    <div class="col-12">
-                        <h6>Keterangan</h6>
-                        <h5>Laporan diterima oleh Mungki Astiningrum.</h5><br>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div>
-                        <h6>Catatan </h6>
-                        <h5>Keterangan tambahan</h5><br>
-                    </div>
+                <div class="col-md-4">
+                    <h6 class="fw-semibold">Catatan</h6>
+                    <h6><?= $model->comment ?: '-' ?></h6>
                 </div>
             </div>
         </div>

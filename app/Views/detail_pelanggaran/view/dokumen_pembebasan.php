@@ -1,28 +1,27 @@
-<div class="container mt-5">
+<div class="mt-4">
     <!-- Dokumen Pembebasan Pelanggaran -->
-    <div class="p-4 card mb-4 shadow-sm">
+    <div class="p-4 card shadow-sm">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h3 class="text-dark mb-0">Dokumen Pembebasan Pelanggaran</h3>
+            <h3 class="fw-semibold mb-0">Dokumen Pembebasan Pelanggaran</h3>
             <div class="d-flex justify-content-center">
-                <button type="button" class="btn btn-outline-primary px-5 py-2"
-                    onclick="previewPDF('path/to/Surat_Bebas_Pelanggaran_2341702234.pdf')">
-                    Lihat Pratinjau
+                <button type="button" class="btn btn-outline-primary"
+                    onclick="previewPDF('<?= $model->clearence_file ?>')">
+                    <i class="fa-regular fa-eye"></i> Pratinjau
                 </button>
             </div>
         </div>
-        <div class="card-body">
-            <div class="row">
-                <!-- Surat Bebas Pelanggaran -->
-                <div class="col-md-12 mb-3">
-                    <h6>Surat Bebas Pelanggaran</h6>
-                    <div class="d-flex align-items-center">
-                        <a href="path/to/Surat_Bebas_Pelanggaran_2341702234.pdf" id="downloadSurat" class="btn btn-link"
-                            download>
-                            Surat Bebas Pelanggaran_2341702234.pdf
-                        </a>
-                        <span class="text-muted">15 November 2024, 09:00 AM</span>
-                    </div>
-                </div>
+        <div class="card-body p-0">
+            <h6 class="fw-semibold">Surat Bebas Pelanggaran</h6>
+            <div class="d-flex align-items-center">
+                <?php if($model->clearence_file): ?>
+                <i class="fa-solid fa-file"></i>&ensp;
+                <a href="<?= $model->clearence_file ?>" id="downloadSanksi" class="" download="Surat Bebas Pelanggaran_<?= $model->violation_number ?>.pdf">
+                    Surat Bebas Pelanggaran_<?= $model->violation_number ?>.pdf
+                </a>
+                <span class="ms-5 text-muted"><?= datetime($model->action_verified_at) ?></span>
+                <?php else: ?>
+                -
+                <?php endif ?>
             </div>
         </div>
     </div>

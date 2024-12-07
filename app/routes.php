@@ -17,6 +17,7 @@ Route::get('logout', 'HomeController@logout');
 Route::get('profil', 'HomeController@profil', AuthMiddleware::class);
 Route::get('dashboard', 'DashboardController@index', AuthMiddleware::class);
 Route::get('panduan', 'PanduanController@index', AuthMiddleware::class); //Panduan Tata Tertib
+Route::get('pelanggaran/detail/{id}', 'PelanggaranController@detail', AuthMiddleware::class);
 Route::get('pelanggaran', 'PelanggaranController@index', MahasiswaMiddleware::class);
 Route::get('pelaporan', 'PelaporanController@index', DosenMiddleware::class);
 Route::get('pelaporan/tambah', 'PelaporanController@tambah', DosenMiddleware::class);

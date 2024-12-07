@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../core/Env.php';
+require_once __DIR__ . '/../helpers/humanDate.php';
 
 Core\Env::load();
 

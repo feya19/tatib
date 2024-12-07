@@ -15,10 +15,7 @@ use Core\Models\Profil;
 class HomeController extends Controller {
 
     public function index() {
-        $userModel = new ViewUserDetails();
-        $data['examples'] = $userModel->all();
         $data['title'] = "Home Page";
-
         self::view('home', $data);
     }
 

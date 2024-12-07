@@ -164,3 +164,12 @@ body {
 .max-w-20 {
   max-width: 18rem;
 }
+
+#notifikasi .notification-text {
+  word-wrap: break-word;
+  flex: 1;
+  line-height: 1.4;
+  color: #333;
+  max-width: calc(100% - 60px);
+  font-size: 13px;
+}

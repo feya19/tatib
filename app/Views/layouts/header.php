@@ -98,7 +98,7 @@ if (!empty($userdata['student_id'])) {
                             <?php foreach ($notifications['mahasiswa'] as $status => $message): ?>
                             <li>
                                 <a href="/pelanggaran" class="dropdown-item d-flex align-items-center mb-2  p-1">
-                                    <div class="icon">
+                                    <div class="icon me-1">
                                         <?php if ($status == 'new'): ?>
                                         <img src="/assets/img/icon-notif-pelanggaran.png" alt="New Notification">
                                         <?php elseif ($status == 'action_rejected'): ?>
@@ -115,7 +115,7 @@ if (!empty($userdata['student_id'])) {
                             <?php foreach ($notifications['dosen'] as $status => $message): ?>
                             <li>
                                 <a href="/pelaporan" class="dropdown-item d-flex align-items-center mb-2 p-1">
-                                    <div class="icon">
+                                    <div class="icon me-3">
                                         <?php if ($status == 'rejected'): ?>
                                         <img src="/assets/img/icon-notif-ditolak.png" alt="Rejected">
                                         <?php elseif ($status == 'process'): ?>

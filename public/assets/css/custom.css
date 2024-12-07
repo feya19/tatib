@@ -69,11 +69,11 @@ body {
 #panduan .alert-custom {
   background-color: #d0ebff;
   border-color: #80bfff;
-  color: var(--bs-info);
+  color: var(--bs-primary);
 }
 
 #panduan .alert-heading {
-  color: var(--bs-info);
+  color: var(--bs-primary);
   margin-bottom: 5px;
 }
 

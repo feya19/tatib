@@ -47,7 +47,7 @@ class ViewViolationsDetails extends Model
     
     function getPelaporanDiterimaDosen($lecturer_id): int {
         return count(
-            $this->where('nim', '=', $lecturer_id)
+            $this->where('reporter_id', '=', $lecturer_id)
             ->where('status', '=', 'process')
             ->get()
         );
@@ -55,14 +55,14 @@ class ViewViolationsDetails extends Model
     
     function getPelaporanDitolakDosen($lecturer_id): int {
         return count(
-            $this->where('nim', '=', $lecturer_id)
+            $this->where('reporter_id', '=', $lecturer_id)
             ->where('status', '=', 'rejected')
             ->get()
         );
     }
     
     function getTotalPelanggaranKelasDPA($lecturer_id): int {
-        return count($this->where('dpa_id', '=', $lecturer_id)->get());
+        return $this->where('dpa_id', '=', $lecturer_id)->count();
     }
 
     function getLaporanPerluKonfirmasiDPA($lecturer_id): int {

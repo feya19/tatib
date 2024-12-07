@@ -174,18 +174,21 @@ if (!empty($userdata['student_id'])) {
                     <i class="fa-duatone fa-solid fa-grid-2" aria-hidden="true"></i> Dashboard
                 </a>
             </li>
+            <!-- Sidebar Dosen -->
             <?php if ($userdata['lecturer_id']): ?>
             <li class="nav-item">
                 <a href="/pelaporan" class="nav-link <?=Request::is('/pelaporan') ? 'active' : ''?>">
                     <i class="fa-duotone fa-solid fa-file-lines"></i></i> Pelaporan
                 </a>
             </li>
+            <!-- Sidebar Mahasiswa -->
             <?php elseif ($userdata['student_id']): ?>
             <li class="nav-item">
                 <a href="/pelanggaran" class="nav-link <?=Request::is('/pelanggaran') ? 'active' : ''?>">
                     <i class="fa-duotone fa-solid fa-file-lines"></i> Pelanggaran
                 </a>
             </li>
+            <!-- Sidebar Admin -->
             <?php else: ?>
             <li class="nav-item">
                 <a href="/laporan" class="nav-link <?=Request::is('/laporan') ? 'active' : ''?>">
@@ -193,6 +196,15 @@ if (!empty($userdata['student_id'])) {
                 </a>
             </li>
             <?php endif;?>
+            <!-- Sidebar Sekjur -->
+            <?php if ($userdata['is_sekjur']): ?>
+                <li class="nav-item">
+                <a href="/laporan/sekjur" class="nav-link <?=Request::is('/laporan/sekjur') ? 'active' : ''?>">
+                    <i class="fa-duotone fa-solid fa-file-lines"></i> Pelanggaran
+                </a>
+            </li>    
+            <?php endif;?>
+            <!-- Sidebar Verifikasi -->
             <?php if ($userdata['is_sekjur'] || !empty($userdata['classes'])): ?>
             <li class="nav-item">
                 <a href="#verifikasiSubmenu" data-bs-toggle="collapse"
@@ -203,6 +215,7 @@ if (!empty($userdata['student_id'])) {
                             data-parent="verifikasiSubmenu"></i>
                     </div>
                 </a>
+                <!-- Verifikasi DPA -->
                 <ul id="verifikasiSubmenu" class="collapse nav ms-4 <?=Request::is('/verifikasi/*') ? 'show' : ''?>">
                     <?php if (!empty($userdata['classes'])): ?>
                     <li class="nav-item flex w-100">
@@ -212,6 +225,7 @@ if (!empty($userdata['student_id'])) {
                         </a>
                     </li>
                     <?php endif;?>
+                    <!-- Verifikasi Sekjur -->
                     <?php if ($userdata['is_sekjur']): ?>
                     <li class="nav-item flex w-100">
                         <a class="nav-link <?=Request::is('/verifikasi/jurusan') ? 'active' : ''?>"
@@ -223,6 +237,7 @@ if (!empty($userdata['student_id'])) {
                 </ul>
             </li>
             <?php endif;?>
+            <!-- Sidebar Data Master Admin -->
             <?php if ($userdata['is_admin']): ?>
             <p class="text-muted text-center my-2">Data Master</p>
             <li class="nav-item">
@@ -254,12 +269,14 @@ if (!empty($userdata['student_id'])) {
                 </ul>
             </li>
             <?php endif;?>
+            <!-- Sidebar Data Tata Tertib Admin -->
             <?php if ($userdata['is_admin']): ?>
             <li class="nav-item">
                 <a href="/data_tatib" class="nav-link <?=Request::is('/data_tatib') ? 'active' : ''?>">
                     <i class="fa-duotone fa-solid fa-book"></i></i> Tata Tertib
                 </a>
             </li>
+            <!-- Sidebar Tata Tertib Mahasiswa & Dosen -->
             <?php else: ?>
             <li class="nav-item">
                 <a href="/panduan" class="nav-link <?=Request::is('/panduan') ? 'active' : ''?>">

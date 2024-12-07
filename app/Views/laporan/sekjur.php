@@ -85,7 +85,7 @@
     $table.bootstrapTable({
         pagination: true,
         search: true,
-        url: '/laporan', // Initial URL
+        url: '/laporan/sekjur', // Initial URL
         sidePagination: 'server',
         toolbar: '.table-toolbar',
         columns: [

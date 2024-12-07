@@ -24,11 +24,11 @@ Route::get('pelaporan/tambah', 'PelaporanController@tambah', DosenMiddleware::cl
 Route::post('pelaporan/tambah', 'PelaporanController@store', DosenMiddleware::class);
 Route::get('verifikasi/kelas', 'VerifikasiController@kelas', DpaMiddleware::class);
 Route::get('verifikasi/jurusan', 'VerifikasiController@jurusan', SekjurMiddleware::class);
+Route::get('laporan/sekjur', 'LaporanController@sekjur', SekjurMiddleware::class);
 Route::get('laporan', 'LaporanController@index', AdminMiddleware::class);
 Route::get('data_user/mahasiswa', 'UserController@mahasiswa', AdminMiddleware::class);
 Route::get('data_user/dosen', 'UserController@dosen', AdminMiddleware::class);
 Route::get('data_tatib', 'TataTertibController@index', AdminMiddleware::class);
 Route::get('detail', 'DetailController@index', AuthMiddleware::class);
-
 // Dispatch the route
 Route::dispatch();

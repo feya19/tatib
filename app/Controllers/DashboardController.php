@@ -13,14 +13,28 @@ class DashboardController extends Controller {
         $modelDosen = new DosenModel();
         $modelMahasiswa = new MahasiswaModel();
         $modelPelanggaran = new Violations();
-        $modelDetailPelanggaran = new ViewViolationsDetails();
+        $modelDetailPelanggaranDosen = new ViewViolationsDetails();
+        $modelDetailPelanggaranDosen1 = new ViewViolationsDetails();
+        $modelDetailPelanggaranDosen2 = new ViewViolationsDetails();
         $modelDetailPelanggaranDPA = new ViewViolationsDetails();
+        $modelDetailPelanggaranDPA1 = new ViewViolationsDetails();
+        $modelDetailPelanggaranDPA2 = new ViewViolationsDetails();
+        $modelDetailPelanggaranMhs = new ViewViolationsDetails();
+        $modelDetailPelanggaranMhs1 = new ViewViolationsDetails();
+        $modelDetailPelanggaranMhs2 = new ViewViolationsDetails();
         self::render('dashboard', [
             'modelDosen' => $modelDosen,
             'modelMahasiswa' => $modelMahasiswa,
             'modelPelanggaran' => $modelPelanggaran,
-            'modelDetailPelanggaran' => $modelDetailPelanggaran,
-            'modelDetailPelanggaranDPA' => $modelDetailPelanggaranDPA
+            'modelDetailPelanggaranDosen' => $modelDetailPelanggaranDosen,
+            'modelDetailPelanggaranDosen1' => $modelDetailPelanggaranDosen1,
+            'modelDetailPelanggaranDosen2' => $modelDetailPelanggaranDosen2,
+            'modelDetailPelanggaranDPA' => $modelDetailPelanggaranDPA,
+            'modelDetailPelanggaranDPA1' => $modelDetailPelanggaranDPA1,
+            'modelDetailPelanggaranDPA2' => $modelDetailPelanggaranDPA2,
+            'modelDetailPelanggaranMhs' => $modelDetailPelanggaranMhs,
+            'modelDetailPelanggaranMhs1' => $modelDetailPelanggaranMhs1,
+            'modelDetailPelanggaranMhs2' => $modelDetailPelanggaranMhs2
         ]);
     }
 }

@@ -5,6 +5,7 @@ use Core\Controller;
 use App\Models\DosenModel;
 use App\Models\MahasiswaModel;
 use App\Models\Violations;
+use App\Models\ViewViolationsDetails;
 
 class DashboardController extends Controller {
 
@@ -12,13 +13,12 @@ class DashboardController extends Controller {
         $modelDosen = new DosenModel();
         $modelMahasiswa = new MahasiswaModel();
         $modelPelanggaran = new Violations();
-        $totalDosen = $modelDosen->getTotalDosen();
-        $totalMahasiswa = $modelMahasiswa->getTotalMahasiswa();
-        $totalPelanggaran = $modelPelanggaran->getTotalPelanggaran();
+        $modelDetailPelanggaran = new ViewViolationsDetails();
         self::render('dashboard', [
-            'totalDosen' => $totalDosen,
-            'totalMahasiswa' => $totalMahasiswa,
-            'totalPelanggaran' => $totalPelanggaran
+            'modelDosen' => $modelDosen,
+            'modelMahasiswa' => $modelMahasiswa,
+            'modelPelanggaran' => $modelPelanggaran,
+            'modelDetailPelanggaran' => $modelDetailPelanggaran
         ]);
     }
 }

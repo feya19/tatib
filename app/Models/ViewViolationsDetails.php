@@ -93,7 +93,7 @@ class ViewViolationsDetails extends Model
     function getPelaporanDiterimaDosen($lecturer_id): int {
         return count(
             $this->where('reporter_id', '=', $lecturer_id)
-            ->where('status', '=', 'process')
+            ->where('status', '=', 'done')
             ->get()
         );
     }

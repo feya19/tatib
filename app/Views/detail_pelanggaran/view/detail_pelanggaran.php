@@ -1,66 +1,62 @@
-<div class="container mt-5">
+<div id="detail">
     <!--Detail Pelanggaran (view) -->
-    <div class="p-4 card mb-4 shadow-sm">
-        <div class="text-dark d-flex align-items-center ">
-            <h3 class="p-2 mb-1">Detail Pelanggaran</h3>
-            <span class="badge bg-success" style="font-size: 1.2em; padding: 0.4em 0.8em;">Selesai</span>
+    <div class="p-4 card shadow-sm">
+        <div class="d-flex">
+            <h3 class="fw-semibold mb-1">Detail Pelanggaran</h3>&ensp;<span class="badge badge-<?= $model->statusClass ?> fs-5 px-2 py-2"><?= $model->statusText ?></span>
         </div>
 
-        <div class="card-body">
+        <div class="card-body p-0">
             <div class="row">
-                <div class="col-md-3">
-                    <div>
-                        <h6>Hari, Tanggal</h6>
-                        <h5>Senin, 11 November 2024</h5><br>
+                <div class="row col-md-9 gy-3">
+                    <div class="col-md-6 mt-0">
+                        <h6 class="fw-semibold">Nomor Pelanggaran</h6>
+                        <h6><?= $model->violation_number ?></h6>
                     </div>
-                    <div>
-                        <h6>NIM</h6>
-                        <h5>2341702234</h5><br>
+                    <div class="col-md-6 mt-0">
+                        <h6 class="fw-semibold">Hari, Tanggal</h6>
+                        <h6><?= human_date($model->report_date) ?></h6>
                     </div>
-                    <div>
-                        <h6>Nama Mahasiswa</h6>
-                        <h5>Anya Callistta Chriswantiari</h5><br>
+                    <div class="col-md-6">
+                        <h6 class="fw-semibold">NIM</h6>
+                        <h6><?= $model->nim ?></h6>
                     </div>
-                    <div>
-                        <h6>Kelas</h6>
-                        <h5>TI 2A</h5><br>
+                    <div class="col-md-6">
+                        <h6 class="fw-semibold">Nama Mahasiswa</h6>
+                        <h6><?= $model->student_name ?></h6>
                     </div>
-                    <div>
-                        <h6>Nama Pelapor</h6>
-                        <h5>Azizi Asadel S.T., M.Kom.</h5><br>
+                    <div class="col-md-6">
+                        <h6 class="fw-semibold">Kelas</h6>
+                        <h6><?= $model->student_class ?></h6>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="fw-semibold">Nama Pelapor</h6>
+                        <h6><?= $model->reporter_name ?></h6>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="fw-semibold">Pelanggaran</h6>
+                        <h6><?= $model->violation_type_name ?></h6>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="fw-semibold">Sanksi</h6>
+                        <h6><?= $model->sanction_description ?></h6>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h6 class="fw-semibold">Level</h6>
+                        <h6><?= $model->sanction_level ?></h6>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="fw-semibold">Keterangan</h6>
+                        <h6><?= $model->description ?: '-' ?></h6>
                     </div>
                 </div>
-                <div class="col-md-6">
-
-                    <div class="col-12">
-                        <h6>Pelanggaran</h6>
-                        <h5>Berkomunikasi dengan tidak sopan, baik tertulis atau tidak tertulis kepada
-                            mahasiswa, dosen, karyawan, atau orang lain.</h5><br>
-                    </div>
-                    <div class="col-12">
-                        <h6>Tingkat</h6>
-                        <h5>V</h5><br>
-                    </div>
-                    <div class="col-12">
-                        <h6>Sanksi</h6>
-                        <h5>Teguran lisan disertai dengan surat pernyataan tidak mengulangi perbuatan tersebut,
-                            dibubuhi materai, ditandatangani mahasiswa yang bersangkutan dan DPA.</h5><br>
-                    </div>
-                    <div class="col-12">
-                        <h6>Keterangan</h6>
-                        <h5>Keterangan tambahan</h5><br>
-                    </div>
-
-                </div>
-
                 <!-- Bukti Pelanggaran -->
                 <div class="col-md-3 text-center">
                     <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal">
-                        <img src="https://via.placeholder.com/300" alt="Bukti Pelanggaran" class="img-fluid rounded">
+                        <img src="<?= $model->photo_evidence ?>" alt="Bukti Pelanggaran" class="img-fluid rounded">
                     </a>
                     <p class="mt-2"><strong>Bukti Pelanggaran</strong></p>
-                    <a href="https://via.placeholder.com/300" download="bukti_pelanggaran.jpg"
-                        class="btn btn-primary">Download Bukti</a>
+                    <a href="<?= $model->photo_evidence ?>" download class="btn btn-outline-primary"><i class="fa-regular fa-download"></i> Download</a>
                 </div>
             </div>
         </div>

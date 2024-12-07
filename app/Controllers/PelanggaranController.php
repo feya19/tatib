@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Models\ViewViolationsDetails;
 use App\Models\Violations;
 use Core\Controller;
+use Core\Redirect;
 use Core\Request;
 use Core\Session;
 
@@ -73,5 +74,20 @@ class PelanggaranController extends Controller
             'status' => Violations::enumStatus(),
             'status_class' => ViewViolationsDetails::enumStatusClass(),
         ]);
+    }
+
+    public function detail($id)
+    {
+        $data['title'] = 'Informasi Pelanggaran';
+        $model = new ViewViolationsDetails();
+        $data['model'] = $model->find($id);
+        if (empty($data['model'])) {
+            Redirect::to('/dashboard', ['error' => 'Data tidak ditemukan']);
+        }
+        $data['model']->statusClass = ViewViolationsDetails::enumStatusClass($data['model']->status);
+        $data['model']->statusText = Violations::enumStatus($data['model']->status);
+        $data['views'] = ViewViolationsDetails::enumStatusViews($data['model']->status);
+
+        self::render('detail_pelanggaran/index', $data);
     }
 }

@@ -52,7 +52,7 @@ function statusFormat(value, row, index) {
 }
 
 function actionFormat(value, row, index) {
-    return `<a href='/pelaporan/detail/${value}' class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-circle-info"></i> Detail</a>`
+    return `<a href='/pelanggaran/detail/${value}' class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-circle-info"></i> Detail</a>`
 }
 
 // Initialize the Bootstrap table

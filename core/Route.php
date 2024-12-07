@@ -30,37 +30,44 @@ class Route
         $method = $_SERVER['REQUEST_METHOD'];
         $uri = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
 
-        if (!isset(self::$routes[$method][$uri])) {
-            http_response_code(404);
-            echo "404 Not Found";
-            return;
-        }
+        // Search for matching route
+        foreach (self::$routes[$method] ?? [] as $route => $action) {
+            $pattern = preg_replace('#\{([^}]+)\}#', '([^/]+)', $route);
+            $pattern = "#^" . $pattern . "$#";
 
-        $action = self::$routes[$method][$uri];
+            if (preg_match($pattern, $uri, $matches)) {
+                array_shift($matches); // Remove full match
+                $params = $matches;
 
-        // Check and execute middleware
-        if (isset(self::$middlewares[$uri])) {
-            $middlewareClass = self::$middlewares[$uri];
+                // Check and execute middleware
+                if (isset(self::$middlewares[$route])) {
+                    $middlewareClass = self::$middlewares[$route];
 
-            if (!class_exists($middlewareClass)) {
-                http_response_code(500);
-                echo "Middleware not found: {$middlewareClass}";
+                    if (!class_exists($middlewareClass)) {
+                        http_response_code(500);
+                        echo "Middleware not found: {$middlewareClass}";
+                        return;
+                    }
+
+                    $middlewareInstance = new $middlewareClass();
+                    if (method_exists($middlewareInstance, 'handle')) {
+                        $middlewareResult = $middlewareInstance->handle();
+                        if ($middlewareResult === false) {
+                            return;
+                        }
+                    }
+                }
+
+                self::executeAction($action, $params);
                 return;
             }
-
-            $middlewareInstance = new $middlewareClass();
-            if (method_exists($middlewareInstance, 'handle')) {
-                $middlewareResult = $middlewareInstance->handle();
-                if ($middlewareResult === false) {
-                    return;
-                }
-            }
         }
 
-        self::executeAction($action);
+        http_response_code(404);
+        echo "404 Not Found";
     }
 
-    private static function executeAction(string $action): void
+    private static function executeAction(string $action, array $params = []): void
     {
         [$controller, $method] = explode('@', $action);
         $controllerClass = "App\\Controllers\\{$controller}";
@@ -79,7 +86,7 @@ class Route
             return;
         }
 
-        // Call the controller method
-        $controllerInstance->$method();
+        // Call the controller method with parameters
+        call_user_func_array([$controllerInstance, $method], $params);
     }
 }

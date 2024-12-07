@@ -48,11 +48,11 @@ function statusFormat(value, row, index) {
     const statusLabel = $status[row.status] || row.status;
     const statusClass = $status_class[row.status] || 'secondary';
 
-    return `<span class="fs-6 fw-normal px-2 py-1 badge border border-${statusClass} badge-${statusClass} text-${statusClass}">${statusLabel}</span>`;
+    return `<span class="fs-6 fw-normal px-2 py-1 badge badge-${statusClass}">${statusLabel}</span>`;
 }
 
 function actionFormat(value, row, index) {
-    return `<a href='/pelaporan/detail/${value}' class="btn btn-sm btn-secondary">Detail</a>`
+    return `<a href='/pelaporan/detail/${value}' class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-circle-info"></i> Detail</a>`
 }
 
 // Initialize the Bootstrap table

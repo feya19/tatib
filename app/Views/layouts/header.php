@@ -45,16 +45,21 @@ if (!empty($userdata['student_id'])) {
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/css/bootstrap-table.css" rel="stylesheet">
+    <link href="/assets/css/bootstrap-select2.min.css" rel="stylesheet">
     <link href="/assets/css/custom.css" rel="stylesheet">
     <link href="/assets/css/fontawesome.min.css" rel="stylesheet">
     <link href="/assets/css/toastr.min.css" rel="stylesheet">
-    <link href="/assets/css/gijgo.min.css" rel="stylesheet">
     <script src="/assets/js/jquery.min.js"></script>
     <script src="/assets/js/bootstrap.bundle.min.js"></script>
     <script src="/assets/js/bootstrap-table.js"></script>
     <script src="/assets/js/fontawesome.min.js"></script>
     <script src="/assets/js/toastr.min.js"></script>
-    <script src="/assets/js/gijgo.min.js"></script>
+    <script src="/assets/js/flatpickr.min.js"></script>
+    <link href="/assets/css/flatpickr.min.css" rel="stylesheet">
+    <script src="/assets/js/select2.min.js"></script>
+    <link href="/assets/css/select2.min.css" rel="stylesheet">
+    <script src="/assets/js/sweetalert2.min.js"></script>
+    <link href="/assets/css/sweetalert2.min.css" rel="stylesheet">
 </head>
 
 <body>

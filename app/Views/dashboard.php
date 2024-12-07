@@ -21,7 +21,7 @@ $userdata = \Core\Session::get('userdata');
                         <div class="card-body p-4 d-flex align-items-center">
                             <div class="flex-grow-1">
                                 <h5 class="card-title fw-bold mb-3">Pelanggaran</h5>
-                                <h2 class="text-primary fw-bold mb-3"><?php echo $totalPelanggaran; ?></h2>
+                                <h2 class="text-primary fw-bold mb-3"><?php echo $modelPelanggaran->getTotalPelanggaran(); ?></h2>
                                 <p class="text-muted">Total pelanggaran keseluruhan </p>
                             </div>
                             <img src="/assets/img/icon-1.png" alt="Icon representing total violations" class="ms-4 pb-4" width="80">
@@ -36,7 +36,7 @@ $userdata = \Core\Session::get('userdata');
                         <div class="card-body p-4 d-flex align-items-center">
                             <div class="flex-grow-1">
                                 <h5 class="card-title fw-bold mb-3">Mahasiswa</h5>
-                                <h2 class="text-primary fw-bold mb-3"><?php echo $totalMahasiswa; ?></h2>
+                                <h2 class="text-primary fw-bold mb-3"><?php echo $modelMahasiswa->getTotalMahasiswa(); ?></h2>
                                 <p class="text-muted">Total pengguna mahasiswa</p>
                             </div>
                             <img src="/assets/img/icon-mhs.png" alt="Icon representing total violations" class="ms-4 pb-4" width="80">
@@ -51,7 +51,7 @@ $userdata = \Core\Session::get('userdata');
                         <div class="card-body p-4 d-flex align-items-center">
                             <div class="flex-grow-1">
                                 <h5 class="card-title fw-bold mb-3">Dosen</h5>
-                                <h2 class="text-primary fw-bold mb-3"><?php echo $totalDosen; ?></h2>
+                                <h2 class="text-primary fw-bold mb-3"><?php echo $modelDosen->getTotalDosen(); ?></h2>
                                 <p class="text-muted">Total pengguna dosen</p>
                             </div>
                             <img src="/assets/img/icon-dosen.png" alt="Icon representing total violations" class="ms-4 pb-4" width="80">
@@ -69,7 +69,7 @@ $userdata = \Core\Session::get('userdata');
                         <div class="card-body p-4 d-flex align-items-center">
                             <div class="flex-grow-1">
                                 <h5 class="card-title fw-bold mb-3">Seluruh Pelaporan</h5>
-                                <h2 class="text-primary fw-bold mb-3">3</h2>
+                                <h2 class="text-primary fw-bold mb-3"><?php echo $modelDetailPelanggaran->getTotalPelaporanDosen($userdata['lecturer_id']); ?></h2>
                                 <p class="text-muted">Total seluruh pelaporan dosen</p>
                             </div>
                             <img src="/assets/img/icon-1.png" alt="Icon representing total violations" class="ms-4 pb-4" width="80">
@@ -84,7 +84,7 @@ $userdata = \Core\Session::get('userdata');
                         <div class="card-body p-4 d-flex align-items-center">
                             <div class="flex-grow-1">
                                 <h5 class="card-title fw-bold mb-3">Pelaporan Diterima</h5>
-                                <h2 class="text-primary fw-bold mb-3">2</h2>
+                                <h2 class="text-primary fw-bold mb-3"><?php echo $modelDetailPelanggaran->getPelaporanDiterimaDosen($userdata['lecturer_id']); ?></h2>
                                 <p class="text-muted">Total pelaporan Anda yang diterima</p>
                             </div>
                             <img src="/assets/img/icon-3.png" alt="Icon representing total violations" class="ms-4 pb-4" width="80">
@@ -99,7 +99,7 @@ $userdata = \Core\Session::get('userdata');
                         <div class="card-body p-4 d-flex align-items-center">
                             <div class="flex-grow-1">
                                 <h5 class="card-title fw-bold mb-3">Pelaporan Ditolak</h5>
-                                <h2 class="text-primary fw-bold mb-3">1</h2>
+                                <h2 class="text-primary fw-bold mb-3"><?php echo $modelDetailPelanggaran->getPelaporanDitolakDosen($userdata['lecturer_id']); ?></h2>
                                 <p class="text-muted">Total pelaporan Anda yang ditolak</p>
                             </div>
                             <img src="/assets/img/icon-2.png" alt="Icon representing total violations" class="ms-4 pb-4" width="80">
@@ -117,7 +117,7 @@ $userdata = \Core\Session::get('userdata');
                             <div class="card-body p-4 d-flex align-items-center">
                                 <div class="flex-grow-1">
                                     <h5 class="card-title fw-bold mb-3">Seluruh Laporan</h5>
-                                    <h2 class="text-primary fw-bold mb-3">5</h2>
+                                    <h2 class="text-primary fw-bold mb-3"><?php echo $modelDetailPelanggaran->getTotalPelanggaranKelasDPA($userdata['lecturer_id']); ?></h2>
                                     <p class="text-muted">Total pelanggaran yang telah dilaporkan</p>
                                 </div>
                                 <img src="/assets/img/icon-4.png" alt="Icon representing total violations" class="ms-4 pb-4" width="80">
@@ -132,7 +132,7 @@ $userdata = \Core\Session::get('userdata');
                             <div class="card-body p-4 d-flex align-items-center">
                                 <div class="flex-grow-1">
                                     <h5 class="card-title fw-bold mb-3">Laporan Perlu Konfirmasi</h5>
-                                    <h2 class="text-primary fw-bold mb-3">2</h2>
+                                    <h2 class="text-primary fw-bold mb-3"><?php echo $modelDetailPelanggaran->getLaporanPerluKonfirmasiDPA($userdata['lecturer_id']); ?></h2>
                                     <p class="text-muted">Total laporan yang perlu dikonfirmasi</p>
                                 </div>
                                 <img src="/assets/img/icon-5.png" alt="Icon representing total violations" class="ms-4 pb-4" width="80">
@@ -147,7 +147,7 @@ $userdata = \Core\Session::get('userdata');
                             <div class="card-body p-4 d-flex align-items-center">
                                 <div class="flex-grow-1">
                                     <h5 class="card-title fw-bold mb-3">Laporan Terkonfirmasi</h5>
-                                    <h2 class="text-primary fw-bold mb-3">3</h2>
+                                    <h2 class="text-primary fw-bold mb-3"><?php echo $modelDetailPelanggaran->getLaporanTerkonfirmasiDPA($userdata['lecturer_id']); ?></h2>
                                     <p class="text-muted">Total laporan yang sudah dikonfirmasi</p>
                                 </div>
                                 <img src="/assets/img/icon-6.png" alt="Icon representing total violations" class="ms-4 pb-4" width="80">
@@ -180,7 +180,7 @@ $userdata = \Core\Session::get('userdata');
                         <div class="card-body p-4 d-flex align-items-center">
                             <div class="flex-grow-1">
                                 <h5 class="card-title fw-bold mb-3">Seluruh Pelanggaran</h5>
-                                <h2 class="text-primary fw-bold mb-3"><?php ?></h2>
+                                <h2 class="text-primary fw-bold mb-3"><?php echo $modelDetailPelanggaran->getTotalPelanggaranMahasiswa($userdata['student_id']); ?></h2>
                                 <p class="text-muted">Total pelanggaran keseluruhan </p>
                             </div>
                             <img src="/assets/img/icon-1.png" alt="Icon representing total violations" class="ms-4 pb-4" width="80">
@@ -195,7 +195,7 @@ $userdata = \Core\Session::get('userdata');
                         <div class="card-body p-4 d-flex align-items-center">
                             <div class="flex-grow-1">
                                 <h5 class="card-title fw-bold mb-3">Tanggungan Pelanggaran</h5>
-                                <h2 class="text-danger fw-bold mb-3">2</h2>
+                                <h2 class="text-danger fw-bold mb-3"><?php echo $modelDetailPelanggaran->getTanggunganPelanggaranMahasiswa($userdata['student_id']); ?></h2>
                                 <p class="text-muted">Total pelanggaran yang belum terselesaikan</p>
                             </div>
                             <img src="/assets/img/icon-2.png" alt="Icon representing pending violations" class="ms-4 pb-4" width="80">
@@ -210,7 +210,7 @@ $userdata = \Core\Session::get('userdata');
                         <div class="card-body p-4 d-flex align-items-center">
                             <div class="flex-grow-1">
                                 <h5 class="card-title fw-bold mb-3">Penyelesaian Pelanggaran</h5>
-                                <h2 class="text-success fw-bold mb-3">1</h2>
+                                <h2 class="text-success fw-bold mb-3"><?php echo $modelDetailPelanggaran->getPenyelesaianPelanggaranMahasiswa($userdata['student_id']); ?></h2>
                                 <p class="text-muted">Total pelanggaran yang sudah terselesaikan</p>
                             </div>
                             <img src="/assets/img/icon-3.png" alt="Icon representing resolved violations" class="ms-4 pb-4" width="80">

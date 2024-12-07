@@ -11,7 +11,6 @@
                     <option value="new">Baru</option>
                     <option value="rejected">Ditolak</option>
                     <option value="process">Diproses</option>
-                    <option value="action_rejected">Pelaksanaan Sanksi Ditolak</option>
                     <option value="done">Selesai</option>
                 </select>
 

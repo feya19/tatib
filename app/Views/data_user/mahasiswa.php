@@ -6,14 +6,30 @@
             Tambah
         </a>
     </div>
-    <table id="table"></table>
+</div>
+
+<div class="container-fluid p-4 bg-white rounded">
+    <table id="table">
+        <thead>
+            <tr>
+                <th data-field="nim" class="text-nowrap">NIM</th>
+                <th data-field="username" class="text-nowrap">Username</th>
+                <th data-field="email" class="text-nowrap">Email</th>
+                <th data-field="name" class="text-nowrap">Nama Mahasiswa</th>
+                <th data-field="class_name" class="text-nowrap">Kelas</th>
+                <th data-field="program_study_name" class="text-truncate max-w-20">Program Studi</th>
+                <th data-field="student_year" class="text-nowrap">Angkatan</th>
+                <th data-field="aksi" class="text-nowrap">Aksi</th>
+            </tr>
+        </thead>
+    </table>
 </div>
 
 <!-- Modal Tambah Data -->
 <div class="modal fade" id="addDataModal" tabindex="-1" aria-labelledby="addDataModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form id="addDataForm">
+            <form id="addDataForm" action="/data_user/addMhs" method="post" >
                 <div class="modal-header">
                     <h5 class="modal-title" id="addDataModalLabel">Tambah Data Mahasiswa</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -21,7 +37,15 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="nim" class="form-label">NIM</label>
-                        <input type="text" class="form-control" id="nim" name="nim" placeholder="Masukkan NIM Mahasiswa" required>
+                        <input type="number" class="form-control" id="nim" name="nim" placeholder="Masukkan NIM Mahasiswa" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Masukkan Username Mahasiswa" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Password Mahasiswa" required>
                     </div>
                     <div class="mb-3">
                         <label for="name" class="form-label">Nama Lengkap</label>
@@ -32,21 +56,11 @@
                         <input type="email" class="form-control" id="email" name="email" placeholder="nama@example.com" required>
                     </div>
                     <div class="mb-3">
-                        <label for="program_study_name" class="form-label">Program Studi</label>
-                        <select class="form-control" id="program_study_name" name="program_study_name" required>
-                            <option value="" class="text-muted">--Pilih Program Studi Mahasiswa--</option>
-                            <option value="Teknik Informatika">Teknik Informatika</option>
-                            <option value="Sistem Informasi">Sistem Informasi Bisnis</option>
-                            <option value="Teknik Elektro">Piranti Perangkat Lunak Sistem</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="class_name" class="form-label">Kelas</label>
-                        <select class="form-control" id="class_name" name="class_name" required>
-                            <option value="">--Pilih Kelas Mahasiswa--</option>
-                            <option value="A">TI-1A</option>
-                            <option value="B">SIB-1A</option>
-                            <option value="C">PPLS</option>
+                        <label for="class_id" class="form-label">Kelas</label>
+                        <select class="form-select" id="class_id" name="class_id" required>
+                            <option value="">Pilih Kelas</option>
+                            <option value="6">TI-1A</option>
+                            <option value="1">TI-2A</option>
                         </select>
                     </div>
                     <div class="mb-3">
@@ -55,8 +69,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-arrow-left"></i> Kembali</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-save"></i> Simpan</button>
                 </div>
             </form>
         </div>
@@ -75,7 +89,15 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="nim" class="form-label">NIM</label>
-                        <input type="text" class="form-control" id="nim" name="nim" placeholder="Masukkan NIM Mahasiswa" required>
+                        <input type="number" class="form-control" id="nim" name="nim" placeholder="Masukkan NIM Mahasiswa" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Masukkan Username Mahasiswa" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Password Mahasiswa" required>
                     </div>
                     <div class="mb-3">
                         <label for="name" class="form-label">Nama Lengkap</label>
@@ -86,21 +108,11 @@
                         <input type="email" class="form-control" id="email" name="email" placeholder="nama@example.com" required>
                     </div>
                     <div class="mb-3">
-                        <label for="program_study_name" class="form-label">Program Studi</label>
-                        <select class="form-control" id="program_study_name" name="program_study_name" required>
-                            <option value="" class="text-muted">--Pilih Program Studi Mahasiswa--</option>
-                            <option value="Teknik Informatika">Teknik Informatika</option>
-                            <option value="Sistem Informasi">Sistem Informasi Bisnis</option>
-                            <option value="Teknik Elektro">Piranti Perangkat Lunak Sistem</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="class_name" class="form-label">Kelas</label>
-                        <select class="form-control" id="class_name" name="class_name" required>
-                            <option value="">--Pilih Kelas Mahasiswa--</option>
-                            <option value="A">TI-1A</option>
-                            <option value="B">SIB-1A</option>
-                            <option value="C">PPLS</option>
+                        <label for="class_id" class="form-label">Kelas</label>
+                        <select class="form-select" id="class_id" name="class_id" required>
+                            <option value="">Pilih Kelas</option>
+                            <option value="TI-1A">TI-1A</option>
+                            <option value="TI-2A">TI-2A</option>
                         </select>
                     </div>
                     <div class="mb-3">
@@ -109,8 +121,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-arrow-left"></i> Kembali</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-save"></i> Simpan</button>
                 </div>
             </form>
         </div>
@@ -129,76 +141,82 @@
                 Apakah Anda yakin ingin menghapus data ini?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
-                <button type="button" id="confirmDeleteBtn" class="btn btn-danger">Hapus</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-arrow-left"></i> Kembali</button>
+                <button type="button" id="confirmDeleteBtn" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Hapus</button>
             </div>
         </div>
     </div>
 </div>
 
-<style>
-    .modal .form-control {
-        font-size: 14px;
-    }
-
-    #table th, #table td {
-        text-align: center; /* Pusatkan teks di dalam kolom */
-        white-space: nowrap; /* Mencegah teks terpotong */
-    }
-    .btn-group-sm .btn {
-        padding: 0.3rem 0.5rem; /* Kurangi padding tombol agar lebih kecil */
-    }
-</style>
-
 <script>
+    const $table =  $('#table');
     function actionFormat(value, row, index) {
         return `
-        <div class="btn-group btn-group-sm gap-2">
-            <a href='/laporan/detail/${value}' class="btn btn-sm btn-secondary">Detail</a>
+        <div class="btn-group btn-group-sm gap-2 d-flex justify-content-center">
             <a href='#' class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editDataModal">Edit</a>
             <a href='#' class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">Hapus</a>
         </div>
         `
     }
 
-    $('#table').bootstrapTable({
-    pagination: true,
-    search: true,
-    URL: '/data_user/mahasiswa',
-    sidePagination: 'server',
-    toolbar: '.table-toolbar',
-    columns: [
-        {
-            field: 'nim',
-            title: 'NIM',
-            width: '80', // Lebar spesifik untuk data kecil
-            align: 'center', // Pusatkan teks
-        }, {
-            field: 'name',
-            title: 'Nama Mahasiswa',
-            align: 'left', // Biarkan rata kiri
-        }, {
-            field: 'class_name',
-            title: 'Kelas',
-            width: '120', // Lebar proporsional
-            align: 'center',
-        }, {
-            field: 'program_study_name',
-            title: 'Program Studi',
-            align: 'left', // Biarkan rata kiri
-        }, {
-            field: 'student_year',
-            title: 'Tahun Masuk',
-            width: '100', // Lebar kecil
-            align: 'center',
-        }, {
-            field: 'aksi',
-            title: 'Aksi',
-            align: 'center',
-            formatter: actionFormat,
-        }
-    ],
-    data: <?= json_encode($data) ?>
-});
-
+    $table.bootstrapTable({
+        pagination: true,
+        search: true,
+        url: '/data_user/mahasiswa', // Initial URL
+        sidePagination: 'server',
+        toolbar: '.table-toolbar',
+        columns: [
+            {
+                field: 'nim',
+                title: 'NIM',
+                width: '1', 
+                sortable: true
+            }, {
+                field: 'username',
+                title: 'Username',
+                width: '1',
+                sortable: true
+            }, {
+                field: 'email',
+                title: 'Email',
+                width: '1',
+                sortable: true
+            }, {
+                field: 'name',
+                title: 'Nama Mahasiswa',
+                width: '1',
+                sortable: true
+            }, {
+                field: 'class_name',
+                title: 'Kelas',
+                width: '1', 
+                sortable: true
+            }, {
+                field: 'program_study_name',
+                title: 'Program Studi',
+                width: '1',
+                sortable: true
+            }, {
+                field: 'student_year',
+                title: 'Tahun Masuk',
+                width: '1', 
+                sortable: true
+            }, {
+                field: 'aksi',
+                title: 'Aksi',
+                formatter: actionFormat,
+                width: '1',
+            }
+        ],
+    });
 </script>
+
+<style>
+    .modal .form-control {
+        font-size: 14px;
+    }
+
+    .btn-group-sm .btn {
+        padding: 0.3rem 0.5rem; 
+    }
+</style>

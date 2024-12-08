@@ -30,5 +30,7 @@ Route::get('data_user/mahasiswa', 'UserController@mahasiswa', AdminMiddleware::c
 Route::get('data_user/dosen', 'UserController@dosen', AdminMiddleware::class);
 Route::get('data_tatib', 'TataTertibController@index', AdminMiddleware::class);
 Route::get('detail', 'DetailController@index', AuthMiddleware::class);
+Route::post('data_user/addMhs', 'UserController@addMahasiswa', AdminMiddleware::class);
+Route::post('data_user/addDosen', 'UserController@addDosen', AdminMiddleware::class);
 // Dispatch the route
 Route::dispatch();

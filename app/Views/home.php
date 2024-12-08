@@ -131,29 +131,29 @@
         </div>
         <div class="row mt-3">
             <button class="faq-button rounded" style="background-color: #F6921E; padding: 20px">
-                <b>Bagaimana cara mengatahui peraturan kampus yang berlaku?</b>
+                <b>Bagaimana cara mahasiswa menyelesaikan sanksi melalui sistem?</b>
                 <img class="toggle-icon img-fluid d-flex float-end justify-content-center align-items-center mt-1" src="/assets/img/panah.png" alt="" style="height: 15px">
             </button>
             <div class="faq-content mt-2" style="display: none; padding-left: 20px;">
-                Peraturan kampus dapat dilihat pada menu "Tata Tertib".
+                PDF pada kolom "Bukti Pengerjaan Sanksi" yang tersedia di sistem.
             </div>
         </div>
         <div class="row mt-3">
             <button class="faq-button rounded" style="background-color: #F6921E; padding: 20px">
-                <b>Bagaimana cara mengatahui peraturan kampus yang berlaku?</b>
+                <b>Apakah mahasiswa mendapatkan notifikasi saat melakukan pelanggaran?</b>
                 <img class="toggle-icon img-fluid d-flex float-end justify-content-center align-items-center mt-1" src="/assets/img/panah.png" alt="" style="height: 15px">
             </button>
             <div class="faq-content mt-2" style="display: none; padding-left: 20px;">
-                Peraturan kampus dapat dilihat pada menu "Tata Tertib".
+                Ya, sistem akan secara otomatis mengirimkan notifikasi kepada mahasiswa terkait jika terjadi pelanggaran, termasuk informasi tentang jenis pelanggaran dan sanksi yang harus diselesaikan.
             </div>
         </div>
         <div class="row mt-3">
             <button class="faq-button rounded" style="background-color: #F6921E; padding: 20px">
-                <b>Bagaimana cara mengatahui peraturan kampus yang berlaku?</b>
+                <b>Bagaimana cara mahasiswa memantau status penyelesaian sanksi?</b>
                 <img class="toggle-icon img-fluid d-flex float-end justify-content-center align-items-center mt-1" src="/assets/img/panah.png" alt="" style="height: 15px">
             </button>
             <div class="faq-content mt-2" style="display: none; padding-left: 20px;">
-                Peraturan kampus dapat dilihat pada menu "Tata Tertib".
+                Mahasiswa dapat memantau status penyelesaian sanksi melalui dashboard sistem, yang akan menunjukkan apakah sanksi telah diverifikasi dan diselesaikan.
             </div>
         </div>
     </div>

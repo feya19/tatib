@@ -48,15 +48,12 @@ class LaporanController extends Controller {
 
             if ($search) {
                 $model->where(function($query) use ($search) {
-                    $query->where('CAST(report_date AS varchar)', 'LIKE', "%$search%")
-                        ->orWhere('LOWER(violation_number)', 'LIKE', "%$search%")
+                    $query->Where('LOWER(violation_number)', 'LIKE', "%$search%")
                         ->orWhere('nim', 'LIKE', "%$search%")
                         ->orWhere('LOWER(student_class)', 'LIKE', "%$search%")
                         ->orWhere('LOWER(program_study_name)', 'LIKE', "%$search%")
                         ->orWhere('LOWER(student_name)', 'LIKE', "%$search%")
-                        ->orWhere('LOWER(violation_type_name)', 'LIKE', "%$search%")
-                        ->orWhere('LOWER(sanction_level)', 'LIKE', "%$search%")
-                        ->orWhere('LOWER(status)', 'LIKE', "%$search%");
+                        ->orWhere('LOWER(violation_type_name)', 'LIKE', "%$search%");
                 });
             }
             if ($sort) {
@@ -120,15 +117,12 @@ class LaporanController extends Controller {
 
             if ($search) {
                 $model->where(function($query) use ($search) {
-                    $query->where('CAST(report_date AS varchar)', 'LIKE', "%$search%")
-                        ->orWhere('LOWER(violation_number)', 'LIKE', "%$search%")
+                    $query->Where('LOWER(violation_number)', 'LIKE', "%$search%")
                         ->orWhere('nim', 'LIKE', "%$search%")
                         ->orWhere('LOWER(student_class)', 'LIKE', "%$search%")
                         ->orWhere('LOWER(program_study_name)', 'LIKE', "%$search%")
                         ->orWhere('LOWER(student_name)', 'LIKE', "%$search%")
-                        ->orWhere('LOWER(violation_type_name)', 'LIKE', "%$search%")
-                        ->orWhere('LOWER(sanction_level)', 'LIKE', "%$search%")
-                        ->orWhere('LOWER(status)', 'LIKE', "%$search%");
+                        ->orWhere('LOWER(violation_type_name)', 'LIKE', "%$search%");
                 });
             }
             if ($sort) {

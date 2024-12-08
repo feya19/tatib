@@ -199,7 +199,7 @@ if (!empty($userdata['student_id'])) {
                 <ul id="verifikasiSubmenu" class="collapse nav ms-4 <?=Request::is('/verifikasi/*') ? 'show' : ''?>">
                     <?php if (!empty($userdata['classes'])): ?>
                     <li class="nav-item flex w-100">
-                        <a class="nav-link <?=Request::is('/verifikasi/kelas') ? 'active' : ''?>"
+                        <a class="nav-link <?= Request::is('/verifikasi/kelas/') || Request::is('/verifikasi/kelas/*') ? 'active' : ''?>"
                             href="/verifikasi/kelas">
                             <i class="fa-duotone fa-solid fa-building"></i> Kelas
                         </a>
@@ -208,7 +208,7 @@ if (!empty($userdata['student_id'])) {
                     <!-- Verifikasi Sekjur -->
                     <?php if ($userdata['is_sekjur']): ?>
                     <li class="nav-item flex w-100">
-                        <a class="nav-link <?=Request::is('/verifikasi/jurusan') ? 'active' : ''?>"
+                        <a class="nav-link <?= Request::is('/verifikasi/jurusan/') || Request::is('/verifikasi/jurusan/*')  ? 'active' : ''?>"
                             href="/verifikasi/jurusan">
                             <i class="fa-duotone fa-solid fa-buildings"></i> Jurusan
                         </a>

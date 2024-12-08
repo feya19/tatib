@@ -6,7 +6,7 @@
         </div>
 
         <div class="card-body p-0">
-            <div class="row">
+            <div class="row gy-3">
                 <div class="col-md-4">
                     <h6 class="fw-semibold">Tanggal Unggah Laporan</h6>
                     <h6><?= datetime($model->created_at) ?></h6>
@@ -16,6 +16,10 @@
                     <h6><?= datetime($model->assigned_date) ?></h6>
                 </div>
                 <div class="col-md-4">
+                    <h6 class="fw-semibold">Keterangan</h6>
+                    <h6><?= $model->verifier_name ? 'Laporan '.($model->status == 'rejected' ? 'ditolak' : 'dikonfirmasi').' oleh '.  $model->verifier_name : 'Laporan belum dikonfirmasi' ?></h6>
+                </div>
+                <div class="col-md-12">
                     <h6 class="fw-semibold">Catatan </h6>
                     <h6><?= $model->verification_comment ?: '-' ?></h6>
                 </div>

@@ -56,7 +56,7 @@
                         <img src="<?= $model->photo_evidence ?>" alt="Bukti Pelanggaran" class="img-fluid rounded">
                     </a>
                     <p class="mt-2"><strong>Bukti Pelanggaran</strong></p>
-                    <a href="<?= $model->photo_evidence ?>" download class="btn btn-outline-primary"><i class="fa-regular fa-download"></i> Download</a>
+                    <a href="<?= $model->photo_evidence ?>" download="Bukti Pelanggaran_<?= $model->violation_number ?>" class="btn btn-outline-primary"><i class="fa-regular fa-download"></i> Download</a>
                 </div>
             </div>
         </div>

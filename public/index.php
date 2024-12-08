@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('Asia/Jakarta');
 
 require_once __DIR__ . '/../core/Env.php';
 require_once __DIR__ . '/../helpers/humanDate.php';

@@ -2,6 +2,7 @@
 
 namespace Core;
 
+use InvalidArgumentException;
 use PDO;
 use PDOException;
 
@@ -68,11 +69,21 @@ abstract class Model {
      * Update the current record.
      */
     public function save(): bool {
-        $setClause = implode(', ', array_map(fn($key) => "{$key} = :{$key}", array_keys($this->attributes)));
-        $sql = "UPDATE {$this->table} SET {$setClause} WHERE {$this->primaryKey} = :id";
+        $columns = array_filter(array_keys($this->attributes), fn($key) => $key !== $this->primaryKey);
+        // Prepare the SET clause by excluding the identity column
+        $setClause = implode(', ', array_map(fn($key) => "{$key} = :{$key}", $columns));
 
+        // Construct the UPDATE query
+        $sql = "UPDATE {$this->table} SET {$setClause} WHERE {$this->primaryKey} = :id";
+    
+        // Prepare the statement
         $stmt = self::$pdo->prepare($sql);
-        return $stmt->execute($this->attributes);
+
+        // Merge the attributes with the primary key (id)
+        $params = array_merge($this->attributes, ['id' => $this->attributes[$this->primaryKey]]);
+        unset($params[$this->primaryKey]);
+        // Execute the query
+        return $stmt->execute($params);
     }
 
     /**
@@ -89,8 +100,12 @@ abstract class Model {
      * Add a whereIn condition.
      */
     public function whereIn(string $column, array $values): self {
+        if (empty($values)) {
+            throw new InvalidArgumentException("The values array for whereIn cannot be empty.");
+        }
+    
         $placeholders = implode(', ', array_fill(0, count($values), '?'));
-        $this->whereConditions[] = ["{$column} IN ({$placeholders})", $values];
+        $this->whereConditions[] = ['AND', "{$column} IN ({$placeholders})", $values];
         return $this;
     }
 
@@ -210,30 +225,30 @@ abstract class Model {
      */
     private function buildWhere(array $conditions, array &$params): string {
         $sqlParts = [];
-        $booleanOperator = ''; // Start with an empty string for the boolean operator.
+
+        foreach ($conditions as $condition) {
+            $type = $condition[0]; // AND or OR
     
-        foreach ($conditions as $index => $condition) {
-            // Determine the operator for this condition
-            if ($index === 0) {
-                $booleanOperator = $condition[0]; // For the first condition, use the operator (AND/OR)
-            } else {
-                $booleanOperator = $condition[0]; // Subsequent conditions will use the operator in the array (AND/OR)
-            }
-    
-            if (is_array($condition[1])) { // Nested group
+            if (is_array($condition[1])) { // Nested conditions
                 $nestedSql = $this->buildWhere($condition[1], $params);
-                $sqlParts[] = "({$nestedSql})";
-            } else {
-                // Build individual condition
-                $sqlParts[] = "{$condition[1]} {$condition[2]} ?";
+                if ($nestedSql) {
+                    $sqlParts[] = "{$type} ({$nestedSql})";
+                }
+            } elseif (strpos($condition[1], 'IN') !== false) { // whereIn clause
+                $sqlParts[] = "{$type} {$condition[1]}";
+                $params = array_merge($params, $condition[2]);
+            } elseif (strpos($condition[1], 'IS') !== false) { // Special conditions
+                $sqlParts[] = "{$type} {$condition[1]}";
+            } else { // Regular condition
+                $sqlParts[] = "{$type} {$condition[1]} {$condition[2]} ?";
                 $params[] = $condition[3];
             }
         }
     
-        // Join the conditions with their respective boolean operators (AND/OR)
-        return implode(" {$booleanOperator} ", $sqlParts);
+        // Remove leading AND/OR from the first condition
+        return ltrim(implode(' ', $sqlParts), 'AND OR ');
     }
-
+    
     /**
      * Get an attribute.
      */

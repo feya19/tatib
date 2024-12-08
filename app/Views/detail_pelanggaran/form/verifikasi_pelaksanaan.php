@@ -1,60 +1,82 @@
-<div class="container mt-5">
-  <!--Verifikasi Pelaksanaan Sanksi (DPA/SEKJUR) -->
-  <div class="p-4 card mb-4 shadow-sm">
-    <div class="text-dark d-flex align-items-center">
-      <h3 class="p-2 mb-1">Verifikasi Pelaksanaan Sanksi</h3>
+<div class="mt-4">
+    <!--Verifikasi Pelaksanaan Sanksi (DPA/SEKJUR) -->
+    <div class="p-4 card shadow-sm">
+        <div class="d-flex mb-3">
+            <h3 class="fw-semibold mb-1">Verifikasi Pelaksanaan Sanksi</h3>
+        </div>
+        <form action="" method="post" id="verification">
+            <div class="card-body p-0">
+                <div class="row gy-3 mb-4">
+                    <div class="col-md-4">
+                        <h6 class="fw-semibold">Tanggal Unggah File</h6>
+                        <h6><?= datetime($model->action_date) ?></h6>
+                    </div>
+                    <div class="col-md-4">
+                        <h6 class="fw-semibold">Tanggal Konfirmasi</h6>
+                        <h6><?= datetime($model->action_verified_at) ?></h6>
+                    </div>
+                    <div class="col-md-4">
+                        <h6 class="fw-semibold">Keterangan</h6>
+                        <h6><?= $model->action_verified_at ? 'File '.($model->comment ? 'ditolak' : 'dikonfirmasi').' oleh '.  $model->verifier_name : 'File belum dikonfirmasi' ?></h6>
+                    </div>
+                    <div class="col-md-12">
+                        <h6 class="fw-semibold">Catatan <small>(Wajib diisi jika ditolak)</small></h6>
+                        <input type="hidden" name="type">
+                        <textarea name="comment" class="form-control" rows="4" placeholder="Tulis catatan Anda di sini..."><?= $model->comment ?></textarea>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <a href="<?= $back ?>" class="btn btn-outline-secondary"><i class="fa-solid fa-arrow-left"></i> Kembali</a>
+                    <div>
+                        <button type="button" onclick="tolak()" class="btn btn-danger me-2"><i class="fa-solid fa-close"></i> Tolak</button>
+                        <button type="button" onclick="setuju()" class="btn btn-primary"><i class="fa-solid fa-check"></i> Setuju</button>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
-
-    <div class="card-body">
-      <div class="row">
-        <div class="col-md-3">
-          <div>
-            <h6>Tanggal Unggah Laporan</h6>
-            <h5>11 November 2024</h5>
-            <br />
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div>
-            <h6>Tanggal Konfirmasi</h6>
-            <h5>-</h5>
-            <br />
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="col-12">
-            <h6>Keterangan</h6>
-            <h5>Pelaksanaan Sanksi belum dikonfirmasi.</h5>
-            <br />
-          </div>
-        </div>
-        <div class="col-md-12 mt-3">
-          <h6>Catatan (Wajib diisi jika ditolak)</h6>
-          <textarea
-            class="form-control"
-            rows="3"
-            placeholder="Tulis komentar Anda di sini..."
-          ></textarea>
-        </div>
-        <div class="col-md-12 text-center mt-4">
-          <div class="d-flex justify-content-center" style="gap: 300px">
-            <button
-              type="button"
-              class="btn btn-danger px-4 py-2"
-              style="width: 250px"
-            >
-              Tolak
-            </button>
-            <button
-              type="button"
-              class="btn btn-success px-4 py-2"
-              style="width: 250px"
-            >
-              Setujui
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
+
+<script>
+    const tolak = () => {
+        $('input[name="type"]').val('action_rejected');
+        if (!$('textarea[name="comment"]').val()){
+            swalBootstrap.fire({
+                title: "Peringatan!",
+                text: "Catatan wajib diisi jika ditolak!",
+                icon: "warning"
+            });
+            return;
+        }
+        swalBootstrap.fire({
+            title: "Apakah anda yakin menolak pelaksanaan sanksi ini?",
+            icon: 'warning',
+            showCancelButton: true,
+            reverseButtons: true,
+            confirmButtonText: "Ya, tolak",
+            cancelButtonText: "Tidak, batal",
+            
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $('#verification').submit();
+            }
+        });
+    }
+
+    const setuju = () => {
+        $('input[name="type"]').val('done');
+        swalBootstrap.fire({
+            title: "Apakah anda yakin menyetujui pelaksanaan sanksi ini?",
+            icon: 'warning',
+            showCancelButton: true,
+            reverseButtons: true,
+            confirmButtonText: "Ya, setuju",
+            cancelButtonText: "Tidak, batal",
+            
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $('#verification').submit();
+            }
+        });
+    }
+</script>

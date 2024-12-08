@@ -54,15 +54,27 @@ class ViewViolationsDetails extends Model
     }
 
 
-    public static function enumStatusForms(): array
+    public static function enumStatusForms(string $status = ''): array
     {
-        return [
-            'new' => 'form/verifikasi_laporan',
+        $views = [
+            'new' => [
+                'view/detail_pelanggaran',
+                'form/verifikasi_laporan'
+            ],
             'process' => [
-                'student' => 'form/pelaksanaan_sanksi',
-                'lecturer' => 'form/verifikasi_pelaksanaan'
+                'student' => [
+                    'view/detail_pelanggaran',
+                    'form/pelaksanaan_sanksi'
+                ],
+                'lecturer' => [
+                    'view/detail_pelanggaran',
+                    'view/pelaksanaan_sanksi',
+                    'form/verifikasi_pelaksanaan'
+                ]
             ]
         ];
+
+        return $views[$status] ?? $views;
     }
 
     function getTotalPelanggaranMahasiswa($student_id): int {

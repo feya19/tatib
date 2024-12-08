@@ -20,11 +20,11 @@
             <label for="filter-status" class="form-label">Status</label>
             <select id="filter-status" class="form-select">
                 <option value="">Semua</option>
-                <option value="new">New</option>
-                <option value="rejected">Rejected</option>
-                <option value="process">Process</option>
-                <option value="action rejected">Action Rejected</option>
-                <option value="done">Done</option>
+                <option value="new">Baru</option>
+                <option value="rejected">Ditolak</option>
+                <option value="process">Diproses</option>
+                <option value="action rejected">File Ditolak</option>
+                <option value="done">Selesai</option>
             </select>
         </div>
         <!-- Filter Level -->
@@ -74,11 +74,11 @@
         const statusLabel = $status[row.status] || row.status;
         const statusClass = $status_class[row.status] || 'secondary';
      
-        return `<span class="fs-6 fw-normal px-2 py-1 badge border border-${statusClass} badge-${statusClass} text-${statusClass}">${statusLabel}</span>`;
+        return `<span class="fs-6 fw-normal px-2 py-1 badge badge-${statusClass}">${statusLabel}</span>`;
     }
 
     function actionFormat(value, row, index) {
-        return `<a href='/laporan/detail/${value}' class="btn btn-sm btn-secondary">Detail</a>`
+        return `<a href='/pelanggaran/detail/${value}' class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-circle-info"></i> Detail</a>`
     }
 
     // Initialize the Bootstrap table

@@ -1,27 +1,6 @@
 <h2 class="mb-4 fw-semibold"><?=$title?></h2>
 
 <div class="container-fluid p-4 bg-white rounded">
-    <div class="table-toolbar">
-        <div class="row align-items-center">
-            <!-- Status Filter -->
-            <div class="col-md-5 d-flex align-items-center">
-                <label for="status" class="form-label fw-semibold me-3 mb-0">Status:</label>
-                <select class="form-select" name="status" id="status">
-                    <option value="semua">Semua</option>
-                    <option value="new">Baru</option>
-                    <option value="rejected">Ditolak</option>
-                    <option value="process">Diproses</option>
-                    <option value="done">Selesai</option>
-                </select>
-
-            </div>
-            <!-- Tanggal Filter -->
-            <div class="col-md-6 d-flex align-items-center">
-                <label for="tanggal" class="form-label fw-semibold me-4 mb-0">Tanggal:</label>
-                <input type="date" class="form-control" name="tanggal" id="tanggal">
-            </div>
-        </div>
-    </div>
     <table id="table">
         <thead>
             <tr>
@@ -40,32 +19,20 @@
 const $table = $('#table');
 const $status = JSON.parse('<?=json_encode($status)?>');
 const $status_class = JSON.parse('<?=json_encode($status_class)?>');
-$(function() {
-    // Attach change event listeners to status and tanggal filters
-    $('#status, #tanggal').change(function() {
-        reloadTable();
-    });
-});
-
-function reloadTable() {
-    const status = $('#status').val();
-    const tanggal = $('#tanggal').val();
-
-    // Reload the table with new URL params
-    $table.bootstrapTable('refresh', {
-        url: `/pelanggaran?status=${status}&tanggal=${tanggal}`
-    });
-}
 
 function statusFormat(value, row, index) {
     const statusLabel = $status[row.status] || row.status;
     const statusClass = $status_class[row.status] || 'secondary';
 
-    return `<span class="fs-6 fw-normal px-2 py-1 badge border border-${statusClass} badge-${statusClass} text-${statusClass}">${statusLabel}</span>`;
+    return `<span class="fs-6 fw-normal px-2 py-1 badge badge-${statusClass}">${statusLabel}</span>`;
 }
 
 function actionFormat(value, row, index) {
-    return `<a href='/pelanggaran/detail/${value}' class="btn btn-sm btn-secondary">Detail</a>`
+    let btn =  `<a href='/pelanggaran/detail/${value}' class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-circle-info"></i> Detail</a>`;
+    if ((row.status == 'process' && !row.sanction_action_file) || row.status == 'action_rejected') {
+        btn = `<a href='/pelanggaran/proses/${value}' class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-cog"></i> Proses</a>`;
+    }
+    return btn;
 }
 
 // Initialize the Bootstrap table

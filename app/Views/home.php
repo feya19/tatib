@@ -84,7 +84,7 @@
                             class="img-fluid mb-3" 
                             style="width: 90px; height: 90px;">
                         <h3>Tata Tertib</h3>
-                        <hr style="width: 50%; border: 3px solid #F6921E; border-radius: 10px; background-color: #F6921E;">
+                        <hr style="width: 100%; border: 3px solid #F6921E; border-radius: 10px; background-color: #F6921E;">
                         <p class="text-justify">
                             Pelajari aturan yang harus dipatuhi di kampus untuk menciptakan lingkungan yang tertib dan harmonis.
                         </p>
@@ -99,7 +99,7 @@
                             class="img-fluid mb-3" 
                             style="width: 90px; height: 90px;">
                         <h3>Pelanggaran</h3>
-                        <hr style="width: 50%; border: 3px solid #F6921E; border-radius: 10px; background-color: #F6921E;">
+                        <hr style="width: 100%; border: 3px solid #F6921E; border-radius: 10px; background-color: #F6921E;">
                         <p class="text-justify">
                             Lihat riwayat pelanggaran dan pantau status kedisiplinan. Pastikan untuk selalu mematuhi tata tertib kampus.
                         </p>

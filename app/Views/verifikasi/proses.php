@@ -5,7 +5,7 @@
 use App\Models\ViewViolationsDetails;
 
 foreach($views as $view):
-    \Core\Controller::view(ViewViolationsDetails::FILE_PATH.$view, ['model' => $model]);
+    \Core\Controller::view(ViewViolationsDetails::FILE_PATH.$view, ['model' => $model, 'back' => $back]);
 endforeach;
 ?>
 

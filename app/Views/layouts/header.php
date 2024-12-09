@@ -122,6 +122,8 @@ if (!empty($userdata['student_id'])) {
                                 </a>
                             </li>
                             <?php endforeach;?>
+                            <?php else: ?>
+                            <li><span class="dropdown-item text-muted">Tidak ada notifikasi baru.</span></li>
                             <?php endif;?>
                         </ul>
                     </li>
@@ -178,11 +180,11 @@ if (!empty($userdata['student_id'])) {
             <?php endif;?>
             <!-- Sidebar Sekjur -->
             <?php if ($userdata['is_sekjur']): ?>
-                <li class="nav-item">
+            <li class="nav-item">
                 <a href="/laporan/sekjur" class="nav-link <?=Request::is('/laporan/sekjur') ? 'active' : ''?>">
                     <i class="fa-duotone fa-solid fa-file-lines"></i> Pelanggaran
                 </a>
-            </li>    
+            </li>
             <?php endif;?>
             <!-- Sidebar Verifikasi -->
             <?php if ($userdata['is_sekjur'] || !empty($userdata['classes'])): ?>
@@ -199,7 +201,7 @@ if (!empty($userdata['student_id'])) {
                 <ul id="verifikasiSubmenu" class="collapse nav ms-4 <?=Request::is('/verifikasi/*') ? 'show' : ''?>">
                     <?php if (!empty($userdata['classes'])): ?>
                     <li class="nav-item flex w-100">
-                        <a class="nav-link <?= Request::is('/verifikasi/kelas/') || Request::is('/verifikasi/kelas/*') ? 'active' : ''?>"
+                        <a class="nav-link <?=Request::is('/verifikasi/kelas/') || Request::is('/verifikasi/kelas/*') ? 'active' : ''?>"
                             href="/verifikasi/kelas">
                             <i class="fa-duotone fa-solid fa-building"></i> Kelas
                         </a>
@@ -208,7 +210,7 @@ if (!empty($userdata['student_id'])) {
                     <!-- Verifikasi Sekjur -->
                     <?php if ($userdata['is_sekjur']): ?>
                     <li class="nav-item flex w-100">
-                        <a class="nav-link <?= Request::is('/verifikasi/jurusan/') || Request::is('/verifikasi/jurusan/*')  ? 'active' : ''?>"
+                        <a class="nav-link <?=Request::is('/verifikasi/jurusan/') || Request::is('/verifikasi/jurusan/*') ? 'active' : ''?>"
                             href="/verifikasi/jurusan">
                             <i class="fa-duotone fa-solid fa-buildings"></i> Jurusan
                         </a>

@@ -102,11 +102,11 @@ class VerifikasiController extends Controller {
                 Redirect::to($redirectUrl, ['error' => 'Data tidak ditemukan']);
             }
     
-            $model->status = $post['type'];
-            $model->verifier_id = Session::get('userdata')['lecturer_id'];
-            $model->verification_comment = $post['verification_comment'] ?? null;
-            $model->assigned_date = date('Y-m-d H:i:s');
-            $model->save();
+            $data->status = $post['type'];
+            $data->verifier_id = Session::get('userdata')['lecturer_id'];
+            $data->verification_comment = $post['verification_comment'] ?? null;
+            $data->assigned_date = date('Y-m-d H:i:s');
+            $data->save();
             Redirect::to($redirectUrl, ['success' => 'Laporan berhasil '.($post['type'] == 'process' ? 'diproses' : 'ditolak')]);
         } else if ($post['type'] == 'action_rejected' || $post['type'] == 'done') {
             if ($post['type'] == 'action_rejected') {
@@ -125,10 +125,10 @@ class VerifikasiController extends Controller {
                 Redirect::to($redirectUrl, ['error' => 'Data tidak ditemukan']);
             }
     
-            $model->status = $post['type'];
-            $model->comment = $post['comment'] ?? null;
-            $model->action_verified_at = date('Y-m-d H:i:s');
-            $model->save();
+            $data->status = $post['type'];
+            $data->comment = $post['comment'] ?? null;
+            $data->action_verified_at = date('Y-m-d H:i:s');
+            $data->save();
             Redirect::to($redirectUrl, ['success' => 'File berhasil '.($post['type'] == 'process' ? 'diproses' : 'ditolak')]);
         } else {
             Redirect::back(['errors' => 'Invalid type.']);

@@ -139,10 +139,6 @@ class VerifikasiController extends Controller {
 
                 $data->clearence_file = $path;
             }
-echo '<pre>';
-print_r($data);
-echo '</pre>';
-die;
     
             if (empty($data)) {
                 Redirect::to($redirectUrl, ['error' => 'Data tidak ditemukan']);

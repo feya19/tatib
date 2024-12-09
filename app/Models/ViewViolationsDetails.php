@@ -78,18 +78,20 @@ class ViewViolationsDetails extends Model
     }
 
     function getTotalPelanggaranMahasiswa($student_id): int {
-        return count($this->where('nim', '=', $student_id)->get());
+        return $this->where('nim', '=', $student_id)
+                     ->where('status', '!=', 'rejected')
+                     ->count();
     } 
 
     function getTanggunganPelanggaranMahasiswa($student_id): int {
         return count(
             $this->where('nim', '=', $student_id)
                  ->where('status', '!=', 'done')
+                 ->where('status', '!=', 'rejected')
                  ->get()
         );
     }
     
-
     function getPenyelesaianPelanggaranMahasiswa($student_id): int {
         return  $this->where('nim', '=', $student_id)
                 ->where('status', '=', 'done')
@@ -103,7 +105,8 @@ class ViewViolationsDetails extends Model
     function getPelaporanDiterimaDosen($lecturer_id): int {
         return 
             $this->where('reporter_id', '=', $lecturer_id)
-            ->where('status', '=', 'done')
+            ->where('status', '!=', 'new')
+            ->where('status', '!=', 'rejected')
             ->count();
     }
     
@@ -129,7 +132,7 @@ class ViewViolationsDetails extends Model
     function getLaporanTerkonfirmasiDPA($lecturer_id): int {
         return count(
             $this->where('dpa_id', '=', $lecturer_id)
-            ->where('status', '=', 'done')
+            ->where('status', '!=', 'new')
             ->get()
         );
     }

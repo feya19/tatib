@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Models\ViewViolationsDetails;
 use Core\Controller;
 use App\Models\Violations;
+use Core\Env;
 use Core\Redirect;
 use Core\Request;
 use Core\Session;
@@ -117,9 +118,31 @@ class VerifikasiController extends Controller {
             if (!$validation->validate()) {
                 Redirect::back(['errors' => $validation->errors()]);
             }
-    
+
             $model = new Violations();
             $data = $model->find($id);
+            
+            if ($post['type'] == 'done') {
+                $views = new ViewViolationsDetails();
+                $viewData = $views->where('violation_id', '=', $id)->first();
+                $viewData['report_date'] = date('d-m-Y', strtotime($viewData['report_date']));
+                $templatePath = __DIR__.'/../../public/template/surat_bebas_pelanggaran.docx';
+                $outputDir = __DIR__.'/../../public/clearence';
+                $jenis_dokumen = [
+                    'file_original' => 'surat_bebas_pelanggaran.docx',
+                    'nama_surat' => 'Surat_Bebas_Pelanggaran_'.str_replace('/', '_', $viewData['violation_number'])
+                ];
+                $path = '/clearence/'.$jenis_dokumen['nama_surat'].'.pdf';
+                $qrContent = Env::get('APP_URL').$path;
+
+                $this->generateDocument($templatePath, $outputDir, $jenis_dokumen, $viewData, $qrContent);
+
+                $data->clearence_file = $path;
+            }
+echo '<pre>';
+print_r($data);
+echo '</pre>';
+die;
     
             if (empty($data)) {
                 Redirect::to($redirectUrl, ['error' => 'Data tidak ditemukan']);
@@ -129,7 +152,7 @@ class VerifikasiController extends Controller {
             $data->comment = $post['comment'] ?? null;
             $data->action_verified_at = date('Y-m-d H:i:s');
             $data->save();
-            Redirect::to($redirectUrl, ['success' => 'File berhasil '.($post['type'] == 'process' ? 'diproses' : 'ditolak')]);
+            Redirect::to($redirectUrl, ['success' => 'File berhasil '.($post['type'] == 'done' ? 'disetujui' : 'ditolak')]);
         } else {
             Redirect::back(['errors' => 'Invalid type.']);
         }
@@ -188,5 +211,62 @@ class VerifikasiController extends Controller {
         $data = $model->limit($limit)->offset($offset)->get();
         $total = $model->count();
         return [$data, $total];
+    }
+
+    private function generateDocument($templatePath, $outputDir, $jenis_dokumen, $data, $qrContent) {
+        require_once __DIR__.'/../../vendor/autoload.php';
+    
+        // Generate QR code as a base64 string
+        $qrCode = new \Endroid\QrCode\QrCode($qrContent);
+        $qrCode->setSize(120);
+    
+        // Use PngWriter to save the QR code image
+        $writer = new \Endroid\QrCode\Writer\PngWriter();
+        $qrFilePath = $outputDir . '/qr_code.png';
+        $writer->write($qrCode)->saveToFile($qrFilePath);
+    
+        // Embed QR code into the $data array
+        $data['action_verified_at'] = human_date(date('Y-m-d'));
+    
+        $template = new \PhpOffice\PhpWord\TemplateProcessor($templatePath);
+        $vars = $template->getVariables();
+    
+        // Replace variables
+        foreach ($vars as $var) {
+            if (isset($data[$var])) {
+                $value = $data[$var];
+                $template->setValue($var, $value);
+            }
+        }
+
+        $template->setImageValue('QR', [
+            'path' => $qrFilePath,
+            'width' => 150,
+            'height' => 150,
+            'margin' => 0,
+        ]);
+
+        // Save the modified Word document
+        $file_name = $jenis_dokumen['nama_surat'].'.docx';
+        $filePath = $outputDir . '/' . $file_name;
+        $template->saveAs($filePath);
+    
+        // Convert to PDF
+        $domPdfPath = __DIR__ . '/../../vendor/dompdf/dompdf';
+        \PhpOffice\PhpWord\Settings::setPdfRendererPath($domPdfPath);
+        \PhpOffice\PhpWord\Settings::setPdfRendererName('DomPDF');
+    
+        $content = \PhpOffice\PhpWord\IOFactory::load($filePath);
+        $pdfWriter = \PhpOffice\PhpWord\IOFactory::createWriter($content, 'PDF');
+    
+        $pdfFilename = str_replace('.docx', '.pdf', $file_name);
+        $pdfPath = $outputDir . '/' . $pdfFilename;
+        $pdfWriter->save($pdfPath);
+
+        // Return file paths
+        return [
+            'docx' => $filePath,
+            'pdf' => $pdfPath
+        ];
     }
 }

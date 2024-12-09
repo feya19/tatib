@@ -136,7 +136,7 @@ abstract class Model {
     /**
      * Get the first record.
      */
-    public function first(): ?self {
+    public function first(): ?array {
         $this->limit(1);
         $results = $this->get();
         return $results[0] ?? null;

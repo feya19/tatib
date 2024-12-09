@@ -24,7 +24,7 @@
                 <option value="new">Baru</option>
                 <option value="rejected">Ditolak</option>
                 <option value="process">Diproses</option>
-                <option value="action rejected">File Ditolak</option>
+                <option value="action_rejected">File Ditolak</option>
                 <option value="done">Selesai</option>
             </select>
         </div>

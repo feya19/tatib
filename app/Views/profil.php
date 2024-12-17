@@ -16,7 +16,7 @@
                         echo "Mahasiswa / " . $user['student_id'];
                     } elseif (!empty($user['lecturer_id'])) {
                         echo "Dosen / " . $user['lecturer_id'];
-                    } elseif ($user['is_admin'] === true) {
+                    } elseif ($user['is_admin']) {
                         echo "Admin";
                     }
                     ?>

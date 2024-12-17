@@ -29,6 +29,10 @@
                         <h6><?= $model->student_class ?></h6>
                     </div>
                     <div class="col-md-6">
+                        <h6 class="fw-semibold">Nama DPA</h6>
+                        <h6><?= $model->dpa_name ?></h6>
+                    </div>
+                    <div class="col-md-6">
                         <h6 class="fw-semibold">Nama Pelapor</h6>
                         <h6><?= $model->reporter_name ?></h6>
                     </div>

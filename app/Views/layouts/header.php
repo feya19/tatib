@@ -4,28 +4,6 @@ $userdata = \Core\Session::get('userdata');
 use Core\Request;
 $statusClasses = ViewViolationsDetails::enumStatusClass();
 
-$notifications = [
-    'mahasiswa' => [
-        'new' => 'Anda mendapatkan pelanggaran <br> baru',
-        'action_rejected' => 'Laporan pelaksanaan sanksi <br> anda ditolak',
-        'done' => 'Laporan pelaksanaan sanksi <br> anda diterima',
-    ],
-    'dosen' => [
-        'rejected' => 'Laporan yang anda ajukan <br>ditolak',
-        'process' => 'Laporan yang anda ajukan <br>disetujui.',
-        'done' => 'Laporan yang anda ajukan <br>telah diselesaikan',
-    ],
-];
-
-$seeAllLink = '#';
-$notif_count = 0;
-if (!empty($userdata['student_id'])) {
-    $seeAllLink = '/pelanggaran';
-    $notif_count = count($notifications['mahasiswa']);
-} elseif (!empty($userdata['lecturer_id'])) {
-    $seeAllLink = '/pelaporan';
-    $notif_count = count($notifications['dosen']);
-}
 ?>
 
 <!DOCTYPE html>
@@ -69,73 +47,11 @@ if (!empty($userdata['student_id'])) {
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav me-3">
-                    <!-- Notification -->
-                    <?php if (empty($userdata['is_admin'])): ?>
-                    <li class="nav-item me-2 dropdown">
-                        <button class="btn btn-light position-relative" id="notificationButton"
-                            data-bs-toggle="dropdown">
-                            <img src="/assets/img/bell.png" alt="Notification Bell" height="25" width="25" />
-                            <span class="position-absolute top-0 start-90 translate-middle badge rounded-pill bg-danger"
-                                style="font-size: 0.6rem; padding: 0.2em 0.4em">
-                                <?=$notif_count > 0 ? $notif_count : '';?>
-                                <span class="visually-hidden">unread notifications</span>
-                            </span>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end p-2" id="notifikasi" style="width: 275px">
-                            <li class="d-flex justify-content-between align-items-center fw-bold px-2 mb-2">
-                                <span>Notifikasi</span>
-                                <a href="<?=$seeAllLink?>" class="btn btn-sm btn-primary">Lihat Semua</a>
-                            </li>
-
-                            <!-- Loop through Notifications based on user role -->
-                            <?php if (!empty($userdata['student_id'])): ?>
-                            <?php foreach ($notifications['mahasiswa'] as $status => $message): ?>
-                            <li>
-                                <a href="/pelanggaran" class="dropdown-item d-flex align-items-center mb-2  p-1">
-                                    <div class="icon me-1">
-                                        <?php if ($status == 'new'): ?>
-                                        <img src="/assets/img/icon-notif-pelanggaran.png" alt="New Notification">
-                                        <?php elseif ($status == 'action_rejected'): ?>
-                                        <img src="/assets/img/icon-notif-ditolak.png" alt="Action Rejected">
-                                        <?php elseif ($status == 'done'): ?>
-                                        <img src="/assets/img/icon-notif-diterima.png" alt="Done">
-                                        <?php endif;?>
-                                    </div>
-                                    <span class="notification-text"><?php echo $message; ?></span>
-                                </a>
-                            </li>
-                            <?php endforeach;?>
-                            <?php elseif (!empty($userdata['lecturer_id'])): ?>
-                            <?php foreach ($notifications['dosen'] as $status => $message): ?>
-                            <li>
-                                <a href="/pelaporan" class="dropdown-item d-flex align-items-center mb-2 p-1">
-                                    <div class="icon me-3">
-                                        <?php if ($status == 'rejected'): ?>
-                                        <img src="/assets/img/icon-notif-ditolak.png" alt="Rejected">
-                                        <?php elseif ($status == 'process'): ?>
-                                        <img src="/assets/img/icon-notif-diterima.png" alt="Process">
-                                        <?php elseif ($status == 'done'): ?>
-                                        <img src="/assets/img/icon-notif-diterima.png" alt="Done">
-                                        <?php endif;?>
-                                    </div>
-                                    <span class="notification-text"><?php echo $message; ?></span>
-                                </a>
-                            </li>
-                            <?php endforeach;?>
-                            <?php else: ?>
-                            <li><span class="dropdown-item text-muted">Tidak ada notifikasi baru.</span></li>
-                            <?php endif;?>
-                        </ul>
-                    </li>
-                    <?php endif;?>
-
-
-
                     <!-- Profile -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdown"
                             role="button" data-bs-toggle="dropdown">
-                            <span><?=$userdata['name']?></span>
+                            <span><?= ($userdata['student_id'] ?: $userdata['lecturer_id'] ?: $userdata['username']) .' / '. $userdata['name']?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="/profil">Profile</a></li>

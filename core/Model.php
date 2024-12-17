@@ -221,6 +221,17 @@ abstract class Model {
     }
 
     /**
+     * Interpolate query with parameters for debugging
+     */
+    private function interpolateQuery(string $query, array $params): string {
+        foreach ($params as $value) {
+            $escapedValue = is_string($value) ? "'".addslashes($value)."'" : $value;
+            $query = preg_replace('/\?/', $escapedValue, $query, 1); // Replace one ? at a time
+        }
+        return $query;
+    }
+
+    /**
      * Recursively build the WHERE clause.
      */
     private function buildWhere(array $conditions, array &$params): string {

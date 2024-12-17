@@ -192,16 +192,3 @@
         ],
     });
 </script>
-
-<style>
-    .btn-group-sm .btn {
-        padding: 0.4rem 0.6rem;
-        font-size: 0.875rem; 
-        margin-right: 5px; 
-    }
-
-    .btn-group-sm .btn:last-child {
-        margin-right: 0;
-    }
-
-</style>

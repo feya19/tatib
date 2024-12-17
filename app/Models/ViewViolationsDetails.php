@@ -84,12 +84,9 @@ class ViewViolationsDetails extends Model
     } 
 
     function getTanggunganPelanggaranMahasiswa($student_id): int {
-        return count(
-            $this->where('nim', '=', $student_id)
-                 ->where('status', '!=', 'done')
-                 ->where('status', '!=', 'rejected')
-                 ->get()
-        );
+        return $this->where('nim', '=', $student_id)
+                 ->whereIn('status', ['process', 'action_rejected'])
+                 ->count();
     }
     
     function getPenyelesaianPelanggaranMahasiswa($student_id): int {
@@ -99,7 +96,7 @@ class ViewViolationsDetails extends Model
     }
     
     function getTotalPelaporanDosen($lecturer_id): int {
-        return count($this->where('reporter_id', '=', $lecturer_id)->get());
+        return $this->where('reporter_id', '=', $lecturer_id)->count();
     }
     
     function getPelaporanDiterimaDosen($lecturer_id): int {
@@ -122,18 +119,14 @@ class ViewViolationsDetails extends Model
     }
 
     function getLaporanPerluKonfirmasiDPA($lecturer_id): int {
-        return count(
-            $this->where('dpa_id', '=', $lecturer_id)
+        return $this->where('dpa_id', '=', $lecturer_id)
             ->where('status', '=', 'new')
-            ->get()
-        );
+            ->count();
     }
 
     function getLaporanTerkonfirmasiDPA($lecturer_id): int {
-        return count(
-            $this->where('dpa_id', '=', $lecturer_id)
+        return $this->where('dpa_id', '=', $lecturer_id)
             ->where('status', '!=', 'new')
-            ->get()
-        );
+            ->count();
     }
 }

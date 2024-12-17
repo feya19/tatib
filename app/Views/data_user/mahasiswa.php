@@ -6,9 +6,6 @@
             Tambah
         </a>
     </div>
-</div>
-
-<div class="container-fluid p-4 bg-white rounded">
     <table id="table">
         <thead>
             <tr>
@@ -38,10 +35,6 @@
                     <div class="mb-3">
                         <label for="nim" class="form-label">NIM</label>
                         <input type="number" class="form-control" id="nim" name="nim" placeholder="Masukkan NIM Mahasiswa" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="username" class="form-label">Username</label>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Masukkan Username Mahasiswa" required>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
@@ -89,11 +82,7 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="nim" class="form-label">NIM</label>
-                        <input type="number" class="form-control" id="nim" name="nim" placeholder="Masukkan NIM Mahasiswa" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="username" class="form-label">Username</label>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Masukkan Username Mahasiswa" required>
+                        <input type="number" class="form-control" id="nim" name="nim" placeholder="Masukkan NIM Mahasiswa" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
@@ -210,13 +199,3 @@
         ],
     });
 </script>
-
-<style>
-    .modal .form-control {
-        font-size: 14px;
-    }
-
-    .btn-group-sm .btn {
-        padding: 0.3rem 0.5rem; 
-    }
-</style>

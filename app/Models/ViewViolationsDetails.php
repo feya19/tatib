@@ -79,6 +79,7 @@ class ViewViolationsDetails extends Model
 
     function getTotalPelanggaranMahasiswa($student_id): int {
         return $this->where('nim', '=', $student_id)
+                     ->where('status', '!=', 'new')
                      ->where('status', '!=', 'rejected')
                      ->count();
     } 
